@@ -1,0 +1,12 @@
+Hi John - I've included here four relatively simple scripts that
+should contain useful examples of fits read/write with pyfits, calling
+of pyraf commands, and use of subroutines. These are from my work on
+the NEWFIRM survey. The scripts are moderately commented, but here's a
+brief description of each:
+
+newalign.py	- Align images using scamp
+newstack.py	- Stack images using swarp
+catalog.py	- Generated source extractor catalogs for the images
+SExtractor.py	- Subroutines for source extractor
+tweakzpt.py	- Query 2MASS, cross-match with objects in the image, and compute a median zeropoint for an image.
+

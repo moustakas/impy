@@ -1,0 +1,28 @@
+################################################################################
+# README
+################################################################################
+
+To generate a grid of subfigures of the students do this:
+
+* Download the Siena Class Roster to this directory. This produces a file 
+
+    Siena Class Roster.html
+ 
+and a directory.
+
+    Siena Class Roster_files.html
+
+* Run the parser.
+
+    python siena_class_roster.py Siena\ Class\ Roster.html > temp.tex
+
+
+* Build the pdf.
+
+    pdflatex temp.tex
+
+* View your class list!
+
+    evince temp.pdf -f
+
+

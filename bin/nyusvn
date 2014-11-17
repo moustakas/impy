@@ -1,0 +1,5 @@
+#!/bin/csh -f
+setenv SVN_SSH 'ssh -p 4426'
+svn $argv
+setenv SVN_SSH 
+

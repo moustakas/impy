@@ -1,0 +1,12 @@
+#!/bin/tcsh
+
+set destination = '/Volumes/Archive_the_First/'
+set origin = '/global/data/archive'
+
+rsync -auvn --delete nyx:$origin $destination
+echo 'continue? (yes/no)'
+set input = $<
+
+if ($input == 'yes') then
+    rsync -auvz --delete --progress nyx:$origin $destination
+endif
