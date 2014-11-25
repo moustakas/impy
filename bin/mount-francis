@@ -1,0 +1,2 @@
+sudo mount -t cifs \\\\francis.siena.edu\\users\$\\jmoustakas /mnt/francis/ -o uid=1002,gid=1002,username=jmoustakas
+    

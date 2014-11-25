@@ -1,0 +1,5 @@
+/data
+/papers
+/personal
+/projects
+/repositories

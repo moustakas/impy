@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# J. Moustakas, 2003 July 15, U of A
+# added mail folder 2004-Jan-20
+#
+# Script to back up /home to the external USB drive and my
+# /var/spool/mail folder, but only if the drive is mounted.  [Script
+# courtesy of C.  Kulesa.]
+
+#/usr/bin/rsync -aR --delete --exclude '*~' /home /usbdisk
+
+if ! grep "/usbdisk" /proc/mounts >& /dev/null; then
+   echo "USB drive not mounted -- unable to do back up."
+   exit
+else
+   /usr/bin/rsync -auvzR --delete /home/ioannis /usbdisk
+fi

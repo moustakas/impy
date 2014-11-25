@@ -1,12 +1,12 @@
 #!/bin/tcsh
 
-set origin = '/Volumes/Archive_the_First/archive/'
-set destination = '/global/data/archive/'
+set origin = '/Volumes/Archive_the_First/'
+set destination = '/global/work/'
 
-rsync -auvn --delete $origin nyx:$destination
+rsync -auvn --delete --include-from=${IMPY_DIR}/bin/nyx-include.txt --exclude='/*' $origin nyx:$destination
 echo 'continue? (yes/no)'
 set input = $<
 
 if ($input == 'yes') then
-    rsync -auvz --delete --progress $origin nyx:$destination
+    rsync -auvz --delete --progress --include-from=${IMPY_DIR}/bin/nyx-include.txt --exclude='/*' $origin nyx:$destination
 endif

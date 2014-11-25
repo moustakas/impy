@@ -1,0 +1,6 @@
+rsync -auvzn --delete --progress --exclude-from='~/research/mybin/clash_archive_exclude.txt' coma2:"/moustakas-archive/clash-archive/" /Volumes/Archive_the_First/clash-archive/
+
+
+
+
+

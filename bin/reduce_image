@@ -1,0 +1,136 @@
+#!/usr/bin/perl -w 
+ 
+#----------------------------------------------------------- 
+# Name: 
+#    reduce_image
+#
+# Purpose: 
+#    reduce size of images, in order to be published on line
+#    then use DIOW
+# 
+# Requirements:
+#    uses PERL and the convert program: best is running Linux
+#
+# Optional Keywords:
+#
+# Examples:
+#    chmod 755 reduce_image.pl
+#    ln -s reduce_image.pl reduce_image 
+#
+# Informations:
+#    http://mips.as.arizona.edu/~hdole/diow/
+#    http://wwwfirback.ias.u-psud.fr/users/dole/diow/
+#    Herve Dole
+#
+# Modification History: 
+#    17-Aug-2000 Written, Herve Dole, IAS, Orsay, France
+#    25-Aug-2000 Corrected bug with uppercase filenames + sort HD
+#
+#----------------------------------------------------------- 
+$reduce_image_version = '1.1.1';
+
+# Welcome message
+#----------------
+print("--------------------------------------------------------\n"); 
+print(" reduce_image v$reduce_image_version \n"); 
+print("--------------------------------------------------------\n"); 
+
+# Users's Data 
+#------------- 
+$suffix = 'web';    # suffix to add in reduced images' name
+$imsize = 1024 ;    # size of the largest dimension of the image you want
+
+#first get a listing of the current directory, warts and all 
+opendir THISDIR, "." or die "Whoa! Current directory cannot be opened.."; 
+ 
+# the regexp looks for either .jpg or .jpeg at the end of a filename. 
+# () means group it together, \. is an escaped period, e? means 0 or 1  
+# occurences of the letter e and $ means look for it at the end of the  
+# filename 
+# the i appended after the slash means ignore the case. 
+@allfiles_raw = grep /(\.jpe?g)$/i, readdir THISDIR; 
+closedir THISDIR; 
+ 
+# Sort files
+#-----------
+@allfiles = sort @allfiles_raw ;
+
+# Initialisation
+#---------------
+$dummy_jpg = 'zfile.jpg'; # tmp file
+$dummy_txt = 'zfile.txt'; # tmp file
+system("rm -Rf $suffix");
+system("mkdir $suffix");
+
+# Loop on images
+#---------------
+foreach $jpegfile (@allfiles) { 
+# Initialisation
+#---------------
+  system("rm -f $dummy_jpg");
+  system("rm -f $dummy_txt");
+# select jpg or jpeg file and create name for smaller file
+#---------------------------------------------------------
+  print("Working on... $jpegfile\n"); 
+  $smallerfile = $jpegfile; 
+# new name for lowercase filenames
+  $smallerfile =~ s/.jpe?g/_$suffix.jpg/; 
+# new name for uppercase filenames
+  $smallerfile =~ s/.JPE?G/_$suffix.jpg/;  
+
+# get size of input image
+#------------------------
+  system("convert -verbose $jpegfile $dummy_jpg > $dummy_txt");
+  open(DUMMY_TXT,"$dummy_txt") or die "Can't open $dummy_txt for reading";
+# Read tmp file
+#--------------
+  while ($line =  <DUMMY_TXT>) {
+    chop $line;
+# split line after space
+#-----------------------
+    ($beg, $mid, $end) = split(" ",$line,3);
+# split mid after x to get size	
+#------------------------------  
+    ($width, $height) = split("x",$mid,2);
+#    print("  $width $height  $jpegfile \n");
+  }
+# test size and reduce image
+#----------------------------
+# landscape
+#----------
+  if ($width >= $height) {
+    if ($width > $imsize) {
+      system("convert -geometry 1024 $jpegfile $smallerfile"); 
+#      print("  $width $height $imsize test 1 \n");
+    }
+    else {
+      system("cp -f $jpegfile $smallerfile");
+#      print("  $width $height $imsize test 2 \n");
+    }
+  }
+# portrait
+#---------
+  if ($width < $height) {
+    if ($height > $imsize) {
+      system("convert -geometry x1024 $jpegfile $smallerfile");
+#      print("  $width $height $imsize test 3 \n");
+    }
+    else {
+      system("cp -f $jpegfile $smallerfile");
+#      print("  $width $height $imsize test 4 \n");
+    }
+  }
+
+} 
+
+# clean
+#------
+system("rm -f $dummy_jpg");
+system("rm -f $dummy_txt");
+system("mv *$suffix*jp* $suffix");
+
+# Bye message
+#------------
+print(" reduce_image: run OK. Bye.\n"); 
+print("--------------------------------------------------------\n"); 
+
