@@ -1,5 +1,6 @@
 /data
 /papers
+/people
 /personal
 /projects
 /repositories
