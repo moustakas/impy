@@ -1,0 +1,12 @@
+#!/bin/tcsh
+
+set dir_origin = '/project/projectdirs/cosmo/work/decam/versions/work/images/decam/'
+set dir_dest = '/global/work/decam/versions/work/images/decam/'
+
+rsync -auvn --include-from=${IMPY_DIR}/bin/decals-images.txt --exclude='/*' dtn04:$dir_origin $dir_dest
+echo 'continue? (yes/no)'
+set input = $<
+
+if ($input == 'yes') then
+    rsync -auvzP --delete --include-from=${IMPY_DIR}/bin/decals-images.txt --exclude='/*' dtn04:$dir_origin $dir_dest
+endif

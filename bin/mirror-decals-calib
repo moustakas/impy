@@ -1,0 +1,12 @@
+#!/bin/tcsh
+
+set dir_origin = '/project/projectdirs/cosmo/work/decam/versions/work/calib/decam/'
+set dir_dest = '/global/work/decam/versions/work/calib/decam/'
+
+rsync -auvn --delete --include-from=${IMPY_DIR}/bin/decals-calib.txt --exclude='/*' dtn04:$dir_origin $dir_dest
+echo 'continue? (yes/no)'
+set input = $<
+
+if ($input == 'yes') then
+    rsync -auvzP --delete --include-from=${IMPY_DIR}/bin/decals-calib.txt --exclude='/*' dtn04:$dir_origin $dir_dest
+endif

@@ -1,0 +1,4 @@
+/astrom-pv
+/photom
+/psfex
+/sky

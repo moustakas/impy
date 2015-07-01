@@ -1,0 +1,5 @@
+#!/bin/tcsh
+
+rsync -auvPn --delete /home/desi1 /moustakas/desi-accounts/
+rsync -auvPn --delete /home/desi2 /moustakas/desi-accounts/
+rsync -auvPn --delete /home/desi3 /moustakas/desi-accounts/

@@ -1,0 +1,12 @@
+#!/bin/tcsh
+
+set dir_origin = '/project/projectdirs/cosmo/data/unwise/unwise-coadds/243'
+set dir_dest = '/global/work/unwise-coadds'
+
+rsync -auvn --delete dtn04:$dir_origin $dir_dest
+echo 'continue? (yes/no)'
+set input = $<
+
+if ($input == 'yes') then
+    rsync -auvzP --delete dtn04:$dir_origin $dir_dest
+endif

@@ -1,0 +1,23 @@
+#!/bin/tcsh
+#jj = mrdfits('~/dr1/decals-bricks-in-dr1-grz.fits',1)
+#openw, lun, '~/dr1/grz-images.txt', /get_lun
+#;niceprintf, lun, 'decals-'+strtrim(jj.brickname,2)+'-image-*.fits'
+#niceprintf, lun, 'decals-'+strtrim(jj.brickname,2)+'-model-*.fits.gz'
+#free_lun, lun
+
+# transfer just the image coadds
+#set dir_origin = 'dr1/tractor'
+#set dir_origin = '/project/projectdirs/cosmo/work/decam/release/dr1/tractor'
+set dir_origin = '/project/projectdirs/cosmo/work/decam/release/dr1/coadd'
+set dir_dest = '/global/work/decam/release/dr1/'
+
+#rsync -auvn nersc:$dir_origin $dir_dest
+rsync -auvn --include='*/' --include-from='/home/ioannis/dr1/grz-images.txt' --exclude='*' nersc:$dir_origin $dir_dest
+echo 'continue? (yes/no)'
+set input = $<
+
+if ($input == 'yes') then
+#    rsync -auvzP nersc:$dir_origin $dir_dest
+     rsync -auvzP --include='*/' --include-from='/home/ioannis/dr1/grz-images.txt' --exclude='*' nersc:$dir_origin $dir_dest
+#    rsync -auvzP --delete --include='*/' --include='*-image-*.fits' --exclude='*' nersc:$dir_origin $dir_dest
+endif
