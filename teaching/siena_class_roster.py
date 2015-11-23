@@ -68,8 +68,9 @@ for table in tables:
                         print "\centering"
                         closed_figure = False
 
-                    if os.stat(image).st_size < 200:
-                        image = './file_not_found.jpg'
+                    if os.stat(image).st_size < 250:
+                        #image = './file_not_found.jpg'
+                        image = './smiley.png'
 
                     if icount%5==4:
                         print "\subfloat[%s]{\includegraphics[width=0.19\\textwidth]{%s}}\\\\" % (name,image)
