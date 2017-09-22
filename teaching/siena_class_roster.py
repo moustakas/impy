@@ -63,7 +63,10 @@ for table in tables:
 
                 if name is not None and image is not None:
                     if icount%25==0:
-                        print "\\begin{document}"
+                        if icount > 0:
+                            print "\\clearpage"
+                        else:
+                            print "\\begin{document}"
                         print "\\begin{figure}"
                         print "\centering"
                         closed_figure = False
@@ -73,9 +76,9 @@ for table in tables:
                         image = './smiley.png'
 
                     if icount%5==4:
-                        print "\subfloat[%s]{\includegraphics[width=0.19\\textwidth]{%s}}\\\\" % (name,image)
+                        print "\subfloat[%s]{\includegraphics[height=0.19\\textwidth]{%s}}\\\\" % (name,image)
                     else:
-                        print "\subfloat[%s]{\includegraphics[width=0.19\\textwidth]{%s}}\\hfill" % (name,image)
+                        print "\subfloat[%s]{\includegraphics[height=0.19\\textwidth]{%s}}\\hfill" % (name,image)
 
                     image = None
                     name = None

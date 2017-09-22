@@ -1,6 +1,6 @@
 #!/bin/tcsh
 
-set destination = '/Volumes/Archive_the_First/'
+set destination = '/Volumes/Archive_the_Second/'
 set origin = '/global/work/'
 
 rsync -auvn --delete --include-from=${IMPY_DIR}/bin/nyx-include.txt --exclude='/*' nyx:$origin $destination
