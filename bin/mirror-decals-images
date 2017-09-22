@@ -1,6 +1,6 @@
 #!/bin/tcsh
 
-set dir_origin = '/project/projectdirs/cosmo/work/decam/versions/work/images/decam/'
+set dir_origin = '/project/projectdirs/cosmo/staging/decam/'
 set dir_dest = '/global/work/decam/versions/work/images/decam/'
 
 rsync -auvn --include-from=${IMPY_DIR}/bin/decals-images.txt --exclude='/*' dtn04:$dir_origin $dir_dest

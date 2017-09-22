@@ -5,8 +5,8 @@ set destination = '/moustakas/'
 
 rsync -auvn --delete --include-from=${IMPY_DIR}/bin/nyx-include.txt --exclude='/*' $origin $destination
 echo 'continue? (yes/no)'
-#set input = $<
+set input = $<
 
-#if ($input == 'yes') then
+if ($input == 'yes') then
     rsync -auvzP --delete --include-from=${IMPY_DIR}/bin/nyx-include.txt --exclude='/*' $origin $destination
-#endif
+endif
