@@ -1,6 +1,6 @@
 #!/bin/bash
 pushd ${DESI_PRODUCT_ROOT}
-for package in specsim redmonster desiutil specter desitarget desispec desisim desimodel; do
+for package in specsim redmonster desiutil specter desitarget desispec desisim desimodel redrock; do
   echo 'Updating '$package
   cd $package
   git pull
