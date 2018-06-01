@@ -8,21 +8,23 @@ from mpi4py import MPI
 import multiprocessing
 ncpu = multiprocessing.cpu_count() // 2   #- avoid hyperthreading
 
-def get_logger(logfile, delimiter=':'):
-    import logging
-    logger = logging.getLogger()
+#def get_logger(logfile, delimiter=':'):
+#    import logging
+#    logger = logging.getLogger()
+#
+#    hdlr = logging.FileHandler(logfile, mode='w')
+#
+#    fmtfields = ['%(levelname)s', '%(filename)s', '%(lineno)s',
+#                 '%(funcName)s', '%(asctime)s', ' %(message)s']
+#    formatter = logging.Formatter(delimiter.join(fmtfields),
+#                                  datefmt='%Y-%m-%dT%H:%M:%S')
+#    hdlr.setFormatter(formatter)
+#    logger.addHandler(hdlr)
+#    logger.setLevel(logging.INFO)
+#
+#    return logger
 
-    hdlr = logging.FileHandler(logfile, mode='w')
-
-    fmtfields = ['%(levelname)s', '%(filename)s', '%(lineno)s',
-                 '%(funcName)s', '%(asctime)s', ' %(message)s']
-    formatter = logging.Formatter(delimiter.join(fmtfields),
-                                  datefmt='%Y-%m-%dT%H:%M:%S')
-    hdlr.setFormatter(formatter)
-    logger.addHandler(hdlr)
-    logger.setLevel(logging.INFO)
-
-    return logger
+from legacyhalos.util import get_logger
 
 comm = MPI.COMM_WORLD
 rank, size = comm.rank, comm.size
