@@ -9,8 +9,8 @@ import os
 # Open the file.
 r = open(sys.argv[1])
 
-if os.path.exists('./Siena Class Roster_files'):
-    os.rename('Siena Class Roster_files','Siena_Class_Roster_files')
+if not os.path.isdir('Siena_Class_Roster_files'):
+    os.rename('Siena Class Roster_files', 'Siena_Class_Roster_files')
 
 # Try to parse the webpage by looking for the tables.
 soup = BeautifulSoup(r)
@@ -56,10 +56,11 @@ for table in tables:
                 a = col.findAll('p')
                 if len(img)>0 and img[0]['src'].find('jpg')>=0:
                     image = img[0]['src']
-                    image = image.replace(' ','_')
+                    image = image.replace(' ','_').replace('%20', '_')
+                    if not os.path.isfile(image):
+                        import pdb ; pdb.set_trace()
                 if len(a)>0 and a[0]['class']==['leftaligntext']:
                     name = a[0].string
-
 
                 if name is not None and image is not None:
                     if icount%25==0:
