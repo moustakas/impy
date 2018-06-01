@@ -1,0 +1,47 @@
+#!/bin/bash
+# Set up DESI code
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+export DESI_ROOT=$IM_WORK_DIR/desi
+export DESI_PRODUCT_ROOT=$IM_GITREPOS/desihub
+export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
+export DESI_SPECTRO_SIM=$DESI_ROOT/spectro/sim
+export DESI_SPECTRO_DATA=$DESI_ROOT/spectro/data
+export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
+export SPECPROD=dailytest
+export PIXPROD=dailytest
+
+## For the first time, clone everything
+#cd $DESI_PRODUCT_ROOT
+#for package in desiutil specter specsim desitarget desispec desisim desimodel; do
+#  git clone git@github.com:desihub/$package
+#done
+
+# Build all the core packages
+for package in desiutil specter desitarget desispec desisim desimodel redrock; do
+  export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
+  export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
+done
+export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
+export PYTHONPATH=$IM_GITREPOS/simqso:$PYTHONPATH
+
+# Build the SVN desimodel
+# cd $DESIMODEL
+# svn export https://desi.lbl.gov/svn/code/desimodel/trunk/data
+export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
+
+# Build redrock
+# cd $DESI_PRODUCT_ROOT
+# git clone https://github.com/desihub/redmonster
+# rsync -auvP ${DESI_PRODUCT_ROOT}/redmonster/templates/ ${DESI_ROOT}/spectro/templates/redmonster/
+#export PATH=$DESI_PRODUCT_ROOT/redmonster/bin:$PATH
+#export PYTHONPATH=$DESI_PRODUCT_ROOT/redmonster/python:$PYTHONPATH
+
+#export REDMONSTER_TEMPLATES_DIR=${DESI_ROOT}/spectro/templates/redmonster
+#export REDMONSTER_TEMPLATES_DIR=${DESI_PRODUCT_ROOT}/redmonster/templates
+export RR_TEMPLATES_DIR=$DESI_ROOT/redrock/py/redrock/templates
+
+export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
+
+source activate desi

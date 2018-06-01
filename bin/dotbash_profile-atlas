@@ -1,0 +1,113 @@
+##################################################
+# Personal system defaults
+#set -x
+umask 002
+export EDITOR=emacs
+export TERM=xterm-color
+#export CLICOLOR=1
+export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "
+
+##################################################
+# Some convenience variables
+export IM_SVNREPOS=${HOME}/repos/svn
+export IM_GITREPOS=${HOME}/repos
+export TEACHING_DIR=${HOME}/teaching
+
+export IM_WORK_DIR=${HOME}/work
+export IM_ARCHIVE_DIR=/Volumes/Archive_the_Second
+export IM_RESEARCH_DIR=${HOME}/research
+export IM_DATA_DIR=${HOME}/research/data
+export IM_PROJECTS_DIR=${HOME}/research/projects
+
+export DUST_DIR=${IM_DATA_DIR}/sfd_dustmaps/
+export CATALOGS_DIR=${HOME}/research/data/catalogs
+
+export IMPRO_DIR=${IM_GITREPOS}/impro
+export IMPY_DIR=${IM_GITREPOS}/impy
+
+# export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
+# export ARCHETYPES_DIR=${IM_PROJECTS_DIR}/archetypes
+
+##################################################
+# Expand my PATH
+export PATH=/usr/local/anaconda3/bin:$PATH
+export PATH=$IM_GITREPOS/software/bin:$PATH
+export PATH=$IMPY_DIR/bin:$PATH
+#export PATH=${IM_GITREPOS}/CUTE/CUTE:$PATH
+
+##########################
+## Set up IDL
+
+#export IDL_DIR=/Applications/exelis/idl
+#export IDL_PATH=${IDL_PATH}:+${IDL_DIR}/lib
+#export IDL_PATH=${IDL_PATH}:+${IMPRO_DIR}/pro
+#export IDL_PATH=${IDL_PATH}:+${IDL_PROJECTS_DIR}
+#export IDL_PATH=${IDL_PATH}:+${RED_DIR}
+#export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/IDLAstro/pro
+#export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/idl-lib/markwardt
+#export IDL_PATH=${IDL_PATH}:+${COYOTE_DIR}/ # must appear before IDLUTILS_DIR
+#export IDL_PATH=${IDL_PATH}:+${IDLUTILS_DIR}/pro
+#export IDL_PATH=${IDL_PATH}:+${IDLSPEC2D_DIR}/pro
+#export IDL_PATH=${IDL_PATH}:+${KCORRECT_DIR}/pro
+
+#export IDL_STARTUP=${HOME}/.idl_startup
+
+#export IDL_PROJECTS_DIR=${IM_GITREPOS}/moustakas-projects
+#export RED_DIR=${IM_SVNREPOS}/red
+#export IDLUTILS_DIR=${IM_SVNREPOS}/idlutils
+#export IDLSPEC2D_DIR=${IM_SVNREPOS}/idlspec2d
+#export KCORRECT_DIR=${IM_SVNREPOS}/kcorrect
+#export PHOTOOP_DIR=${IM_SVNREPOS}/photoop
+#export DIMAGE_DIR=${IM_SVNREPOS}/dimage
+#export COYOTE_DIR=${IM_SVNREPOS}/coyote
+
+#export PATH=${IDLUTILS_DIR}/bin:${PATH}
+#export PATH=${IDLSPEC2D_DIR}/bin:${PATH}
+
+##################################################
+# Personal aliases
+
+alias l='ls -lp'
+alias lt='ls -ltrp'
+alias lm='ls -lp | more'
+alias dirs='ls -lp | grep ^d'
+alias cls='clear'
+alias df='df -kH'
+alias du='du -ksh'
+alias mv='mv -i'
+alias rm='rm -i'
+alias cp='cp -ip'        # make copy preserve timestamp of files
+alias cx='chmod +x'
+alias findf='find . -name "\!*"  -print'
+alias rgrep='find . -type f -exec grep -HI \!$ {} \;'
+alias pwd='pwd -P'
+alias em='open -a /Applications/Emacs.app $1'
+
+alias olsen='ssh jmoustakas@olsen.cs.siena.edu'
+alias edison='ssh -XY edison'
+alias cori='ssh -XY cori'
+alias dtn01='ssh -XY dtn01'
+alias dtn04='ssh -XY dtn04'
+alias nyx='ssh -XY nyx'
+alias sos='ssh -XY sos'
+alias hpcc='ssh -XY hpcc'
+alias hpcc-moustakas1='ssh -XY hpcc-moustakas1'
+alias hpcc-moustakas2='ssh -XY hpcc-moustakas2'
+alias offshore='ssh offshore.ucsd.edu'
+alias cass='ssh cass.ucsd.edu'
+alias howdy='ssh -p 4426 howdy'
+alias polar='ssh polar'
+
+alias 010='cd ~/teaching/010-S18'
+alias 330='cd ~/teaching/330-S18'
+
+alias py27='source activate py27'
+
+alias desi='source $IMPY_DIR/bin/desi-env-atlas'
+alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-atlas'
+alias LSLGA='source $IMPY_DIR/bin/LSLGA-env-atlas'
+alias hizea='source $IMPY_DIR/bin/hizea-env-atlas'
+alias clash='source $IMPY_DIR/bin/clash-env-atlas'
+alias jwstclusters='source $IMPY_DIR/bin/jwstclusters-env-atlas'
+
+# [[ -s ~/.bashrc ]] && source ~/.bashrc

@@ -1,0 +1,10 @@
+#!/bin/bash
+# Set up jwstclusters code
+
+export pandeia_refdata=${IM_DATA_DIR}/pandeia_data-1.0
+export PYSYN_CDBS=${IM_DATA_DIR}/pysyn_cdbs/grp/hst/cdbs
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+source activate jwstclusters
+
