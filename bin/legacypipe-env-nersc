@@ -78,7 +78,7 @@ export UNWISE_COADDS_DIR=/project/projectdirs/cosmo/work/wise/outputs/merge/neo4
 
 # export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo3/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
 export UNWISE_COADDS_TIMERESOLVED=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
-export UNWISE_COADDS_TIMERESOLVED_INDEX=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo3/time_resolved_atlas.fits
+export UNWISE_COADDS_TIMERESOLVED_INDEX=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/time_resolved_atlas.fits
 
 export DUST_DIR=/global/cscratch1/sd/desiproc/dust/v0_0
 
