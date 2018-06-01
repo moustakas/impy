@@ -1,0 +1,3 @@
+#!/bin/bash
+echo 'Requesting an interactive node.'
+salloc -N 1 -C haswell -t 00:60:00 --qos interactive -L SCRATCH,project

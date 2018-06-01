@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Setup the LSLGA project
+
+source $HOME/bin/setup-legacypipe
+
+export LSLGA_DIR=$CSCRATCH/LSLGA
+export LSLGA_CODE_DIR=$CSCRATCH/repos/LSLGA
+export PATH=$LSLGA_CODE_DIR/bin:$PATH
+export PYTHONPATH=$LSLGA_CODE_DIR:$PYTHONPATH
+echo '$LSLGA_DIR='$LSLGA_DIR
+echo '$LSLGA_CODE_DIR='$LSLGA_CODE_DIR

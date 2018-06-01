@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Setup the legacyhalos project
+
+source $HOME/bin/setup-legacypipe
+
+export LEGACYHALOS_DIR=$CSCRATCH/legacyhalos
+export LEGACYHALOS_CODE_DIR=$CSCRATCH/repos/legacyhalos
+export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
+export PYTHONPATH=$LEGACYHALOS_CODE_DIR:$PYTHONPATH
+echo '$LEGACYHALOS_DIR='$LEGACYHALOS_DIR
+echo '$LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR

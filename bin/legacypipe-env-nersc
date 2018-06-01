@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# Set up the software environment we need in order to run various Legacy Surveys
+# code (legacypipe) at NERSC.
+
+##################################################
+# Custom install of tractor and astrometry.net
+# desiconda_version=20180512-1.2.5-img
+# module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version/modulefiles
+# module load desiconda
+
+# desiconda_version=20170818-1.1.12-img
+# desiconda_version=20180103-1.2.3-img
+# module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version/modulefiles
+# module load desiconda
+
+# cd $SCRATCH/repos
+# git clone https://github.com/dstndstn/astrometry.net.git
+# cd astrometry.net/
+# python setup.py install --prefix=$SCRATCH/repos/build
+
+# cd ..
+# git clone https://github.com/dstndstn/tractor.git
+# cd tractor/
+# make
+# python setup.py install --prefix=$SCRATCH/repos/build
+
+# cd ..
+# git clone https://github.com/legacysurvey/legacypipe.git
+
+##################################################
+# Load a vanilla version of the imaging packages and desiconda
+
+#desiconda_version=20180103-1.2.3-img
+#desiconda_version=20180512-1.2.5-img
+#module use /global/common/${NERSC_HOST}/contrib/desi/desiconda/$desiconda_version/modulefiles
+
+#desiconda_version=20170818-1.1.12-img
+desiconda_version=20180512-1.2.5-img
+echo 'Loading $desiconda='$desiconda_version
+
+module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version/modulefiles
+module load desiconda
+
+# Legacy Surveys variables
+#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr6plus
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr5
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr5
+#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/work/legacysurvey/dr6  
+#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/data/legacysurvey/dr6
+export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+
+export LEGACYPIPE_DIR=$CSCRATCH/repos/legacypipe
+
+export PATH=$LEGACYPIPE_DIR/bin:$PATH
+export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
+
+# export PATH=$CSCRATCH/repos/build/bin:$PATH
+# export PYTHONPATH=$CSCRATCH/repos/build/lib/python3.6/site-packages:$PYTHONPATH
+
+#if [ "$NERSC_HOST" == "cori" ]; then
+#  module use $LEGACYPIPE_DIR/bin/modulefiles/cori
+#fi
+#if [ "$NERSC_HOST" == "edison" ]; then
+#  module use $LEGACYPIPE_DIR/bin/modulefiles/edison
+#fi  
+
+#module load unwise_coadds
+#module load unwise_coadds_timeresolved
+#module load dust
+
+# Set a bunch of environment variables we need
+export GALEX_DIR=/project/projectdirs/cosmo/data/galex/images
+
+# temporarily use Aaron's scratch directory to get the NEO4 coadds
+export UNWISE_COADDS_DIR=/project/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+
+# export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo3/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_COADDS_TIMERESOLVED=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
+export UNWISE_COADDS_TIMERESOLVED_INDEX=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo3/time_resolved_atlas.fits
+
+export DUST_DIR=/global/cscratch1/sd/desiproc/dust/v0_0
+
+export TYCHO2_KD=/global/project/projectdirs/cosmo/staging/tycho2
+
+export GAIA_CAT_VER=2
+export GAIA_CAT_DIR=/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom
+export PS1CAT_DIR=/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # only for calibration
+
+# Some NERSC-specific options to get MPI working properly.
+#   Force MKL single-threaded and avoid problems with MPI and Python multiprocessing
+#   https://software.intel.com/en-us/articles/using-threaded-intel-mkl-in-multi-thread-application
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export KMP_AFFINITY=disabled
+export MPICH_GNI_FORK_MODE=FULLCOPY

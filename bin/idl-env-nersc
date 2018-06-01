@@ -1,0 +1,27 @@
+# Set up IDL
+module load idl
+export IDL_STARTUP=${HOME}/.idl_startup
+
+export IM_SVNREPOS=${HOME}/repos/svn
+export IM_GITREPOS=${HOME}/repos/git
+
+export IMPRO_DIR=${IM_GITREPOS}/impro
+export IDLUTILS_DIR=${IM_SVNREPOS}/idlutils
+export IDLSPEC2D_DIR=${IM_SVNREPOS}/idlspec2d
+export IDL_PROJECTS_DIR=${IM_GITREPOS}/moustakas-projects
+export PHOTOOP_DIR=${IM_SVNREPOS}/photoop
+export DIMAGE_DIR=${IM_SVNREPOS}/dimage
+export COYOTE_DIR=${IM_SVNREPOS}/coyote
+export DECAMCODE=${IM_SVNREPOS}/desi/decam/code
+
+export IDL_PATH=+${IMPRO_DIR}/pro:${IDL_PATH}
+export IDL_PATH=+${IDL_PROJECTS_DIR}:${IDL_PATH}
+export IDL_PATH=+${IDL_PROJECTS_DIR}:${IDL_PATH}
+export IDL_PATH=+${IM_GITREPOS}/IDLAstro/pro:${IDL_PATH}
+export IDL_PATH=+${COYOTE_DIR}/:${IDL_PATH} # must appear before IDLUTILS_DIR
+export IDL_PATH=+${IDLUTILS_DIR}/pro:${IDL_PATH}
+export IDL_PATH=+${IDLSPEC2D_DIR}/pro:${IDL_PATH}
+export IDL_PATH=+${DECAMCODE}/observing/trunk/pro:${IDL_PATH}
+
+export PATH=${PATH}:${IDLUTILS_DIR}/bin
+export PATH=${PATH}:${IDLSPEC2D_DIR}/bin
