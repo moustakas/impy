@@ -80,7 +80,7 @@ export UNWISE_COADDS_DIR=/project/projectdirs/cosmo/work/wise/outputs/merge/neo4
 export UNWISE_COADDS_TIMERESOLVED=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
 export UNWISE_COADDS_TIMERESOLVED_INDEX=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/time_resolved_atlas.fits
 
-export DUST_DIR=/global/cscratch1/sd/desiproc/dust/v0_0
+export DUST_DIR=/global/project/projectdirs/desi/software/${NERSC_HOST}/dust/v0_0
 
 export TYCHO2_KD=/global/project/projectdirs/cosmo/staging/tycho2
 
