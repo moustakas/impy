@@ -71,22 +71,19 @@ export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 #module load dust
 
 # Set a bunch of environment variables we need
-export GALEX_DIR=/project/projectdirs/cosmo/data/galex/images
-
-# temporarily use Aaron's scratch directory to get the NEO4 coadds
-export UNWISE_COADDS_DIR=/project/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-
-# export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo3/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
-export UNWISE_COADDS_TIMERESOLVED_INDEX=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/time_resolved_atlas.fits
-
 export DUST_DIR=/global/project/projectdirs/desi/software/${NERSC_HOST}/dust/v0_0
 
-export TYCHO2_KD=/global/project/projectdirs/cosmo/staging/tycho2
+export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
 
+export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom/
 export GAIA_CAT_VER=2
-export GAIA_CAT_DIR=/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom
-export PS1CAT_DIR=/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # only for calibration
+
+export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
+
+export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # calibration only
+
+export GALEX_DIR=/project/projectdirs/cosmo/data/galex/images
 
 # Some NERSC-specific options to get MPI working properly.
 #   Force MKL single-threaded and avoid problems with MPI and Python multiprocessing
