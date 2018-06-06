@@ -12,36 +12,45 @@ export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
 export SPECPROD=dailytest
 export PIXPROD=dailytest
 
-## For the first time, clone everything
-#cd $DESI_PRODUCT_ROOT
-#for package in desiutil specter specsim desitarget desispec desisim desimodel; do
-#  git clone git@github.com:desihub/$package
-#done
+## Clone or update all the package dependencies.
+pushd $DESI_PRODUCT_ROOT
+for package in desiutil specter specsim desitarget desispec desisim desisurvey surveysim \
+                        desimodel redrock redrock-templates; do
+  if [ -d $package ]; then
+    echo 'Updating '$package
+    cd $package
+    git pull
+    cd ..
+  else
+      git clone git@github.com:desihub/$package
+  fi
+done
+popd
 
-# Build all the core packages
-for package in desiutil specter desitarget desispec desisim desimodel redrock; do
+# Update PATH and PYTHONPATH
+for package in desiutil specter desitarget desispec desisim \
+                        desisurvey surveysim desimodel redrock; do
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
 export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
-export PYTHONPATH=$IM_GITREPOS/simqso:$PYTHONPATH
+export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
 
-# Build the SVN desimodel
+# Check out the desimodel data files (in svn)
 # cd $DESIMODEL
 # svn export https://desi.lbl.gov/svn/code/desimodel/trunk/data
-export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
 
-# Build redrock
-# cd $DESI_PRODUCT_ROOT
-# git clone https://github.com/desihub/redmonster
-# rsync -auvP ${DESI_PRODUCT_ROOT}/redmonster/templates/ ${DESI_ROOT}/spectro/templates/redmonster/
-#export PATH=$DESI_PRODUCT_ROOT/redmonster/bin:$PATH
-#export PYTHONPATH=$DESI_PRODUCT_ROOT/redmonster/python:$PYTHONPATH
+# Check out calibration and template files
+#username=my_nersc_account_username
+#export DESI_ROOT=$HOME/desi/
+#mkdir -p $DESI_ROOT/spectro/templates/basis_templates
+#cd $DESI_ROOT/spectro/templates/basis_templates
+#svn export svn+ssh://${username}@dtn01.nersc.gov/global/project/projectdirs/desi/spectro/calib/svn/basis_templates/tags/v2.5
 
-#export REDMONSTER_TEMPLATES_DIR=${DESI_ROOT}/spectro/templates/redmonster
-#export REDMONSTER_TEMPLATES_DIR=${DESI_PRODUCT_ROOT}/redmonster/templates
-export RR_TEMPLATES_DIR=$DESI_ROOT/redrock/py/redrock/templates
+export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
 
+# Templates
+export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates
 export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
 
 source activate desi
