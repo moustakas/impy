@@ -1,9 +1,16 @@
 #!/bin/bash
-pushd ${DESI_PRODUCT_ROOT}
-for package in specsim redmonster desiutil specter desitarget desispec desisim desimodel redrock; do
-  echo 'Updating '$package
-  cd $package
-  git pull
-  cd ..
+
+## Clone or update all the package dependencies.
+pushd $DESI_PRODUCT_ROOT
+for package in desiutil specter specsim desitarget desispec desisim desisurvey surveysim \
+                        desimodel redrock redrock-templates; do
+  if [ -d $package ]; then
+    echo 'Updating '$package
+    cd $package
+    git pull
+    cd ..
+  else
+      git clone git@github.com:desihub/$package
+  fi
 done
 popd
