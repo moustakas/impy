@@ -13,7 +13,7 @@ export SPECPROD=dailytest
 export PIXPROD=dailytest
 
 # Update PATH and PYTHONPATH
-for package in desiutil specter desitarget desispec desisim \
+for package in desiutil specter desitarget desispec desisim fiberassign \
                         desisurvey surveysim desimodel redrock; do
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
@@ -38,4 +38,8 @@ export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
 export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates
 export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
 
+# Additional variables
+export DUST_DIR=${IM_DATA_DIR}/sfd_dustmaps/
+
+echo "Loading DESI environment"
 source activate desi
