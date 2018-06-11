@@ -15,7 +15,7 @@
 #   module load desiconda
 #
 
-echo 'Loading desi software'
+echo 'Loading DESI software.'
 source /project/projectdirs/desi/software/desi_environment.sh master
 #source /project/projectdirs/desi/software/desi_environment.sh 18.3
 #source /project/projectdirs/desi/software/desi_environment_18.2.sh 18.2a
@@ -34,3 +34,6 @@ for package in desitarget; do
 done
 
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v2.3
+
+echo 'DESI_ROOT='$DESI_ROOT
+echo 'DESI_BASIS_TEMPLATES='$DESI_BASIS_TEMPLATES
