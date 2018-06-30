@@ -1,0 +1,30 @@
+#!/bin/bash
+# Set up IDL
+
+export IDL_PROJECTS_DIR=${IM_GITREPOS}/moustakas-projects
+export RED_DIR=${IM_SVNREPOS}/red
+export IDLUTILS_DIR=${IM_SVNREPOS}/idlutils
+export IDLSPEC2D_DIR=${IM_SVNREPOS}/idlspec2d
+export KCORRECT_DIR=${IM_GITREPOS}/kcorrect
+export PHOTOOP_DIR=${IM_SVNREPOS}/photoop
+export DIMAGE_DIR=${IM_SVNREPOS}/dimage
+export COYOTE_DIR=${IM_GITREPOS}/coyote
+
+export IDL_DIR=/usr/local/exelis/idl
+export IDL_PATH=${IDL_PATH}:+${IDL_DIR}/lib
+export IDL_PATH=${IDL_PATH}:+${IMPRO_DIR}/pro
+export IDL_PATH=${IDL_PATH}:+${IDL_PROJECTS_DIR}
+export IDL_PATH=${IDL_PATH}:+${RED_DIR}
+export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/IDLAstro/pro
+export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/idl-lib/markwardt
+export IDL_PATH=${IDL_PATH}:+${COYOTE_DIR}/ # must appear before IDLUTILS_DIR
+export IDL_PATH=${IDL_PATH}:+${IDLUTILS_DIR}/pro
+export IDL_PATH=${IDL_PATH}:+${IDLSPEC2D_DIR}/pro
+export IDL_PATH=${IDL_PATH}:+${KCORRECT_DIR}/pro
+export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/legacyhalos/pro
+
+export IDL_STARTUP=${HOME}/.idl_startup
+
+export PATH=${IDLUTILS_DIR}/bin:${PATH}
+export PATH=${IDLSPEC2D_DIR}/bin:${PATH}
+

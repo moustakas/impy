@@ -1,0 +1,17 @@
+#!/bin/bash
+# Set up hizea code
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+export HIZEA_DIR=${IM_GITREPOS}/hizea
+export HIZEA_DATA=${IM_ARCHIVE_DIR}/projects/hizea
+export HIZEA_PROJECT=${IM_RESEARCH_DIR}/projects/hizea
+
+export HIZEA_DIR=${IM_GITREPOS}/hizea
+export HIZEA_DATA=${IM_ARCHIVE_DIR}/projects/hizea
+export HIZEA_PROJECT=${IM_RESEARCH_DIR}/projects/hizea
+
+export IDL_PATH=${IDL_PATH}:+${HIZEA_DIR}/pro
+
+
+source activate hizea

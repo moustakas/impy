@@ -1,0 +1,62 @@
+##################################################
+# Personal system defaults
+#set -x
+umask 002
+export EDITOR=emacs
+export TERM=xterm-256color
+export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "
+shopt -s checkwinsize # check the window size
+
+# export LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/lib64:/usr/local/lib64:/usr/local/lib:/usr/local/atlas/lib
+
+##################################################
+# Some convenience variables
+export IM_SVNREPOS=${HOME}/repos/svn
+export IM_GITREPOS=${HOME}/repos/git
+export TEACHING_DIR=${HOME}/teaching                                                                          
+
+export IM_WORK_DIR=/global/work
+export IM_ARCHIVE_DIR=/global/work
+export IM_RESEARCH_DIR=${HOME}/research
+export IM_DATA_DIR=${HOME}/research/data
+export IM_PROJECTS_DIR=${HOME}/research/projects
+
+export DUST_DIR=$IM_WORK_DIR/sfd_dustmaps/
+export CATALOGS_DIR=$IM_DATA_DIR/catalogs
+
+export IMPRO_DIR=${IM_GITREPOS}/impro
+export IMPY_DIR=${IM_GITREPOS}/impy
+ export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
+
+ # export LSS_CUTE=/global/work/projects/lss-cute
+# export ISEDFIT_SSP_DIR=${IM_DATA_DIR}/isedfit_ssp
+
+##################################################
+# Expand my path
+export PATH=/usr/local/anaconda3/bin:$PATH
+export PATH=${IMPY_DIR}/bin:$PATH
+# export PATH=${IM_GITREPOS}/software/bin:$PATH
+
+##################################################
+# Personal aliases
+
+alias l='ls -l --color=auto'
+# alias l='ls -l --color=auto | grep -v "~"'
+alias lt='ls -ltr --color=auto '
+alias lm='ls -l --color=auto | more'
+alias dirs='ls -l --color=auto | grep ^d'
+alias cls='clear'
+alias df='df -kH'
+alias du='du -ksh'
+alias mv='mv -i'
+alias rm='rm -i'
+alias cp='cp -ip'        # make copy preserve timestamp of files
+alias cx='chmod +x'
+alias findf='find . -name "\!*"  -print'
+alias rgrep='find . -type f -exec grep -HI \!$ {} \;'
+alias pwd='pwd -P'
+# alias jupyter='/usr/bin/jupyter notebook --no-browser'
+
+alias desi='source $IMPY_DIR/bin/desi-env-nyx'
+alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-nyx'
+
