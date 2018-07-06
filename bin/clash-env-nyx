@@ -1,0 +1,7 @@
+
+
+export CLASH_DIR=${IDL_PROJECTS_DIR}/clash
+export CLASH_DATA=${IM_DATA_DIR}/clash
+export CLASH_PROJECTS=/global/work/projects/clash
+export CLASH_ARCHIVE=/Volumes/Archive_the_First/clash-archive/
+
