@@ -23,6 +23,12 @@
 # git clone https://github.com/dstndstn/tractor.git
 # cd tractor/
 # make
+# export SUITESPARSE_LIB_DIR="${SuiteSparse_PREFIX}/lib"
+# export BLAS_LIB="${blas_LIBS_CC}"
+# module load eigen3
+# export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$EIGEN3_DIR/share/pkgconfig
+# export PYTHON_CONFIG=python3-config
+# make ceres
 # python setup.py install --prefix=$SCRATCH/repos/build
 
 # cd ..
@@ -48,6 +54,7 @@ module load desiconda
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr5
 #export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/work/legacysurvey/dr6  
 #export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/data/legacysurvey/dr6
+#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr7-depthcut
 export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
@@ -56,8 +63,8 @@ export LEGACYPIPE_DIR=$CSCRATCH/repos/legacypipe
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-# export PATH=$CSCRATCH/repos/build/bin:$PATH
-# export PYTHONPATH=$CSCRATCH/repos/build/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=$CSCRATCH/repos/build/bin:$PATH
+export PYTHONPATH=$CSCRATCH/repos/build/lib/python3.6/site-packages:$PYTHONPATH
 
 #if [ "$NERSC_HOST" == "cori" ]; then
 #  module use $LEGACYPIPE_DIR/bin/modulefiles/cori
