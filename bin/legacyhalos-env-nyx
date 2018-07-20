@@ -3,7 +3,7 @@
 
 unset PYTHONPATH # Clear PYTHONPATH
 
-export LEGACYHALOS_DIR=${IM_PROJECTS_DIR}/legacyhalos
+export LEGACYHALOS_DIR=${IM_WORK_DIR}/projects/legacyhalos
 export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
 # export REDMAPPER_DIR=${IM_DATA_DIR}/redmapper

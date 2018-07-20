@@ -28,3 +28,4 @@ export IDL_STARTUP=${HOME}/.idl_startup
 export PATH=${IDLUTILS_DIR}/bin:${PATH}
 export PATH=${IDLSPEC2D_DIR}/bin:${PATH}
 
+echo 'Loading IDL environment'
