@@ -58,13 +58,13 @@ module load desiconda
 export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
-export LEGACYPIPE_DIR=$CSCRATCH/repos/legacypipe
+export LEGACYPIPE_DIR=/global/cscratch1/sd/ioannis/repos/legacypipe
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-export PATH=$CSCRATCH/repos/build/$NERSC_HOST/bin:$PATH
-export PYTHONPATH=$CSCRATCH/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/bin:$PATH
+export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
 #if [ "$NERSC_HOST" == "cori" ]; then
 #  module use $LEGACYPIPE_DIR/bin/modulefiles/cori
