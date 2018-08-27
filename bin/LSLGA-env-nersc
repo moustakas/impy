@@ -2,15 +2,30 @@
 
 # Setup the LSLGA project
 
+# pip install --install-option="--prefix=/global/cscratch1/sd/ioannis/repos/build/cori" pydl
+
 echo "Loading LSLGA project"
 
 source $IMPY_DIR/bin/legacypipe-env-nersc
 
-export LSLGA_DIR=$CSCRATCH/LSLGA
-export LSLGA_CODE_DIR=$CSCRATCH/repos/LSLGA
-export SPS_HOME=$CSCRATCH/fsps
+export LSLGA_DIR=$SCRATCH/LSLGA
+export LSLGA_CODE_DIR=$SCRATCH/repos/LSLGA
+export SPS_HOME=$SCRATCH/fsps
+
+export DESI_PRODUCT_ROOT=$SCRATCH/repos/desihub
+export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
 
 export PATH=$LSLGA_CODE_DIR/bin:$PATH
+export PATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/bin:$PATH
+
 export PYTHONPATH=$LSLGA_CODE_DIR:$PYTHONPATH
+export PYTHONPATH=$SCRATCH/repos/mge_2017_07_28:$PYTHONPATH
+export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+
+for package in desiutil desimodel; do
+  export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
+  export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
+done
+
 echo '$LSLGA_DIR='$LSLGA_DIR
 echo '$LSLGA_CODE_DIR='$LSLGA_CODE_DIR

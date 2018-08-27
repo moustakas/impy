@@ -78,8 +78,8 @@ export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/pytho
 #module load dust
 
 # Set a bunch of environment variables we need
-export DUST_DIR=/global/project/projectdirs/desi/software/${NERSC_HOST}/dust/v0_0
-
+export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
+   
 export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
 export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
 
