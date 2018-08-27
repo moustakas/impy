@@ -1,6 +1,8 @@
 #!/bin/bash
 # Set up legacyhalos code
 
+echo 'Loading legacyhalos project'
+
 unset PYTHONPATH # Clear PYTHONPATH
 
 export TRACTOR_DIR=/usr/local/tractor
@@ -16,8 +18,7 @@ export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
 export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
-export PYTHONPATH=${LEGACYHALOS_CODE_DIR}:$PYTHONPATH
-export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
+export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 
 export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
 export PATH=/usr/local/astrometry/bin:${PATH}
