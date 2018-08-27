@@ -1,6 +1,8 @@
 #!/bin/bash
 # Set up LSLGA code
 
+echo 'Loading LSLGA project'
+
 unset PYTHONPATH # Clear PYTHONPATH
 
 export TRACTOR_DIR=/usr/local/tractor

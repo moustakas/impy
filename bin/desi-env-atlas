@@ -21,6 +21,15 @@ done
 export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
 export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
 
+###############
+# Not official, but useful
+export TRACTOR_DIR=/usr/local/tractor
+export ASTROMETRY_DIR=/usr/local/astrometry
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
+export PATH=/usr/local/astrometry/bin:${PATH}
+###############
+
 # Check out the desimodel data files (in svn)
 # cd $DESIMODEL
 # svn export https://desi.lbl.gov/svn/code/desimodel/trunk/data
