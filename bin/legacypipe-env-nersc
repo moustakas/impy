@@ -49,13 +49,13 @@ module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version
 module load desiconda
 
 # Legacy Surveys variables
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr6plus
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr5
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr5
 #export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/work/legacysurvey/dr6  
 #export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/data/legacysurvey/dr6
 #export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr7-depthcut
 export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr6plus
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 export LEGACYPIPE_DIR=/global/cscratch1/sd/ioannis/repos/legacypipe

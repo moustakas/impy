@@ -2,6 +2,8 @@
 
 # Setup the legacyhalos project
 
+echo "Loading legacyhalos project"
+
 source $IMPY_DIR/bin/legacypipe-env-nersc
 
 export LEGACYHALOS_DIR=$CSCRATCH/legacyhalos

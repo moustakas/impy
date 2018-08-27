@@ -27,7 +27,7 @@ source /project/projectdirs/desi/software/desi_environment.sh master
 #module switch desimodel/0.5.1
 
 #for package in desitarget desisim; do
-for package in desitarget; do
+for package in desitarget desisurvey; do
   module unload $package
   export PATH=${SCRATCH}/repos/$package/bin:${PATH}
   export PYTHONPATH=${SCRATCH}/repos/$package/py:${PYTHONPATH}

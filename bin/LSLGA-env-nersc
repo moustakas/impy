@@ -2,10 +2,14 @@
 
 # Setup the LSLGA project
 
-source $HOME/bin/setup-legacypipe
+echo "Loading LSLGA project"
+
+source $IMPY_DIR/bin/legacypipe-env-nersc
 
 export LSLGA_DIR=$CSCRATCH/LSLGA
 export LSLGA_CODE_DIR=$CSCRATCH/repos/LSLGA
+export SPS_HOME=$CSCRATCH/fsps
+
 export PATH=$LSLGA_CODE_DIR/bin:$PATH
 export PYTHONPATH=$LSLGA_CODE_DIR:$PYTHONPATH
 echo '$LSLGA_DIR='$LSLGA_DIR
