@@ -48,6 +48,7 @@ export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
 # Templates
 export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates
 export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
+#export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.0
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
