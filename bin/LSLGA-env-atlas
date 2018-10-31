@@ -17,7 +17,7 @@ export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
 export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
-export PYTHONPATH=${LSLGA_CODE_DIR}:$PYTHONPATH
+export PYTHONPATH=${LSLGA_CODE_DIR}/py:$PYTHONPATH
 
 export PATH=${IM_GITREPOS}/LSLGA/bin:$PATH
 export PATH=/usr/local/astrometry/bin:${PATH}
