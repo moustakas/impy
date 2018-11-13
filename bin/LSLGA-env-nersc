@@ -12,10 +12,13 @@ export LSLGA_DIR=$SCRATCH/LSLGA
 export LSLGA_CODE_DIR=$HOME/repos/git/LSLGA
 # export SPS_HOME=$SCRATCH/fsps
 
+export LEGACYHALOS_CODE_DIR=$HOME/repos/git/legacyhalos
+
 export PATH=$LSLGA_CODE_DIR/bin:$PATH
 export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
 
 export PYTHONPATH=$LSLGA_CODE_DIR/py:$PYTHONPATH
+export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
 export PYTHONPATH=$HOME/repos/git/mge_2017_07_28:$PYTHONPATH
 export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
