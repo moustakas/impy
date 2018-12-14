@@ -19,7 +19,18 @@ for package in desiutil specter desitarget desispec desisim fiberassign \
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
 export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
-export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
+ export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
+#export PYTHONPATH=$HOME/repos/simqso:$PYTHONPATH
+#echo 'Temporarily using local checkout of simqso!'
+
+###############
+# Not official, but useful
+export TRACTOR_DIR=/usr/local/tractor
+export ASTROMETRY_DIR=/usr/local/astrometry
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
+export PATH=/usr/local/astrometry/bin:${PATH}
+###############
 
 # Check out the desimodel data files (in svn)
 # cd $DESIMODEL
@@ -36,7 +47,8 @@ export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
 
 # Templates
 export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates
-export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
+#export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
+export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.0
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/

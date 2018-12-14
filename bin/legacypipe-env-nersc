@@ -49,22 +49,18 @@ module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version
 module load desiconda
 
 # Legacy Surveys variables
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr6plus
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr5
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr5
-#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/work/legacysurvey/dr6  
-#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/data/legacysurvey/dr6
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr7-depthcut
-export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
+export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
-export LEGACYPIPE_DIR=/global/cscratch1/sd/ioannis/repos/legacypipe
+export LEGACYPIPE_DIR=$HOME/repos/git/legacypipe
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-export PATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/bin:$PATH
-export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
+export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
 #if [ "$NERSC_HOST" == "cori" ]; then
 #  module use $LEGACYPIPE_DIR/bin/modulefiles/cori
@@ -78,8 +74,8 @@ export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/pytho
 #module load dust
 
 # Set a bunch of environment variables we need
-export DUST_DIR=/global/project/projectdirs/desi/software/${NERSC_HOST}/dust/v0_0
-
+export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
+   
 export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
 export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
 
@@ -87,6 +83,7 @@ export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-
 export GAIA_CAT_VER=2
 
 export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
+export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies
 
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # calibration only
 

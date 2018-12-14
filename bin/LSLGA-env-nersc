@@ -2,11 +2,25 @@
 
 # Setup the LSLGA project
 
-source $HOME/bin/setup-legacypipe
+# pip install --install-option="--prefix=/global/u2/i/ioannis/repos/build/cori" pydl
 
-export LSLGA_DIR=$CSCRATCH/LSLGA
-export LSLGA_CODE_DIR=$CSCRATCH/repos/LSLGA
+echo "Loading LSLGA project"
+
+source $IMPY_DIR/bin/legacypipe-env-nersc
+
+export LSLGA_DIR=$SCRATCH/LSLGA
+export LSLGA_CODE_DIR=$HOME/repos/git/LSLGA
+# export SPS_HOME=$SCRATCH/fsps
+
+export LEGACYHALOS_CODE_DIR=$HOME/repos/git/legacyhalos
+
 export PATH=$LSLGA_CODE_DIR/bin:$PATH
-export PYTHONPATH=$LSLGA_CODE_DIR:$PYTHONPATH
+export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
+
+export PYTHONPATH=$LSLGA_CODE_DIR/py:$PYTHONPATH
+export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
+export PYTHONPATH=$HOME/repos/git/mge_2017_07_28:$PYTHONPATH
+export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+
 echo '$LSLGA_DIR='$LSLGA_DIR
 echo '$LSLGA_CODE_DIR='$LSLGA_CODE_DIR

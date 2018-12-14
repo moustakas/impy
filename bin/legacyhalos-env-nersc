@@ -2,19 +2,21 @@
 
 # Setup the legacyhalos project
 
+echo "Loading legacyhalos project"
+
 source $IMPY_DIR/bin/legacypipe-env-nersc
 
-export LEGACYHALOS_DIR=$CSCRATCH/legacyhalos
-export LEGACYHALOS_CODE_DIR=$CSCRATCH/repos/legacyhalos
-export REDMAPPER_DIR=$CSCRATCH/redmapper
-export SPS_HOME=$CSCRATCH/fsps
+export LEGACYHALOS_DIR=$SCRATCH/legacyhalos
+export LEGACYHALOS_CODE_DIR=$HOME/repos/git/legacyhalos
+export REDMAPPER_DIR=$SCRATCH/redmapper
+# export SPS_HOME=$SCRATCH/fsps
 
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
 export PATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/bin:$PATH
 
-export PYTHONPATH=$LEGACYHALOS_CODE_DIR:$PYTHONPATH
-export PYTHONPATH=$CSCRATCH/repos/mge_2017_07_28:$PYTHONPATH
-export PYTHONPATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
+export PYTHONPATH=$HOME/repos/git/mge_2017_07_28:$PYTHONPATH
+export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
 echo '$LEGACYHALOS_DIR='$LEGACYHALOS_DIR
 echo '$LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR

@@ -32,6 +32,7 @@ export IMPY_DIR=${IM_GITREPOS}/impy
 # Expand my PATH
 export PATH=/usr/local/anaconda3/bin:$PATH
 export PATH=$IM_GITREPOS/software/bin:$PATH
+export PATH=/usr/local/share/cfitsio/build/bin:$PATH # funpack utilities
 export PATH=$IMPY_DIR/bin:$PATH
 #export PATH=${IM_GITREPOS}/CUTE/CUTE:$PATH
 
