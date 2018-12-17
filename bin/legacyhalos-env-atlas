@@ -23,5 +23,5 @@ export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
 export PATH=/usr/local/astrometry/bin:${PATH}
 
-source activate legacyhalos
+conda activate legacyhalos
 

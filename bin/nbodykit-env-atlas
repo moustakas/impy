@@ -1,0 +1,11 @@
+#!/bin/bash
+# Set up nbodykit code
+
+echo 'Loading nbodykit code base'
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+#export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
+
+conda activate nbodykit-env

@@ -26,10 +26,11 @@ export CATALOGS_DIR=$IM_DATA_DIR/catalogs
 
 export IMPRO_DIR=${IM_GITREPOS}/impro
 export IMPY_DIR=${IM_GITREPOS}/impy
- export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
+export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
+export ISEDFIT_SSP_DIR=${IM_DATA_DIR}/isedfit_ssp
+
 
  # export LSS_CUTE=/global/work/projects/lss-cute
-# export ISEDFIT_SSP_DIR=${IM_DATA_DIR}/isedfit_ssp
 
 ##################################################
 # Expand my path

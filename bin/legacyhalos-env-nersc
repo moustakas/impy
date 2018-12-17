@@ -15,7 +15,7 @@ export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
 export PATH=/global/cscratch1/sd/ioannis/repos/build/$NERSC_HOST/bin:$PATH
 
 export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
-export PYTHONPATH=$HOME/repos/git/mge_2017_07_28:$PYTHONPATH
+#export PYTHONPATH=$HOME/repos/git/mge_2017_07_28:$PYTHONPATH
 export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
 echo '$LEGACYHALOS_DIR='$LEGACYHALOS_DIR
