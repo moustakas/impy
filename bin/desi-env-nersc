@@ -28,11 +28,11 @@ source /project/projectdirs/desi/software/desi_environment.sh master
 
 #for package in desitarget desisurvey desisim; do
 #for package in desitarget desisim; do
-#for package in desitarget; do
-#  module unload $package
-#  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
-#  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
-#done
+for package in desitarget; do
+  module unload $package
+  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+done
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.0
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v2.6
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/trunk
