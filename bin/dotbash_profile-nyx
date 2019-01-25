@@ -5,6 +5,7 @@ umask 002
 export EDITOR=emacs
 export TERM=xterm-256color
 export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "
+export CLICOLOR=1
 shopt -s checkwinsize # check the window size
 
 # export LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/lib64:/usr/local/lib64:/usr/local/lib:/usr/local/atlas/lib
@@ -26,17 +27,22 @@ export CATALOGS_DIR=$IM_DATA_DIR/catalogs
 
 export IMPRO_DIR=${IM_GITREPOS}/impro
 export IMPY_DIR=${IM_GITREPOS}/impy
+
 export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
 export ISEDFIT_SSP_DIR=${IM_DATA_DIR}/isedfit_ssp
-
 
  # export LSS_CUTE=/global/work/projects/lss-cute
 
 ##################################################
 # Expand my path
-export PATH=/usr/local/anaconda3/bin:$PATH
-export PATH=${IMPY_DIR}/bin:$PATH
-# export PATH=${IM_GITREPOS}/software/bin:$PATH
+export PATH=$IMPY_DIR/bin:$PATH
+export PATH=$IM_GITREPOS/software/bin:$PATH
+
+##########################
+# Set up conda
+# export PATH=/usr/local/anaconda3/bin:$PATH
+source /usr/local/anaconda3/etc/profile.d/conda.sh
+conda activate
 
 ##################################################
 # Personal aliases
@@ -62,3 +68,4 @@ alias desi='source $IMPY_DIR/bin/desi-env-nyx'
 alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-nyx'
 alias idl-env-nyx='source $IMPY_DIR/bin/idl-env-nyx'
 
+# [[ -s ~/.bashrc ]] && source ~/.bashrc

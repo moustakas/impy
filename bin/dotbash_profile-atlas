@@ -33,42 +33,13 @@ export IMPY_DIR=${IM_GITREPOS}/impy
 export PATH=$IM_GITREPOS/software/bin:$PATH
 export PATH=/usr/local/share/cfitsio/build/bin:$PATH # funpack utilities
 export PATH=$IMPY_DIR/bin:$PATH
-#export PATH=${IM_GITREPOS}/CUTE/CUTE:$PATH
+#export PATH=$IM_GITREPOS/CUTE/CUTE:$PATH
 
 ##########################
 # Set up conda
 # export PATH=/usr/local/anaconda3/bin:$PATH
 source /usr/local/anaconda3/etc/profile.d/conda.sh
 conda activate
-
-##########################
-## Set up IDL
-
-#export IDL_DIR=/Applications/exelis/idl
-#export IDL_PATH=${IDL_PATH}:+${IDL_DIR}/lib
-#export IDL_PATH=${IDL_PATH}:+${IMPRO_DIR}/pro
-#export IDL_PATH=${IDL_PATH}:+${IDL_PROJECTS_DIR}
-#export IDL_PATH=${IDL_PATH}:+${RED_DIR}
-#export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/IDLAstro/pro
-#export IDL_PATH=${IDL_PATH}:+${IM_GITREPOS}/idl-lib/markwardt
-#export IDL_PATH=${IDL_PATH}:+${COYOTE_DIR}/ # must appear before IDLUTILS_DIR
-#export IDL_PATH=${IDL_PATH}:+${IDLUTILS_DIR}/pro
-#export IDL_PATH=${IDL_PATH}:+${IDLSPEC2D_DIR}/pro
-#export IDL_PATH=${IDL_PATH}:+${KCORRECT_DIR}/pro
-
-#export IDL_STARTUP=${HOME}/.idl_startup
-
-#export IDL_PROJECTS_DIR=${IM_GITREPOS}/moustakas-projects
-#export RED_DIR=${IM_SVNREPOS}/red
-#export IDLUTILS_DIR=${IM_SVNREPOS}/idlutils
-#export IDLSPEC2D_DIR=${IM_SVNREPOS}/idlspec2d
-#export KCORRECT_DIR=${IM_SVNREPOS}/kcorrect
-#export PHOTOOP_DIR=${IM_SVNREPOS}/photoop
-#export DIMAGE_DIR=${IM_SVNREPOS}/dimage
-#export COYOTE_DIR=${IM_SVNREPOS}/coyote
-
-#export PATH=${IDLUTILS_DIR}/bin:${PATH}
-#export PATH=${IDLSPEC2D_DIR}/bin:${PATH}
 
 ##################################################
 # Personal aliases

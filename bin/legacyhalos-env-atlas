@@ -3,17 +3,17 @@
 
 echo 'Loading legacyhalos project'
 
-unset PYTHONPATH # Clear PYTHONPATH
-
-export TRACTOR_DIR=/usr/local/tractor
-export ASTROMETRY_DIR=/usr/local/astrometry
-export REDMAPPER_DIR=${IM_DATA_DIR}/redmapper
-export SPS_HOME=${IM_RESEARCH_DIR}/synthesis/fsps
+unset PYTHONPATH # clear PYTHONPATH
 
 export LEGACYHALOS_DIR=${IM_PROJECTS_DIR}/legacyhalos
 export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
-export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
+export TRACTOR_DIR=/usr/local/tractor
+export ASTROMETRY_DIR=/usr/local/astrometry
+export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
+export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
+
+export LEGACYPIPE_DIR=$IM_GITREPOS/legacysurvey/legacypipe
 
 export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}

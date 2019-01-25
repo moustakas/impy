@@ -1,20 +1,28 @@
 #!/bin/bash
 # Set up legacyhalos code
 
-unset PYTHONPATH # Clear PYTHONPATH
+echo 'Loading legacyhalos project'
 
-export LEGACYHALOS_DIR=${IM_WORK_DIR}/projects/legacyhalos
-export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
+unset PYTHONPATH # clear PYTHONPATH
 
-export REDMAPPER_DIR=${IM_DATA_DIR}/redmapper
+export LEGACYHALOS_DIR=$IM_WORK_DIR/projects/legacyhalos
+export LEGACYHALOS_CODE_DIR=$IM_GITREPOS/legacyhalos
+
+export TRACTOR_DIR=/usr/local/tractor
+export ASTROMETRY_DIR=/usr/local/astrometry
+export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
 # export SPS_HOME=/usr/local/gitrepos/fsps
 
+export LEGACYPIPE_DIR=$IM_GITREPOS/legacysurvey/legacypipe
+
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
-# export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
 
-export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
+export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
+export PATH=$LEGACYHALOS_CODE_DIR/science/paper1:$PATH
+export PATH=$LEGACYHALOS_CODE_DIR/science/paper2:$PATH
+export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
-echo "Loading legacyhalos environment"
-source activate legacyhalos
-
+conda activate legacyhalos
