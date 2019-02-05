@@ -17,7 +17,7 @@
 # cd $SCRATCH/repos
 # git clone https://github.com/dstndstn/astrometry.net.git
 # cd astrometry.net/
-# python setup.py install --prefix=$CSCRATCH/repos/build/$NERSC_HOST
+# python setup.py install --prefix=$HOME/repos/build/$NERSC_HOST
 
 # cd ..
 # git clone https://github.com/dstndstn/tractor.git
@@ -78,6 +78,9 @@ export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
    
 export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
 export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
+
+UNWISE_PSF_DIR=/global/project/projectdirs/cosmo/staging/unwise_psf/2018-11-25
+export WISE_PSF_DIR=$UNWISE_PSF_DIR/etc
 
 export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom/
 export GAIA_CAT_VER=2

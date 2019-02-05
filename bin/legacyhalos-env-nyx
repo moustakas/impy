@@ -6,6 +6,8 @@ echo 'Loading legacyhalos project'
 unset PYTHONPATH # clear PYTHONPATH
 
 export LEGACYHALOS_DIR=$IM_WORK_DIR/projects/legacyhalos
+export LEGACYHALOS_DATA_DIR=$IM_WORK_DIR/projects/legacyhalos-data
+export LEGACYHALOS_HTML_DIR=$IM_WORK_DIR/projects/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=$IM_GITREPOS/legacyhalos
 
 export TRACTOR_DIR=/usr/local/tractor
