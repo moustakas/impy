@@ -56,12 +56,6 @@ echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 export LEGACYPIPE_DIR=$HOME/repos/git/legacypipe
 
-export PATH=$LEGACYPIPE_DIR/bin:$PATH
-export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
-
-export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
-export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
-
 #if [ "$NERSC_HOST" == "cori" ]; then
 #  module use $LEGACYPIPE_DIR/bin/modulefiles/cori
 #fi
@@ -91,6 +85,13 @@ export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # calibration only
 
 export GALEX_DIR=/project/projectdirs/cosmo/data/galex/images
+
+export PATH=$LEGACYPIPE_DIR/bin:$PATH
+export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
+
+export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
+export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+export PYTHONPATH=$UNWISE_PSF_DIR/py:$PYTHONPATH
 
 # Some NERSC-specific options to get MPI working properly.
 #   Force MKL single-threaded and avoid problems with MPI and Python multiprocessing
