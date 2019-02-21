@@ -10,6 +10,8 @@ export LEGACYHALOS_DATA_DIR=${IM_PROJECTS_DIR}/legacyhalos-data
 export LEGACYHALOS_HTML_DIR=${IM_PROJECTS_DIR}/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
+export LEGACY_SURVEY_DIR=$LEGACYHALOS_DATA_DIR
+
 export TRACTOR_DIR=/usr/local/tractor
 export ASTROMETRY_DIR=/usr/local/astrometry
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
