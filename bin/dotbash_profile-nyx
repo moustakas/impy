@@ -65,6 +65,7 @@ alias pwd='pwd -P'
 # alias jupyter='/usr/bin/jupyter notebook --no-browser'
 
 alias desi='source $IMPY_DIR/bin/desi-env-nyx'
+alias hizea='source $IMPY_DIR/bin/hizea-env-nyx'
 alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-nyx'
 alias idl-env-nyx='source $IMPY_DIR/bin/idl-env-nyx'
 
