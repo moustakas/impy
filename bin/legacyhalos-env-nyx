@@ -7,6 +7,7 @@ unset PYTHONPATH # clear PYTHONPATH
 
 export LEGACYHALOS_DIR=$IM_WORK_DIR/projects/legacyhalos
 export LEGACYHALOS_DATA_DIR=$IM_WORK_DIR/projects/legacyhalos-data
+export LEGACYHALOS_ISEDFIT_DIR=$IM_WORK_DIR/projects/legacyhalos-isedfit
 export LEGACYHALOS_HTML_DIR=$IM_WORK_DIR/projects/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=$IM_GITREPOS/legacyhalos
 
