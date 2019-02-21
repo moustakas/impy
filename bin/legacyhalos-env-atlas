@@ -5,12 +5,20 @@ echo 'Loading legacyhalos project'
 
 unset PYTHONPATH # clear PYTHONPATH
 
-export LEGACYHALOS_DIR=${IM_PROJECTS_DIR}/legacyhalos
-export LEGACYHALOS_DATA_DIR=${IM_PROJECTS_DIR}/legacyhalos-data
-export LEGACYHALOS_HTML_DIR=${IM_PROJECTS_DIR}/legacyhalos-html
+export LEGACYHALOS_DIR=${IM_WORK_DIR}/projects/legacyhalos
+export LEGACYHALOS_DATA_DIR=${IM_WORK_DIR}/projects/legacyhalos-data
+export LEGACYHALOS_ISEDFIT_DIR=${IM_WORK_DIR}/projects/legacyhalos-isedfit
+export LEGACYHALOS_HTML_DIR=${IM_WORK_DIR}/projects/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
 export LEGACY_SURVEY_DIR=$LEGACYHALOS_DATA_DIR
+
+export LEGACYLSBS_DIR=${LEGACYHALOS_DIR}/legacylsbs # temporary
+export LEGACYLSBS_DATA_DIR=${IM_WORK_DIR}/projects/legacylsbs-data
+
+export HSC_DIR=${LEGACYHALOS_DIR}/hsc # temporary
+export HSC_DATA_DIR=${IM_WORK_DIR}/projects/hsc-data
+export HSC_HTML_DIR=${IM_WORK_DIR}/projects/hsc-html
 
 export TRACTOR_DIR=/usr/local/tractor
 export ASTROMETRY_DIR=/usr/local/astrometry

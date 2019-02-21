@@ -6,11 +6,19 @@ echo "Loading legacyhalos project"
 
 source $IMPY_DIR/bin/legacypipe-env-nersc
 
-export LEGACYHALOS_DIR=$HOME/legacyhalos
-export LEGACYHALOS_DATA_DIR=$SCRATCH/legacyhalos-data
+export LEGACYHALOS_DIR=/project/projectdirs/desi/users/ioannis/legacyhalos
+export LEGACYHALOS_DATA_DIR=/project/projectdirs/desi/users/ioannis/legacyhalos-data
 export LEGACYHALOS_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=$HOME/repos/git/legacyhalos
-export REDMAPPER_DIR=$HOME/redmapper
+
+export LEGACYLSBS_DIR=${LEGACYHALOS_DIR}/legacylsbs # temporary
+export LEGACYLSBS_DATA_DIR=/project/projectdirs/desi/users/ioannis/legacylsbs-data
+
+export HSC_DIR=${LEGACYHALOS_DIR}/hsc # temporary
+export HSC_DATA_DIR=/project/projectdirs/desi/users/ioannis/hsc-data
+export HSC_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/hsc-html
+
+export REDMAPPER_DIR=/project/projectdirs/desi/users/ioannis/redmapper
 # export SPS_HOME=$SCRATCH/fsps
 
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH

@@ -29,7 +29,7 @@
 # export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$EIGEN3_DIR/share/pkgconfig
 # export PYTHON_CONFIG=python3-config
 # make ceres
-# python setup.py install --prefix=$CSCRATCH/repos/build/$NERSC_HOST
+# python setup.py install --prefix=$HOME/repos/build/$NERSC_HOST
 
 # cd ..
 # git clone https://github.com/legacysurvey/legacypipe.git
