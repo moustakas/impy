@@ -14,7 +14,7 @@ export LEGACYHALOS_CODE_DIR=$IM_GITREPOS/legacyhalos
 export TRACTOR_DIR=/usr/local/tractor
 export ASTROMETRY_DIR=/usr/local/astrometry
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
-# export SPS_HOME=/usr/local/gitrepos/fsps
+export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
 
 export LEGACYPIPE_DIR=$IM_GITREPOS/legacysurvey/legacypipe
 
