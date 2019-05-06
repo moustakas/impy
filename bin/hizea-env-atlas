@@ -3,8 +3,12 @@
 
 unset PYTHONPATH # Clear PYTHONPATH
 
+export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
+
 export HIZEA_DIR=${IM_GITREPOS}/hizea
-export HIZEA_DATA=${IM_ARCHIVE_DIR}/projects/hizea
+export HIZEA_DATA=${IM_WORK_DIR}/projects/hizea
 export HIZEA_PROJECT=${IM_RESEARCH_DIR}/projects/hizea
 
-source activate hizea
+export PYTHONPATH=${HIZEA_DIR}/py:${PYTHONPATH}
+
+conda activate hizea

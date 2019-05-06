@@ -1,0 +1,19 @@
+#!/bin/bash
+# Set up Breyo Observatory code
+
+echo 'Loading Breyo data reduction pipeline'
+
+unset PYTHONPATH # clear PYTHONPATH
+
+export BREYO_DIR=$IM_GITREPOS/breyo
+export BREYO_DATA_DIR=$IM_DATA_DIR/breyo
+
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${BREYO_DIR}/py:${PYTHONPATH}
+
+export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
+export PATH=/usr/local/astrometry/bin:${PATH}
+
+conda activate breyo
+
+

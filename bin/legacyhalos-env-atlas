@@ -31,6 +31,7 @@ export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
+export PYTHONPATH=${IM_GITREPOS}/illustris_python:$PYTHONPATH
 
 export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
 export PATH=${IM_GITREPOS}/legacyhalos/science/paper1:$PATH
