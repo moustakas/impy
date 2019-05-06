@@ -1,0 +1,26 @@
+From amarble@as.arizona.edu Wed Feb 23 13:38:39 2005
+Date: Fri, 18 Feb 2005 15:27:51 -0700 (MST)
+From: Andy Marble <amarble@as.arizona.edu>
+To: John Moustakas <jmoustakas@as.arizona.edu>
+Subject: battery monitor
+
+
+Hi John,
+
+I did finally find the battery monitor (Add to Panel > Utility > Battery
+Charge Monitor).  At first it did not work (showed 0% all the time).  I
+did a bit of searching and found a fix.  I added "acpi=on" to the end of
+the line in /boot/grub/grub.conf which start with "kernel 
+/vmlinuz-2.4.22".  Once I rebooted the battery monitor started working 
+fine.
+
+Andy
+
+---
+
+Andrew R. Marble
+amarble@as.arizona.edu
+
+Steward Observatory (Univ. of Arizona)
+phone: 520-621-1515, fax: 520-621-1532
+http://shapley.as.arizona.edu/~amarble

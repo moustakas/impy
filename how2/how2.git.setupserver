@@ -1,0 +1,26 @@
+For the general idea see: https://gist.github.com/Integralist/1875544
+
+On nyx:
+  cd /global/work/repositories/
+  mkdir papers
+  cd papers
+  git init
+  cd ..
+  git clone --bare papers papers.git
+  mv papers papers.junk
+  git clone papers.git
+
+On my laptop, first make a clean copy of my svn repository:
+  rsync -r --exclude=.svn ~/research/papers/ /tmp/papers.copy
+  cd /tmp/papers.copy
+  git init
+  git add *
+  git commit -m "Initialize papers repository"
+  git remote add origin ioannis@nyx.siena.edu:/global/work/repositories/papers.git
+  git remote -v
+  git push origin master
+
+Then from the laptop again the repository can be checked out from wherever!
+
+  cd ~/repos/git
+  git clone ioannis@nyx.siena.edu:/global/work/repositories/papers.git papers

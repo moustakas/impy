@@ -1,0 +1,6 @@
+jm03may5uofa
+
+To merge two or more postscript files into a single postscript file 
+use the following command:
+
+% ghostscript -dNOPAUSE -sDEVICE=pswrite -dBATCH -sOutputFile=out.ps plot1.ps plot2.ps

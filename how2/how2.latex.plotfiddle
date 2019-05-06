@@ -1,0 +1,10 @@
+# jm03oct23uofa
+
+\plotfiddle{PSFILE}{VSIZE}{ROT}{HSCALE}{VSCALE}{HTRANS}{VTRANS}
+
+[HSCALE] = %
+[VSCALE] = %
+[HTRANS] = "PS units"
+[VTRANS] = "PS units"
+
+NB:  72 "PS units" = 1 inch

@@ -1,0 +1,6 @@
+jm03may6uofa
+
+To determine whose is using a current IDL license try
+
+/usr/local/rsi/idl_5.5/bin/lmstat -a
+

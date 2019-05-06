@@ -1,0 +1,14 @@
+jm03jan7uofa
+
+To look at cron jobs.
+
+% crontab -l    # list cron jobs
+% crontab -e    # add or edit a cron job
+% crontab -r    # remove a cron job
+
+If you want to setup a cron job you can make a file called 
+crontab that has a sequence of commands.  Then type
+
+% crontab crontab
+
+Then the file crontab doesn't have to exist anymore.  

@@ -1,0 +1,21 @@
+jm04mar08uofa
+
+How to add Windows XP printers at Steward:
+
+[1] In the Control Panel click Add/Remove Programs
+[2] Click Windows XP Setup
+[3] Install "Other Network File and Print Services" component 
+[4] Back in the Control Panel click "Printers and Faxes"
+[5] Click "Add Printer"
+[6] Click "Local Printer attached to this computer"
+[7] Select "Create a New Port" then "LPR Port"
+[8] "Name of address of server providing lpd" is "lw1host" (for example)
+[9] "Name of printer" is "lw1"
+[10] Under Manufacturer and printer select "HP Laserjet 5si"
+
+
+	lw1  - HP Laserjet 5si Mx
+	lw26 - HP Laserjet 4m+
+
+See http://sol.as.arizona.edu/www/r/iraf/local/dev/devices.txt for the
+rest of the printers.

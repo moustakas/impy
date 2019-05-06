@@ -1,0 +1,61 @@
+jm03july3uofa
+
+Generate a public and private key pair.  Let's say I want to be able
+to log into my work computer (cerebus) from my home computer in such a
+way that my work computer can identify "me" logging in from home.  At
+home create the ssh key pairs using SSH protocal 2 with no pass-phrase
+(calling the file '/home/ioannis/.ssh/homekey_dsa':
+
+% ssh-keygen -t dsa
+
+We now need to tell ssh that our SSH2 private key is called
+'homekey_dsa' (rather than the default 'id_dsa').  Do
+
+% cp /etc/ssh/ssh_config ~/.ssh/config
+
+and edit the line
+
+IdentityFile ~/.ssh/id_dsa   -->  IdentityFile ~/.ssh/homekey_dsa
+
+Now we need to let cerebus be able to decode the encryption test my
+home computer sends.  Secure copy the public key to cerebus:
+
+% scp ~/.ssh/homekey_dsa.pub ioannis@cerebus.as.arizona.edu:".ssh/"
+
+Do
+
+% cd .ssh
+% cat homekey_dsa.pub >> authorized_keys2
+
+You should now be able to log in from work to cerebus.as.arizona.edu
+without a password.
+
+
+# -------------------------------------------------------------------------
+# Notes from C. Kulesa -- 2003 July 7
+# -------------------------------------------------------------------------
+
+1) Generate the RSA keys on the machine which you'll be connecting FROM:
+        ssh-keygen -t rsa
+
+   This generates two files:
+        $HOME/.ssh/id_rsa  --> private key only accessible to the user
+        $HOME/.ssh/id_rsa.pub  -->  public key
+
+   Use a blank passphrase.
+
+2) Append that public key to the file $HOME/.ssh/authorized_keys2 on the
+   remote server.  [use ftp, or sftp, scp, etc. to get it there]
+
+3) [optional] Just some sanity checks before proceeding.  You shouldn't
+   need any of this.   Make sure /etc/ssh/sshd_config has 
+   PubkeyAuthentication set to 'yes'.  The default is 'yes', so as long as 
+   it doesn't explicitly say 'no', it's ok.
+   If you make changes to this file, restart sshd:  'service sshd restart'
+
+4) Now login:  'ssh remotehost'
+   Look Mom -- no password!
+
+Note:  If you are using ssh protocol 1 instead of protocol 2, the latter 
+of which is assumed above, change the '-t rsa' in step 1 to '-t rsa1'.
+Protocol 2 is recommended, and is the default for Redhat and other Unixes.

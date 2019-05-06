@@ -1,0 +1,4 @@
+# SCP usage.
+
+scp file ioannis@as.arizona.edu:./directory
+scp ioannis@deep.berkeley.edu:"/home/ioannis/file" ./

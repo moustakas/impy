@@ -1,0 +1,23 @@
+Create a ~/.cvspass file with
+
+cvs -d :pserver:anonymous@spectro.princeton.edu:/usr/local/cvsroot login
+
+Add the following lines to your ~/.cshrc file:
+
+setenv CVS_RSH ssh
+setenv CVSROOT :pserver:anonymous@spectro.princeton.edu:/usr/local/cvsroot
+
+and press ENTER when prompted for a password.  Find out the most recent
+versions of IDLUTILS and IDLSPEC2D from 
+
+http://spectro.princeton.edu/idlspec2d_install.html
+
+(for example v4_9_12) and then do
+
+cd
+cvs co -r v4_9_12 idlutils
+cvs co -r v4_9_12 idlspec2d
+
+Be sure to add the paths to IDLUTILS and IDLSPEC2D to your ~/.cshrc and/or
+~/.idlenv files.  Finally don't forget to build the code with evilmake all.
+

@@ -1,0 +1,48 @@
+jm08nov24nyu - This is what you want to copy everything into the
+current directory.  If you want to retain the directory structure then
+drop the "-nd".  See the man page for details.
+
+-r = recursive
+-nd = no directories
+-nH = no host directories
+-np = no parent directories
+
+wget -r -nd -nH -np --accept ".ps.gz" http://kdub.as.arizona.edu/~kwong/primus/zvz/
+
+jm07sep05nyu
+
+wget -nH --quota 0 --retr-symlinks --mirror --no-parent --accept "spec1d.*.fits" http://deep.berkeley.edu/DR3/d2_results
+
+
+jm04jul21uofa
+
+Notes on wget from Bo:
+--------------------------------------------------
+
+To keep the directory structure of the website:
+
+    wget --recursive --accept=.jpg --no-host-directories \
+          --include-directories="/~ioannis/personal/2002_winterhaven/" \
+    http://cerebus.as.arizona.edu/~ioannis/personal/2002_winterhaven/
+  
+To download things into the current directory add --no-directories:
+
+    wget --recursive --accept=.jpg --no-host-directories \
+    --no-directories \
+          --include-directories="/~ioannis/personal/2002_winterhaven/" \
+    http://cerebus.as.arizona.edu/~ioannis/personal/2002_winterhaven/
+
+The --include-directories prevents wget from following links that go 
+elsewhere on the same site.
+
+You should also keep in mind the fundamental different between ftp and
+http: In http, you can't in general just ask to get all the files that
+reside in a given directory, you can only get the files to which some
+HTML file has a link.
+
+I.e., the wget command I just sent you will download the file at the
+URL you give, which in this case in an HTML file called index.html,
+and the recursively retrieve all the *.jpg files one can get to by
+following the links in the first file. But if you add a *.jpg file to
+the directory and do nothing else, this file cannot be downloaded in
+this way, since there is no HTML file that contains a link to it.

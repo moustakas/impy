@@ -1,0 +1,52 @@
+jm03jan7uofa
+
+Some notes from lexi:
+
+Hi Lexi,
+
+Attached is a sample "Makefile" I use for "rsync".
+This file would reside on my laptop at /home/rhoads/GRB/DF/Makefile
+and I would synchronize this directory with the STScI machine directory
+/home/rhoads/SagittariusHome/GRB/DF
+by doing the following on the laptop:
+setenv RSYNC_RSH ssh
+cd /home/rhoads/GRB/DF
+make sync
+
+To see what files would be transferred without actually doing the transfer
+one can do "make tsync"
+and to do just a one way transfer one can do "make get" or "make put";
+likewise "make tget" and "makd tput" do a dry run.
+
+The makefile has a feature to exclude one subdirectory ("Sims") from the
+STScI side from being copied to the laptop.
+Also it has an unrelated make target, "ms", which has nothing to do
+with the rsync and which you should ignore.
+
+Makefile
+---------
+
+EXCLUDE_G = 
+EXCLUDE_P = --exclude Sims
+REMOTE = hokulea.stsci.edu:SagittariusHome/GRB/DF
+get:
+	rsync -auvz --exclude '*~' $(EXCLUDE_G) $(REMOTE)/ .
+
+put:
+	rsync -auvz --exclude '*~' $(EXCLUDE_P) ./ $(REMOTE)
+
+sync: get put
+
+tget:
+	rsync -auvzn --exclude '*~' $(EXCLUDE_G) $(REMOTE)/ .
+
+tput:
+	rsync -auvzn --exclude '*~' $(EXCLUDE_P) ./ $(REMOTE)
+
+tsync: tget tput
+
+ms:	df_v0.tex merr_temp.ps tmon_temp.ps
+	latex df_v0.tex
+	latex df_v0.tex
+	dvips -o df_v0.ps  df_v0.dvi
+

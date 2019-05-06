@@ -1,0 +1,3 @@
+To add style files for latex put the .cls file in a 
+subdirectory of /usr/share/texmf/tex/latex/ and run
+/usr/bin/texhash as root to update the database.

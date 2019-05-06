@@ -1,0 +1,133 @@
+# jm03jul1uofa
+
+# ---------------------------------------------------------------------------
+% cd ${ISPEC_DIR}
+% cvs import -m 'iSPEC Spectroscopic Reduction Package' ispec ioannis start
+% cvs checkout CVSROOT/modules
+% emacs CVSROOT/modules
+
+# added the lines:
+#
+# 	modules CVSROOT
+# 	ispec ispec
+#
+% cvs commit -m "added module ispec" CVSROOT
+% cvs release -d CVSROOT
+
+# to test that it worked:
+% cd ; mkdir test ; cd test
+% cvs checkout ispec
+
+# check that it worked
+% cvs release -d ispec
+% rmdir test
+
+# ---------------------------------------------------------------------------
+# Making cerebus an anonymous CVS pserver 
+# ---------------------------------------------------------------------------
+
+% 
+
+
+
+# ---------------------------------------------------------------------------
+# pserver installation of IDLUTILS/IDLSPEC2D using cvs
+# http://spectro.princeton.edu/idlspec2d_install.html#install_cvs
+# ---------------------------------------------------------------------------
+
+These steps are to check out tagged verions of the "specflat",
+"idlutils" and "idlspec2d" products using CVS. The examples below
+check out and build the code into your home directory.
+
+   1. For the example that follows, I have assumed you are using the
+Bourne-shell. If you normally use C-shell, you can get the
+Bourne-shell prompt with:
+
+  % bash
+
+   2. IDL must be installed on your system, and the environment
+variables IDL_DIR and IDL_PATH must already be set.
+
+   3. The code is in a world-readable Princeton CVS repository. To
+access this repository, you will first need to generate a ~/.cvspass
+file as follows:
+
+  % cvs -d :pserver:anonymous@spectro.princeton.edu:/usr/local/cvsroot login
+
+      When the above asks for a password, just hit Enter. You will
+also need the environment variables CVS_RSH and CVSROOT set. If you
+are using Borne-shell:
+
+  % CVS_RSH=ssh
+  % CVSROOT=:pserver:anonymous@spectro.princeton.edu:/usr/local/cvsroot
+
+      The above definitions could be put in your ~/.cshrc file (for
+C-shell users) or ~/.bashrc file (for Borne-shell users).
+
+   4. Check out tagged versions of "idlutils", "specflat" and
+"idlspec2d". Put them into your home directory (for this example). To
+avoid typing mistakes, I start by defining environment variables for
+the version numbers:
+
+  % IDLUTILS_VERS=v4_9_12
+  % SPECFLAT_VERS=v1_4
+  % IDLSPEC2D_VERS=v4_9_12
+  % setup cvs # Only needed on machines set up by Fermi
+  % cd
+  % cvs co -r $IDLUTILS_VERS idlutils
+  % cvs co -r $SPECFLAT_VERS specflat
+  % cvs co -r $IDLSPEC2D_VERS idlspec2d
+
+   5. Set the environment variables. From the Bourne-shell:
+
+  % IDLUTILS_DIR=$HOME/idlutils
+  % SPECFLAT_DIR=$HOME/specflat
+  % IDLSPEC2D_DIR=$HOME/idlspec2d
+  % PATH=$IDLUTILS_DIR/bin:$SPECFLAT_DIR/bin:$IDLSPEC2D_DIR/bin:$PATH
+  % IDL_PATH=+$IDLUTILS_DIR/goddard/pro:$IDL_PATH
+  % IDL_PATH=+$IDLUTILS_DIR/pro:$IDL_PATH
+  % IDL_PATH=+$IDLSPEC2D_DIR/pro:$IDL_PATH
+
+      You may wish to add the above lines to your ~/.bashrc file.
+
+   6. Build the code:
+
+  % setup idl # Only needed on machines set up by Fermi
+  % cd $IDLUTILS_DIR
+  % evilmake all
+  % cd $SPECFLAT_DIR
+  % evilmake all
+  % cd $IDSPEC2D_DIR
+  % evilmake all
+
+# ---------------------------------------------------------------------------
+# Some instructions from D. Schlegel 2003-July-2
+# ---------------------------------------------------------------------------
+
+Create the directory spectro.princeton.edu:/home/spectro/cvs (as root)
+and make the owner schlegel.dss with permissions set to 2775.
+
+Go in that directory,
+  cd /home/spectro/cvs
+  setenv CVSROOT spectro.princeton.edu:/home/spectro/cvs
+  cvs init
+
+Move the products idlmapper,idlspec2d,idlutils,photoop into that 
+directory.
+Change owner to schlegel.dss with permissions set to 775.
+Now in each product, give group the same permissions as user:
+  cd /home/spectro/cvs/idlmapper
+  chmod g+u *
+  ...
+
+Make a link to this repository from /usr/local/cvsroot (as root)
+  ln -s /home/spectro/cvs /usr/local/cvsroot
+
+Directions for importing a new product called "foobar" in the ~/foobar 
+dir:
+  cd ~/foobar
+  cvs import -m "New stuff" foobar schlegel start
+
+# ---------------------------------------------------------------------------
+
+astron.berkeley.edu/~cooper/deep/spec2d

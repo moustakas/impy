@@ -1,0 +1,46 @@
+jm03jul2uofa
+
+Server setup:
+-------------
+
+[1] As root: Create a user called 'cvs' with "Redhat User Manager."
+Set the password to something temporary then edit the /etc/shadow file
+to make the password '*' (i.e., no log-in allowed).  The password in
+that file lives between the first two colons after the user name.
+Also make the 'cvs' user part of the 'ioannis' group.
+
+[2] As ioannis: generate a normal ssh key pair for the 'cvs' user:
+
+% ssh-keygen -t dsa
+% echo 'no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command="/usr/bin/cvs server"' > cvsjunk
+% paste cvsjunk .ssh/id_dsa.pub > .ssh/authorized_keys2
+% \rm cvsjunk
+
+[3] Put the .ssh/id_dsa file that was generated after running
+'ssh-keygen' at the end of the ssh_anonymous_cvs file, which was
+obtained from http://kitenet.net/programs/perlmoo/sshcvs.  Replace 
+the existing private key.
+
+[4] As root, create a directory /var/lock/cvs and give write
+permissions to group 'ioannis.'  Also make sure to change the group to
+'ioannis'.  Then as 'ioannis', check out the CVSROOT repository and
+edit the CVSROOT/config file such that the Lock_Dir=/var/lock/cvs.
+Commit the changes.
+
+Client procedure:
+-----------------
+
+To check out a package from a cvs repository do the following:
+
+[1] Download the ssh_anonymous_cvs file and place it anywhere.  Make
+it executable with
+
+% chmod +x ssh_anonymous_cvs
+
+[2] Type 
+
+% setenv CVS_RSH ${HOME}/ssh_anonymous_cvs
+% cvs -d :ext:cvs@cerebus.as.arizona.edu:/home/ioannis/cvs_repository checkout ispec
+
+
+

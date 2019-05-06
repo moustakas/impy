@@ -1,0 +1,27 @@
+jm07may03nyu
+
+To install scamp I did the following:
+
+
+
+First I had to download ATLAS from
+
+setenv CPPFLAGS '-B/usr/local/src/ATLAS --Bhome/users/ioannis/software/fftw-3.1.2'
+setenv LDFLAGS '-L/usr/local/src/ATLAS/lib/Linux_HAMMER64SSE2 -L/home/users/ioannis/software/fftw-3.1.2/lib -lfftw3f'
+
+export CPPFLAGS="-B/pth/to/fftw" (the path wherein the include dir with the fftw headers is)
+export LDFLAGS="-L/path/to/fftw/lib -lfftw3f" (same path as above, but you need to type the "lib" dir here)
+
+
+./configure --prefix=/home/users/ioannis/software/scamp-1.3.8 --without-plplot
+
+
+% fink install gsl
+% setenv LDFLAGS '-L/sw/lib -L/usr/local/software/cfitsio'
+% setenv CPPFLAGS '-I/sw/include -I/usr/include/sys -I/usr/local/software/cfitsio'
+
+And then the standard
+
+% ./configure 
+
+worked.

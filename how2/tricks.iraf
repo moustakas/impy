@@ -1,0 +1,293 @@
+
+********
+* Note *
+********
+
+Most of my IRAF knowledge is stored in the form of notes
+on various reduction process.  To find them, search
+/pupusa/sdawson/miscellaneous for any file containing the
+word "notes".  Also, look for hard copy pastings inside
+the "High Z Research" lab book.
+
+
+***************************************
+* Cutting and Overlaying Image Pieces *
+***************************************
+
+09.09.99
+
+Let's say you have an image called image.fits.  You have
+some yucky region, and you just want to cut and paste
+some nearby good region on top of it.  Here's what to do:
+
+1)  Copy your image so you don't screw with the original.
+
+	cl> imcopy image temp
+
+2)  Now just copy the good piece on to the bad.  Easy as pie!
+
+	cl> imcopy image[goodx:goodx,*] temp[badx:badx,*]
+
+Temp is now a Frankenstein's monster...
+
+
+***********************
+* BOGUS NOTES (short) *
+***********************
+
+07.16.99
+
+1.  Make a bias frame by averaging together the 10 or so 0 s 
+    dark exposures.  Now proceed in two ways:
+
+        a)  Subract the bias frame from the data, then run
+            two-amp on the output.
+
+        b)  Run two-amp on the individual bias frames and on
+            the LRIS frames.  Average the two-amped bias frames,
+            and subtract them from the LRIS frames.
+    
+    Proceed with whichever results look better...  
+
+    Note:  Two-amp trims automatically. (It knows the size of the
+    LRIS overscan and prescan regions.)
+
+
+2.  Make flat frame out of the internal flats.  DON'T RUN 
+    RESPONSE!  (Bogus will do this later.)
+
+
+3.  Generate the bogus input files.  You need:
+
+        LIST.OBJ
+        Make a list of just your object frames (no lamps or
+        flats).
+
+        LIST.SHIFT
+        Make a shiftlist just as like those made when reducing
+        longslit data.  That is:
+                a)  x-shift:  splot a sky line
+                b)  y-shift:  apall a bright continuum
+        You should do this from the center slit.
+
+        LIST.SLITLET
+        This file has 4 columns: 
+
+                name bottom top skyline
+
+        Get bottom/top by splotting the frames with the dispersion
+        axis set to "2" (I think--vertically, anyway).  Then do
+        :line 1024 and :nsum 2048 to sum the whole thing.  Cut with
+        a 4-5 pixel margin.  Get the skyline location by splotting
+        in the middle of each slit with the disperion axis set back 
+        on "1", then use the 6300 skyline.
+
+4.  Look at your 2Ds.  Mayhap you'll run BGS again!  Otherwise,
+    extract as before.   (The lamps will be carved up appropriately.)
+
+
+**********************************
+* Parallel Extraction Subraction *
+**********************************
+
+09.21.99
+
+Let's say you have a faint object with some line right above or below
+a bright continuum source.  Since the object is just a few pix away
+from the bright continuum, you can bet that the object's spectrum
+will be contaminated by light from the continuum source.  It'll be
+sort of like the faint object is riding on a DC bias.  To get rid
+of the bias, make an extraction on the opposite of the continuum source,
+exactly the same distance away, then subtract this from the spectrum
+for the faint source.  Here's how:
+
+1.  Do your usual extraction with apex on the faint object and on the
+    continuum source (for the trace).  Using the same trace, also
+    do a third extraction, equidistant but on the opposite side from
+    the object of interest.
+
+2.  You'll want to use sarith for the spectrum arithmetic.  Sarith (I think)
+    can't be used to manipulate apertures within the same .fits file.  So,
+    you'll need to make a separate .fits file containing the parallel extraction.
+    I'm not sure, but it might be important to make the aperture number of the
+    object in the original extraction match that of the parallel extraction
+    in the second .fits file, which is to be subtracted.
+
+3.  Sarith croaks unless everything is wavelength calibrated.  Go do that now.
+    You could also apply the zero-point shift at this point, but I waited until
+    I had the final, subtracted spectrum.
+
+4.  Now you have two .fits files: the original, and the parallel extraction, and
+    the aperture numbers of the object and the parallel extraction match.  Go
+    to sarith (noao.oned) and just subtract the two.  If you leave "apertures"
+    with "*", you should note that the original parallel extraction zeros
+    out when the same spectrum in the second .fits file is subracted.
+
+
+**************************
+* Comments on Extracting *
+**************************
+
+10.27.99
+
+I just had a talk with Doug about how to use sky lines instead of lamp
+lines to do a wavelength calibration.  Along the way, I learned a couple
+of things about what's really going on when I'm doing an extraction.
+Here are those points, summarized.  Hopefully, I will soon actually do
+that sky line-lambda calibration, and I'll add the notes appropriatately.
+
+There are two ways to do an extraction: optimal, or non-optimal.  We
+faint object guys do non-optimal extractions (I think), though I'm
+not sure why.  Here are both, explained.
+
+1)  Non-optimal.
+
+When you fire up the package "apall" and center some apertures, 
+IRAF finds the centroid of your object and generates the trace function,
+basically just smashing together all of the points within the specified
+range.  (That is, you set "low -3" and "hi +3"; IRAF smashed those 7
+pixels together and counts that as your object.)  Also, IRAF fits a
+function to the background sky, using the region specified by "sample".
+This extraction is subtracted from the object and stored.  When you are 
+done, you have two "bands":
+
+	band 1: the extracted object
+	band 2: the sky (which comes from the "sample" region, and is
+        	subtracted from band 1)
+
+The way we faint guys do business, we do a globabl sky subtraction to the
+entire data frame early in the reduction.  Then, we do our extraction out
+of that frame.  We also do a parallel extraction in the unsubtracted frame,
+which we use to correct zero-point offsets in the wavelenght calibration
+later in the game.  Of course, this means that band 2 of the object 
+extraction doesn't *really* contain the sky lines.  Instead, it contains
+the junk that remains after the global sky subtraction.  On a related note,
+band 1 of the data.sky.ms extraction is also junk.  Since the object is
+overwhelmed by the sky, band 1 basically contains the sky minus the sky,
+and band 2 contains the *actual* sky.  This has implications for using
+the sky lines to do a wavelength calibration, as the package "identify"
+looks just to band 1, where it expects arc lamps.  (There is no band 2
+in the lamp extraction, as we turn background subtraction off.)  The trick
+will be to put the sky lines (the sky extraction, band 2) into some band 
+1, presumably with imcopy.
+
+
+2)  Optimal.
+
+You can imagine that the profile of an object on a 2D frame looks something
+like a gaussian.  The centroid is well above the noise, and the wings are
+not much above the noise.  You might imagine that a smart extraction
+would place more weight on high signal-to-noise regions than on the low
+signal-to-noise regions.  This is what an optimal extraction does.  The
+following four bands are generated: 
+
+	band 1: the optimally extracted object
+	band 2: the non-optimally extracted object
+	band 3: the sky
+	band 4: the variance
+
+It'd be worth trying the following experiment.  It seems like it might
+be the case that we only add noise by doing that second background
+extraction, given that we've already done a global sky subtraction.
+What other guys do (and it sounds reasonable), is to perform a global
+sky subtraction just to find the object.  Then, they perform extractions
+out of the original frame, using the sample region to subtract off 
+the sky exactly in the way that it appears IRAF intends.  So, I should
+do three extractions of the same object and I should check to see
+which is the least noisey: (a) extract out of an already globally
+subtracted frame, with background subtracting on, (b) extract out of
+and already globally subtracted frame with background subtracting off,
+(c) find the objects in the globally extracted frame, then extract out
+of the original frame, of course with the background subtracting on.
+Maybe I'll do this...  (Nah...)
+
+
+*****************************************
+* Wavelength Calibrating with Sky Lines *
+*****************************************
+
+10.27.99
+
+First, read the above to ensure that you are familiar with what the
+various bands mean for an extracted spectra.  Given the way that the
+Hy-group reduces data, it's clear that the extracted sky line necessary
+for a wavelength calibration are in band 2 of the extraction from
+the un-sky subtracted frame.  We want to get identify to look at 
+those lines.  Then we'll ID them using the chart of Keck sky lines,
+and we'll REFRAIN from calling on a library of line positions.
+(There are two possibilities concering that last comment.  One is
+that such a library already exists.  That wouldn't surprise me a bit.
+The other is that, with a little work, I could make a library of my
+own.  I won't today.  Maybe someday.)  Here's what to do, stepwise:
+
+1.  Do the usual reduction, extracting an object.ms, and an
+    object.sky.ms.  Don't bother with the object.lamp.ms.
+    (Probably, you already have, and it was crappy, and that's
+    why you're reading this.)
+
+2.  Since it's band 2 of object.sky.ms that we need for identifying,
+    we need to put that somewhere that identify can find.  I don't
+    think we care about preserving the .ms format, so you can just
+    copy it over:
+
+	lo> imcopy object.sky.ms[*,1,2] skylines
+
+    The * says "copy the whole thing".  The "1" refers to the 
+    aperture number, and the "2" refers to the band.  The "1"
+    can change; the "2" can't.
+
+3.  Now run identify on "skylines".
+
+
+****************************
+* Crude Photometry Example *
+****************************
+
+11.04.99
+
+Here's what Dan said to do (over the phone, 11.04.99)
+
+We want to take out hdf4_639.1 because it's bright.  We
+do this by subtracting images in different bands, or
+(if it's symmetric), by flipping it by 180 degrees and
+subtracting the same image from itself.  Here's how to
+go about the first tactic:
+
+1.  Trim out the region of interest in the all four bands.
+
+2.  Perform itterstat over each of the regions to get the
+    sky.  A single value will be returned.
+
+3.  Subtract this constant sky value from each of the four
+    trimmed images.
+
+4.  Do imexamine on the bright object in each image to determine
+    the scaling between images.  Then subtract, e.g.
+
+        new = V - x I
+
+    where V is one image, I is the other, and x is the scale 
+    factor determined above.  (That is, if the peak brightness
+    in V was 10 and the peak brightness in I was 5, you would
+    take x = 2.)
+
+5.  Now perform imstat on a little box which contains the 
+    boomerang.  The syntanx is:
+
+        imstat image[x1:x2,y1:y2]
+
+    In this example, this will be the (V-I) color in counts, 
+    where:
+
+        mag = A - 2.5 log(counts)
+
+    The constant A could be determined from objects of known
+    magnitude in the image.
+
+What will this mean?  I don't know, but Dan said that only 
+V-I of greater than 3 mags would be significant, and that 
+the result of this little experiment is bound to be ambiguous.
+Oh well.
+
+
+

@@ -1,0 +1,33 @@
+#!/bin/sh
+# This program implements the client side of anonymous cvs over ssh.
+# No more pserver! For details on how to use this and how it works,
+# visit http://kitenet.net/programs/perlmoo/sshcvs/
+#
+# This is copyright 1999, 2001 by Joey Hess under the terms of the GPL.
+
+# Just run ssh, telling it to use this file as the identity file. 
+# Cvs will tell it what host to connect to as what user and will
+# proceed to communicate with the cvs server over the ssh link.
+# We do need to fix up the perms of the script to something ssh
+# will accept though, and put them back later.
+trap "chmod 700 $0" 1 2 3
+chmod 600 $0
+ssh -2 -q -C -i $0 $@
+chmod 755 $0
+exit
+
+# The remainder of the file is the "private" key that lets users into my
+# cvs server. ssh 2 can find this key, ignoring the top part of the file.
+
+-----BEGIN DSA PRIVATE KEY-----
+MIIBuwIBAAKBgQCaMAHhVxLgJypYHUf2evLXhrG69LsXRmOwMztSnfA7yt2cruPm
+bzd2rW7XOmcTmd1dtW3NKCGgknDCWFat8M/zCGRIuTIw0DDZUkbzLYj33le9qMRI
+h9lpMFCctjv04gdjWk2LN5xf94n3+99dhlD97NVjzrZA77TkydGGYRvyFwIVAJ97
+dNEsDjNa0J/S68K907VJXgZ5AoGAMObFXBqmWBf5mEak1mpQJnDqIytcKqvE500l
+GqorHYuegT3oXhuETZ2+CweNM5eleGHgU5Tc9AaBEOHDvD0qqwfIA4lVyjQ39xcQ
+slYmSNWjMBPkq7M8VYjj+2Y1lOOJkQ2l6VojWyz3HFzF2E3gtGLS11RJni8+z2q8
+ac5U9/oCgYA4xjZQ9ZZQ77vLcebsBIxbJmdK0zXw1lR/xMYl65cDM8H3XWVVngwa
+fk9HZDlFpdST5mnxi5KWonChankl8utTkypm6D0HoJzZGHvfS/sCAZP6IWxt90fL
+o2unyBWDZDrMp1l+tGT9UIm1Y+CtFgkaVKPiG29dZXNMwcVr2nMtFAIVAJK2RsXl
+qqBqdXtaJbiz790FDFb1
+-----END DSA PRIVATE KEY-----

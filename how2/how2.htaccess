@@ -1,0 +1,61 @@
+jm03feb11uofa
+
+This information was grabbed from http://www.he.net/info/htaccess/demo.html
+
+Generate an .htaccess file.  This file should be in the directory
+which contains the documents to restrict access to. The contents of
+this file specify the name of the password file.
+
+For example if you were user jdoe with web documents in the local
+directory "/home/jdoe/public_html/goodstuff" that you wanted to
+restrict access to, your .htaccess might look like:
+
+AuthUserFile /home/jdoe/public_html/goodstuff/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Goodstuff"
+AuthType Basic
+<Limit GET>
+require valid-user someuser
+</Limit>
+
+Note that .htaccess will not work if there are extra spaces after
+AuthUserFile.  Next we need to generate a password file, .htpasswd.
+This file contains the passwords of the users.  To create the
+.htpasswd file type:
+
+      htpasswd -c .htpasswd someuser
+
+for the first user (where someuser is the username). You will then be
+prompted twice for the user's password. The -c option causes the
+.htpasswd file to be created. For each additional user type:
+
+      htpasswd .htpasswd someuser
+
+NOTE: There is no correspondence between the usernames and passwords
+used for accounts on this server and usernames and passwords in any
+specific .htpasswd file. A user doesn't need to have an account on
+this system in order to be validated for access to files protected by
+HTTP-based authentication.
+
+NOTE: Make sure to do
+
+% chmod 644 .htaccess
+% chmod 644 .htpasswd
+
+NOTE: You might need to update your /etc/httpd/http.conf file.  In redhat9
+find the lines below the comments
+
+# Control access to UserDir directories.  The following is an example
+# for a site where these directories are restricted to read-only.
+
+and uncomment
+
+<Directory /home/*/public_html>
+     AllowOverride FileInfo AuthConfig Limit
+</Directory>
+
+to enable .htaccess.  If you make this change be sure to 
+
+% /sbin/service httpd restart
+
+as root.

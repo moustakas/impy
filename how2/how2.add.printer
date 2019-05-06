@@ -1,0 +1,42 @@
+From nlauver@luna.as.arizona.edu Wed Jul 23 08:33:37 2003
+Date: Tue, 22 Jul 2003 10:54:13 -0700 (MST)
+From: Neal Lauver <nlauver@luna.as.arizona.edu>
+Reply-To: nlauver@as.arizona.edu
+To: John Moustakas <ioannis@as.arizona.edu>
+Subject: Re: printing
+
+Sorry for the delay in my response.  Things have been very busy for the 
+past few days with Jeff out.  We still haven't tackled the RedHat 9 
+printing issue yet.  I think the best thing you can do would be to add the 
+library printer (lw1) as 
+Tools -> System Settings -> Printing -> New -> Forward
+
+Queue Name: lw1
+Queue Type: JetDirect Printer
+
+Printer IP: lw1.as.arizona.edu
+Port: 9100
+
+Then set the printer to an HP LaserJet 5si.
+
+Please let me know if you need my assistance with this.
+
+Thanks,
+Neal
+
+
+On Mon, 21 Jul 2003, John Moustakas wrote:
+
+> 
+> hi neal,
+> 
+> sorry to bother you with this.  if you recall i installed rh9 on my
+> machine but the printers don't work yet.  we had added the printer in my
+> office (lw36) to my printcap but that printer just died.  so i am unable
+> to print to anything currently.  lw1 (library) would be a great minimum
+> printer but eventually it'd be great to be able to print to any machine in
+> the department.  can you help?  is there anything i can do?
+> 
+> thanks a lot!
+> john
+> 

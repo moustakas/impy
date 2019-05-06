@@ -1,0 +1,661 @@
+
+
+*********************************
+* HOW TO WRITE STUFF TO EXABYTE *
+*********************************
+
+07.15.99
+
+You're going to use two command, mt and tar.  Basically, mt controls
+the magnetic tape drive, and tar squashes all the files in the directory
+(including subdirectories) into one big file and puts that file on the
+tape.
+
+The following example takes all of the keck/97feb reductions and
+writes them to the exabyte down on Andy's computer (copacabana).
+Generalizing from here should be straightforward.
+
+1.  From where you are, slogin copacabana.
+
+2.  Type 
+
+	copacabana> setenv TAPE /dev/rmt/1mn
+
+Here, you're setting the environment variable TAPE to the exabyte tape
+drive.  In the last field, the "1" stands for the exabyte tape ("0" 
+specifies the DAT drive), the "m" stands for medium density (you could
+chosen "l" or "h", for "low" and "high", respectively), and the n stands
+for "no rewind" (otherwise, it rewinds after each lit bit is executed,
+writing over itself again and again).
+
+3.  Go the directory containing everything that you want to dump to
+tape.  (This was /crumpet/sdawson/keck/97feb for me.)  Note that
+subdirectories get taken care of automatically!
+
+4.  Type
+
+	copacabana> tar cvf /dev/rmt/1mn .
+
+The "cvf" stand for "create new tape", "be verbose", and "use the
+device already specified".  (That last bit means that, given what
+we did in step 2, we might have been able to have merely written
+"tar cvf .".)  The . means start in this directory and tar everything
+in it and below.
+
+5.  Things should start rolling, and it should print little messages
+to the screen.  When it's all done (which may be 1/2 an hour or so),
+type
+
+	copacabana> mt rewoffl
+
+The "rew" just means rewind the tape.  The "offl" means take the
+thing offline (i.e. eject it).
+
+NOTE:  Dan considers exabyte tapes to be of infinite length.  He 
+makes one tape for each run and leaves it at that...  Don't ever
+worry about space; there will always be enough, so long as the
+principle is one run per tape.  After you've made the tape, leave
+only those things which you require immediate access, e.g.
+the reduded 2Ds, the .w and .f extractions, etc.
+
+08.17.99
+--------
+Let's say you want to add to a tape.  For instance, when I finish
+a batch of reductions, I like to write all the reduced stuff to a
+tape so that I can clear space for the next slitmask, and so on.
+I have a tape with the 97feb longslit reductions, now I want to store
+the 99jun slitmask.  It's easy!  To the above steps, just add
+
+	copacabana> mt fsf 1
+
+This fastforwards 1 block and starts writing a second block of data.
+When I go to store the next batch of reductions, I'll type "mt fsf 2"
+instead.
+
+11.04.99
+--------
+When you're all done, you can verify the write with
+
+	copacabana> tar tvf
+
+04.12.00
+--------
+
+An example of writing blocks:  Here's how we put the third night's (LRIS)
+data on a tape that already had two nights worth...
+
+	> mt fsf 2
+	> tar cvf /dev/rmt/0mn .
+	> mt rewoffl
+
+
+
+****************************
+* HOW TO SEND MYSELF NOTES *
+****************************
+
+07.15.99
+
+The idea here is to use crontab, which performs any task at a given
+time.  The actual note-sending part is just the command
+
+	echo "note to self" | mail sdawson@astro
+
+There might be a more neat or efficient way of doing this.  Here's
+what to do.
+
+1.  Create the file that's going to contain the instructions.  The file
+I created today was called ~/personal/rentreminder, and it contained
+just the line
+
+	0 0 28,29,30,31 * * echo "RENT" | mail sdawson@astro 
+
+The first set of numbers is the schedule used by crontab to execute the
+commands.  The syntax is:
+	
+	Minute		0-59
+	Hour		0-23
+	Day of Month	1-31
+	Month		1-12
+	Day of Week	0-6, with 0 = Sunday
+
+Use a comma between multiple values, a hyphen to indicate a range, and
+an asterisk to indicate all possible values.  The example is set to 
+email the message "RENT" at midnight on the last days of the month, 
+in every month, no matter what day of the week it is.
+
+2.  Once you've made the file, you need to type 
+
+	> crontab <file>
+
+This gets things going.  Note that it's one crontab file per person
+per machine, so you should do this from the machine that you want
+to be in charge...  To delete a crontab file on a machine, type
+
+	machine> crontab -r
+
+To see if you have a file going on a machine, type
+
+	machine> ls /usr/spool/cron/crontabs
+
+and see if your name is listed.
+
+3.  Once things are rolling, I don't know if they keep rolling
+after you logout.  Doug (who showed me most of this stuff) put
+the "crontab <file>" line in his .cshrc file, "o it should start
+up upon opening any window."  I'm not quite sure what this means,
+or what would happen if I didn't do it, but I did it.
+
+NOTE:  Doug Leonard sent me a more detailed message about this stuff.
+It's in my saved message file, accessible with PINE.
+
+
+*********************************
+* HOW TO CUT COLUMNS FROM FILES *
+*********************************
+
+07.16.99
+
+I'm still not quite sure on the syntax here, but here's a summary of 
+my understanding so far.  If you want to remove just some (vertical)
+portion of a file, use the cut command.  The syntax is
+
+	cut <options> <file>
+
+and the cut portions will appear on the screen.  The options are sort
+of tricky...
+
+	-c<list>	Cut the columns identifies in list (separate
+			numbers with commas or hyphens)
+	-dc		Use with -f to specify the field delimiter as
+			character c (quote special characters)
+	-f<list>	Cut the fields identified in list
+	-s		Use with -f to suppress lines without delimiters
+
+Using the -c option is the most straightforward.  Basically, you can
+tell your machine to cut from column # to some other column #, and that's
+it.  Note that "column" literally means the numerical space occupied by the 
+cursors; it doesn't count columns as unbroken units like a FORTRAN program 
+does!  Using the -d and -f options is a bit trickier.  The -d option
+specifies a character which cut will use to signify as the end of the field.
+The -f option specifies which number of field you want to cut...  Try
+these examples to clarify.
+
+	who | cut -d" " -f1
+
+This list only the login names of those who are logged in.
+
+	cut -c4 <file> | past - <file>
+
+This cut characters in the 4th column of <file> and pastes them back in 
+the fist column of the same file.
+
+
+********************
+* HOW TO MAKE A CD *
+********************
+
+02.02.01
+
+I haven't made a CD on the new burner yet.  Nate says:
+
+"problem was, people leave their stupid files in the directory and then you
+can't overwrite them.  I fould that instead of calling the test file
+"test.cdr" (or "test1.cdr", which someone else had also thought of), that
+if I called it "f_this_thing.cdr" it worked just fine.
+
+Directions for the new CD burner are found in:
+
+man -M /usr/schily/man cdrecord"
+
+
+***************************************
+* HOW TO MAKE A CD - the old GEAR way *
+***************************************
+
+07.16.99
+
+This is going to be a short entry, because basically all you do is
+follow the instructions in the "gear" man page.  So, open a window,
+type man gear, then cut and past appropriately...  Let me put this
+is a bit better context:
+
+1.  Put CD in phoebe.  (And leave yourself logged in, maybe with
+a note, so that no on bugs you.
+
+2.  Go back to your office.  Slogin phoebe.
+
+3.  Follow notes from man page!
+
+09.27.99
+
+Now that I've actually done it, here's how I did it, stepwise.
+
+1.  Make a directory with everything you want copied in it.  Subdirectories
+    are ok.
+
+2.  Compress everything, if necessary.
+
+3.  Log in to phoebe, and make sure that no one else is using it.
+
+4.  Type: 
+
+        phoebe> cd /export/cdtemp
+
+    and clear out this directory.  Also remove .gearrc, and copy
+    a fresh one over from /usr/gear.
+
+5.  Type: 
+
+        phoebe> setenv GEARDIR /usr/gear
+
+6.  Type:
+
+        phoebe> /usr/gear/bin/gear
+
+    which will start up the  interface.
+
+7.  In the interface window, type:
+
+        CD> newvol NAME 74
+
+    GEAR will ask some questions; accept the defaults.
+
+8.  Type:
+
+        CD> selvol NAME
+
+9.  Now we want to check how the parameters are set.  Type
+
+        CD> getcdrparms
+
+    to have them read out, then type
+
+        CD> setcdrparms
+
+    to run through them and change what you want.  Accept all
+    the defaults everywhere except:
+	
+	physical/virtual tracks = physical
+	recording speed = 4
+	reading speed = 4
+
+     Also, you should disable recording the first time around if
+     you want to do a test run.
+
+10.  Copy over your stuff.  Syntax is
+
+	CD> cp -r /source .
+
+     This takes a bit.  Now type
+	
+	CD> physvol
+
+     which takes even longer.
+
+11.  When physvol's done, put a CD in the caddy, and type
+
+	CD> writecd NAME
+
+     Since we disabled writing, all that we will get when it's done
+     is a message saying that the write was successful.  Go back
+     and enable recording, and issue this command again.  (Note that
+     the CD will get spit out between these steps.  You gotta shove
+     it back in.)
+
+12.  That should do it.  Throw your beautiful creation into a drive
+     and check it out.
+
+
+**************
+* HOW TO FAX *
+**************
+
+10.04.99
+
+This will send a fax of some pre-prepared text or .ps file, and it
+will include a little cover sheet.  It's nice!
+
+1.  Prepare the file that you want to fax.  Maybe you use letterfm
+    to make a nice letterhead, no?
+
+2.  Type
+
+	> FaxMail
+
+    to open the faxing window.
+
+3.  Enter the subject, hit "add" to attach your document, fill
+    out the name/org/email for the recipient.  As for the codes,
+    here's what you enter:
+
+	country code: 1 (for USA)
+	local code: area code
+	fax number: 7-digit local number
+
+4.  Now hit FAX.  It will prompt you and ask you something about your
+    inbox.  Hit yes if you want an email version of the fax sent to 
+    you.  Once I've tested a FAX, I usually hit no here.  You're done!
+
+
+***************
+* HOW TO SCAN *
+***************
+
+10.04.99
+
+I can make a .ps file with the scanner, which makes it nice and easy
+to include an image in a .tex document.  I can't seem to make a jpeg
+or a gif, however.
+
+1.  Login to mimas.
+
+2.  Type
+
+	mimas> openscan
+
+    to open the scanning dialogue box.
+
+3.  I usually set smoothing and speckle removal on, then I turn down
+    the binary threshold to zero.  Under props, go to file, then set
+    both the binary image file format to postscript, and the multibit
+    image file format to postscript.  (I'm not sure how much of this
+    is really necessary.)
+
+4.  Now hit scan.  Your scanned image will pop up in a new window.  Use
+    the middle mouse button to select just the portion you want to save,
+    then enter a filename and select "save region".  You're done!
+
+05.05.01
+
+UPDATE!!!!  Want to make a jpeg?  Follow the scanning instructions above,
+but don't bother setting the file formats to postscript -- leave them
+as the default (sun raster files).
+
+Now scan and save.  When you're done, open the raster file with xv,
+then from within xv, save the file as a .jpg, or .gif, or a .tiff......
+
+
+**************************
+* Shutting Down Properly *
+**************************
+
+10.28.99 
+
+I haven't actually tried this, but here's how Plonsey says to 
+shut down your computer.
+
+	1)  Hit "stop" and "a" simultaneously.
+
+	2)  At the ok> prompt, type "sync".
+
+	3)  The disks will sync.  After a few minutes, when you
+	    see the ok> prompt again, you can turn off the power.
+
+
+***********************************
+* How to Print Small and Sideways *
+***********************************
+
+10.28.99
+
+So you've got a big chart in an ASCII file, and it's too damn long to
+print.  Makes you want to print landscape style, don't it?  Here's what
+to do:
+
+	> enscript -r -fCourier7 -p psfile txtfile
+
+Enscript makes a .ps file out of an ASCII file.  The -r switches it
+to landscape (think "r" for "rotate), and the -f lets you pick a font
+and size.  You might play with this and note some effects.
+
+
+****************
+* Renew a Book *
+****************
+
+10.29.99
+
+1.  Follow the links from Berkeley's main page to the libraries page.
+    When you get there, click on the online renewals option.  It should
+    take you to:
+
+	http://www.lib.berkeley.edu/TeachingLib/Guides/Gladis.html#online
+
+2.  Hit the "connect to gladis" link.
+
+3.  Type "gladis" in the new window, hit return, then return again.
+
+4.  Type "inv" and then your SID number.  You will then be prompted for the
+    last 4 digits of your social security number.
+
+5.  Your account will now come up.  Type "ren" and then the line number
+    (the integer corresponding to the record display--not the QB number)
+    and new due date info should appear.
+
+6.  Type "quit" to exit.  Return to your business.
+
+
+*******************
+* Check CPU Speed *
+*******************
+
+10.29.99
+
+Type > fpversion for the following info:
+
+ A SPARC-based CPU is available.
+ CPU's clock rate appears to be approximately 333.6 MHz.
+ Kernel says CPU's clock rate is 333.0 MHz.
+ Kernel says main memory's clock rate is 111.0 MHz.
+
+ Sun-4 floating-point controller version 0 found.
+ An UltraSPARC chip is available.
+ FPU's frequency appears to be approximately 341.1 MHz.
+
+ Use "-xtarget=ultra2 -xcache=16/32/1:2048/64/1" code-generation option.
+
+ Hostid = 0x80B11783.
+
+
+******************
+* Using Floppies *
+******************
+
+01.16.00
+
+According to Mike Liu (I haven't tried it yet myself):
+
+1.  Put the PC-formatted disc in.
+
+2.  Type 'volcheck'.  This tells the computer to
+    check the floppy drive.
+
+3.  Get to the disc with 'cd /floppy'.  Regular
+    UNIX commands work from here!
+
+4.  Type 'eject' when through.
+
+
+************************
+* Move a List of Files *
+************************
+
+05.12.00
+
+From Zo (I never roadtested this):
+
+1) create file with file names to move in "filenames"
+
+2) awk '{ printf("cp %s %s.else\n",$1,$1)}' filenames > runme
+
+3) execute runme
+
+
+********************
+* Get an IP Number *
+********************
+
+07.05.00
+
+> nslookup hal2000
+
+Server:  ns2.Berkeley.EDU
+Address:  128.32.136.12
+
+Name:    hal2000.Berkeley.EDU
+Address:  128.32.92.115
+
+
+********************************
+* HOW TO USE SCP (SECURE COPY) *
+********************************
+
+07.28.99
+
+Let's say you want to copy some files from a machine called
+coude.ucolick.org, and those files are in a directory
+/data/tony/C-Linear.  (This is how I got the comet spectra
+down from Lick.)  Also, let's say that your machine is
+hal2000.berekeley.edu, and you want to put the files in
+your own directory ~/comet/data/n6.
+
+1.  slogin to the remote machine.  You'll need a password for it.
+
+	> slogin coude.ucolick.org -l sdawson
+
+2.  Once there, go to the directory of interest.
+
+	> cd /data/tony/C-Linear
+
+3.  Now scp the files:
+
+	> scp d37.ccd sdawson@hal2000.berkeley.edu:/mushu/sdawson/comet/data/n6
+
+    You will be prompted for your own password.
+
+That's it!
+
+
+*********************
+* HOW TO FIND FILES *
+*********************
+
+11.15.00
+
+I'm not sure I'm using this in an optimal fashion, but here's how I 
+find files whose names I at least partially know.  As an example,
+I'll search my entire home directory (working recursively down the 
+directory tree) for any file containing the phrase "agn".
+
+	> find . | grep agn
+
+Find just lists all the files from . (current location) downward.  
+The pipe through the grep grabs those files with the appropriate
+name.  Voila!
+
+
+***************************************
+* Make a Picture into your Background *
+***************************************
+
+11.21.00
+
+It's just:  > xv -root image.jpg
+
+This can do funny things to your color table, so use with caution.	
+
+
+***************************************************
+* Make .ps files out of what you see with Ximtool *
+***************************************************
+
+12.21.00
+
+When you make slitmasks, you'll want to a make a hard copy of
+a picture of the field (in I or R, most likely) with the targets
+and alignment stars circled and labeled.  Get everything good
+looking' in Ximtool (with tvmark, etc), then jump through the
+following hoops:
+
+1)  Start up Snapshot from the pull-down menu.
+2)  Select "region" under Snap Type.
+3)  Click Snap.  You will be prompted to draw a box (left mouse 
+    button) of the region you want to capture.
+4)  Click middle mouse button to capture image.
+5)  Under Save, save the capture as a .ras file.
+6)  Open the .ras file with XView (xv).
+7)  In XView, save the .ras file as a .ps file.
+8)  Ghostview the .ps file, then print away!
+
+
+*********************
+* How to Sort Files *
+*********************
+
+03.25.01
+
+This is a really simply example; I don't think it gets even close to
+what the sort command can do.  Imagine you have some table which is
+represented as a bunch of columns of numbers in an ascii file.  Let's
+say you want to order the entries (the lines) by the value of the number
+in the 5th column.  Sort will do that for ya.  You can output to the
+screen (the standard output), or you can write the output to a file.
+Don't try writing the output on top of the input file with a redirect -- 
+that doesn't seem to work (though maybe I just messed up).
+
+Here's an example.  Let say I want to list the contents of a directory,
+and I want the list to start with the biggest files and work down to 
+the smallest files.  (Alright -- this can be done *within* ls; it's just
+a useful example.  What I really use this for is to sort SExtractor
+output...)  You might proceed by piping "ls -l" to a file (call it "sortme")
+which will look like:
+
+rwxr-xr-x   2 sdawson  other       1536 Mar 23 17:06 KECK_RANDOM/
+drwxr-xr-x   4 sdawson  other       1024 Jan 14 00:47 N3S/
+drwxr-xr-x   2 sdawson  other        512 Jan 23 15:17 arjun/
+drwxr-xr-x  16 sdawson  other       5632 Feb 20 02:33 backups/
+drwxr-xr-x   2 sdawson  other        512 Oct 27 01:51 bin/
+drwxr-xr-x   3 sdawson  other        512 Feb 18 00:41 bunker/
+drwxr-xr-x  15 sdawson  other        512 Nov 14 01:18 classes/
+drwxr-xr-x   4 sdawson  other        512 Aug  3  2000 comet/
+drwxr-xr-x   3 sdawson  other       1024 Mar  3 18:03 dan/
+
+Now you want to sort that file, and you want the output written
+to another file.  The command would be:
+
+	> sort -nbr +4 -o sorted sortme
+
+The "sort" tells it to sort.  I think the "n" option says that we're
+using a numeric string, and the "b" option says to ignore blanks, or
+something.  The "r" says to use reverse order (biggest numbers first,
+rather than vice versa).  The "+4" says that we're interested in sorting
+on column 5 (the column numbers are zero-indexed).  The "-o" says to
+put the result in the output file "sorted".  Now, the file "sorted"
+looks like:
+
+-rw-r--r--   1 sdawson  other    81275072 Feb 14 11:36 Bw_v3.cat
+-rw-r--r--   1 sdawson  other    81257290 Feb 14 10:03 R6_v3.cat
+-rw-r--r--   1 sdawson  other    81257279 Feb 14 10:06 R7_v3.cat
+-rw-r--r--   1 sdawson  other    81249137 Feb 13 22:37 z_v3.cat
+-rw-r--r--   1 sdawson  other    81234486 Feb 13 22:34 I_v3.cat
+-rw-r--r--   1 sdawson  other    30091148 Feb 14 12:15 Bw_cat_v3.sav
+-rw-r--r--   1 sdawson  other    30091148 Feb 14 11:58 R7_cat_v3.sav
+-rw-r--r--   1 sdawson  other    30091148 Feb 14 11:47 R6_cat_v3.sav
+-rw-r--r--   1 sdawson  other    30091144 Feb 13 23:27 z_cat_v3.sav
+-rw-r--r--   1 sdawson  other    30091144 Feb 13 23:16 I_cat_v3.sav
+-rw-r--r--   1 sdawson  other     108012 Feb 20 13:22 easy1.dat.ps
+-rw-r--r--   1 sdawson  other      87288 Feb 18 14:28 easy1.dat
+-rw-r--r--   1 sdawson  other      85668 Feb 18 00:04 Bwdrops_bright.ps
+-rw-r--r--   1 sdawson  other      83785 Feb 20 13:22 easy2.dat.ps
+-rw-r--r--   1 sdawson  other      77520 Feb 15 15:24 junk1
+-rw-r--r--   1 sdawson  other      66513 Feb 17 23:42 Bwdrops_bright.dat
+
+
+Another way to achieve the same thing would have been piping the ls -l
+through the sort command, the directing that to an output file:
+
+	> ls -l | sort -nbr +4 > output
+
+Ain't that efficient!?
+

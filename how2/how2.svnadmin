@@ -1,0 +1,43 @@
+## Make the papers repository
+
+svnadmin create --fs-type fsfs papers
+svn mkdir file:///raid/ioannis/svn/papers/trunk -m "Made trunk folder"
+svn mkdir file:///raid/ioannis/svn/papers/branches -m "Made branches folder"
+svn mkdir file:///raid/ioannis/svn/papers/tags -m "Made tags folder"
+svnadmin load /raid/ioannis/svn/papers < ~/moustakas.papers.dump
+svn move file:///raid/ioannis/svn/papers/trunk/papers file:///raid/ioannis/svn/papers/ -m "Reorganizing..."
+svn delete file:///raid/ioannis/svn/papers/trunk -m "Reorganizing..."
+svn move file:///raid/ioannis/svn/papers/papers file:///raid/ioannis/svn/papers/trunk -m "Reorganizing..."
+
+
+## Make the catalogs repository
+
+svnadmin create --fs-type fsfs catalogs
+svn mkdir file:///raid/ioannis/svn/catalogs/trunk -m "Made trunk folder"
+svn mkdir file:///raid/ioannis/svn/catalogs/branches -m "Made branches folder"
+svn mkdir file:///raid/ioannis/svn/catalogs/tags -m "Made tags folder"
+svnadmin load /raid/ioannis/svn/catalogs < ~/moustakas.catalogs.dump
+svn move file:///raid/ioannis/svn/catalogs/trunk/catalogs file:///raid/ioannis/svn/catalogs/ -m "Reorganizing..."
+svn delete file:///raid/ioannis/svn/catalogs/trunk -m "Reorganizing..."
+svn move file:///raid/ioannis/svn/catalogs/catalogs file:///raid/ioannis/svn/catalogs/trunk -m "Reorganizing..."
+
+
+## Make the hiiregions repository
+
+svnadmin create --fs-type fsfs hiiregions
+svn mkdir file:///raid/ioannis/svn/hiiregions/trunk -m "Made trunk folder"
+svn mkdir file:///raid/ioannis/svn/hiiregions/branches -m "Made branches folder"
+svn mkdir file:///raid/ioannis/svn/hiiregions/tags -m "Made tags folder"
+svnadmin load /raid/ioannis/svn/hiiregions < ~/moustakas.hiiregions.dump
+svn move file:///raid/ioannis/svn/hiiregions/trunk/hiiregions file:///raid/ioannis/svn/hiiregions/ -m "Reorganizing..."
+svn delete file:///raid/ioannis/svn/hiiregions/trunk -m "Reorganizing..."
+svn move file:///raid/ioannis/svn/hiiregions/hiiregions file:///raid/ioannis/svn/hiiregions/trunk -m "Reorganizing..."
+
+
+## Make the idl-lib repository
+
+svnadmin create --fs-type fsfs idl-lib
+svn mkdir file:///raid/ioannis/svn/idl-lib/trunk -m "Made trunk folder"
+svn mkdir file:///raid/ioannis/svn/idl-lib/branches -m "Made branches folder"
+svn mkdir file:///raid/ioannis/svn/idl-lib/tags -m "Made tags folder"
+svn import idl-lib file:///raid/ioannis/svn/idl-lib/trunk -m "Imported the code"

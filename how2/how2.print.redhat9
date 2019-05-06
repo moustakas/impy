@@ -1,0 +1,22 @@
+From nlauver@luna.as.arizona.edu Mon Mar  8 20:37:03 2004
+Date: 04 Mar 2004 16:27:28 -0700
+From: Neal Lauver <nlauver@luna.as.arizona.edu>
+To: jmoustakas@as.arizona.edu
+Subject: How to print under Redhat 9
+
+John,
+
+These instructions should get printing to work and give you access to
+all of the Steward printers.
+
+1.  service cups stop
+2.  rpm -e cups qtcups gimp-print-cups desktop-printing
+3.  yum -y install LPRng
+4.  yum -y install so-config-LPRng
+5.  chkconfig --level 345 lpd on
+6.  service lpd restart
+
+Make sure you use lpr and not *lp* to print from the command line.
+
+
+Neal

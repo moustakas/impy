@@ -1,0 +1,17 @@
+Add to file /etc/rc.d/rc.local (at bottom)
+
+/sbin/modprobe usb-uhci
+/sbin/modprobe usbcore
+mount -t usbdevfs usbdevfs /proc/bus/usb
+/sbin/modprobe usb-storage
+
+Add this line to file /etc/fstab
+
+/dev/sda1               /usbdisk                vfat    noauto,user     0 0
+
+
+Then, you can do "mount /usbdisk" as user ioannis, and it should work.
+
+I did the stuff added to rc.local manually. It should have been done 
+automatically by the file rc.sysinit on boot (search that file for USB). 
+It is not doing it. 

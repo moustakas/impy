@@ -1,0 +1,35 @@
+\begin{figure}[h]
+\unitlength1cm
+\begin{minipage}[t]{7.5cm}
+%\begin{minipage}[t]{5cm}
+\begin{picture}(7.5,7.5)
+\epsscale{1.}
+\plotone{fb_z.ps}
+\end{picture} \par
+\caption{\small Results from Rakos \& Schombert (1995, ApJ, 439, 47) are
+plotted,
+showing the fraction of blue galaxies in $0.18 \le z \le 0.93$ clusters.
+The observed fraction of blue cluster galaxies increases dramatically
+beyond
+$z\approx 0.5$.  The shaded region shows that we will be measuring
+SFRs over the range where evolution should be most evident.}
+\label{fb_z}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{7.5cm}
+\begin{picture}(7.5,7.5)
+\epsscale{1.}
+\plotone{field_sfr.ps}
+\end{picture}
+\par
+\caption{\small Reproduction of Figure 3 from Madau, Pozzetti \& Dickinson
+(1998)
+showing the results from several studies on field galaxy star formation
+evolution
+(see Madau et al. 1998 for details).  The wealth of data on field galaxies
+is in
+stark contrast to data currently available for cluster galaxies as shown
+in Figure \ref{sfr_z} of this proposal.}
+\label{field_sfr}
+\end{minipage}
+\end{figure}

@@ -1,0 +1,34 @@
+* To check out the most recent version
+  svn co svn+ssh://howdy.physics.nyu.edu/usr/local/svn/ioannis/trunk/idl idl
+
+* To browse the repository online:
+  svn co http://howdy.physics.nyu.edu/svn/ioannis/trunk/idl
+
+* To tag the current version of the SVN repository:
+ svn copy svn+ssh://howdy.physics.nyu.edu/usr/local/svn/ioannis/trunk \
+   svn+ssh://howdy.physics.nyu.edu/usr/local/svn/ioannis/tags/v1.0 \
+   -m "Tagging v1.0 of my IDL code."
+
+* To create a new repository (see http://howdy.physics.nyu.edu/index.php/SVN_Tutorial)
+
+ 1. login to howdy
+ 2. newgrp svncomm
+ 3. svnadmin create --fs-type fsfs /usr/local/svn/your_repository 
+
+ 4. Create the tags, branches, and trunk subdirectories:
+
+   svn co file:///usr/local/svn/your_repository
+   cd your_repositiry
+   svn mkdir trunk branches tags
+   svn commit -m "Added trunk, branches, and tags subdirectories"
+
+ 5. Then import your code using the first line if code_directory and
+ repository_name are the same, or the second line if they are different: 
+
+   svn import -m "Imported code for the first time" code_directory file:///usr/local/svn/repository_name/trunk/
+   svn import -m "Imported code for the first time" code_directory file:///usr/local/svn/repository_name/trunk/code_directory
+
+ 6. Check out code following the instructions above.
+
+* To move a repository to a new server or new location do the following:
+

@@ -1,0 +1,21 @@
+From nlauver@luna.as.arizona.edu Mon Mar  8 20:37:30 2004
+Date: 04 Mar 2004 16:25:40 -0700
+From: Neal Lauver <nlauver@luna.as.arizona.edu>
+To: jmoustakas@as.arizona.edu
+Subject: Getting rid of annoying beep on laptop
+
+John,
+
+You can put the following line at the very bottom of your
+/etc/rc.d/rc.local file:
+
+	setterm -blength 0
+
+You will probably also want to put the following line in your .bashrc or
+.cshrc file (depending on whether you use bash or csh as your shell):
+	
+	xset b off
+
+Neal
+
+

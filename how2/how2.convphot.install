@@ -1,0 +1,13 @@
+jm07may03nyu
+
+To install convphot I had to:
+
+% fink install gsl
+% setenv LDFLAGS '-L/sw/lib -L/usr/local/software/cfitsio'
+% setenv CPPFLAGS '-I/sw/include -I/usr/include/sys -I/usr/local/software/cfitsio'
+
+And then the standard
+
+% ./configure 
+
+worked.

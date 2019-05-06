@@ -1,0 +1,12 @@
+jm03jan30uofa
+
+How to make a compact reference list in LATEX.
+
+\leftline{}
+\leftline{Bullock, J.~S., Kravtsov, A.~V. \& Weinberg, D.~H. 2000, ApJ, 539, 517}
+\leftline{Bullock, J. S. \& Zentner, A. R. 2003, preprint, astro-ph/0207534}
+\leftline{Metcalf, R.~B. \& Madau, P. 2001, ApJ, 563, 9}
+\leftline{Metcalf, R.~B. \& Zhao, H.-S., 2002, ApJ, 567, 5}
+\leftline{Moustakas, L. \& Metcalf, R,~B., 2003, MNRAS, in press (astro-ph/0206176)} 
+\leftline{Zentner, A. R. \& Bullock, J. S. 2003, preprint, astro-ph/0212339}
+

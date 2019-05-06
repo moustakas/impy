@@ -1,0 +1,72 @@
+Sample session:
+---------------
+
+% cvs checkout idlutils
+% cd idlutils
+% emacs flipper.pro
+% cvs update
+% cvs commit -m 'Fixed bug.' flipper.pro
+% emacs highz.pro ; create a new file
+% cvs add highz.pro
+% cvs commit -m 'New subroutine of flipper.pro' highz.pro
+% cvs update ; make sure nothing else changed
+% cvs commit -m 'Added new feature.' * ; commits all changed files
+% cvs annotate mofo.pro ; check the line-by-line history of a program
+% cvs log ptastrom.pro  ; examine the history of a program
+% cd ..
+% cvs resease -d idlutils ; release the module
+
+Emacs shortcuts:
+----------------
+
+C-x v v ; commit
+C-x v u ; revert the last version
+C-x v l ; show history
+C-x v = ; compare with last version (i.e., diff)
+C-x v g ; annotate
+
+Add a module (called red):
+--------------------------
+
+% cd ~/idl/red
+% cvs import -m 'IDL cosmology routines.' red ioannis start
+% cd ~/
+% cvs checkout CVSROOT/modules
+% emacs CVSROOT/modules ; add the line and quit
+       red red
+% cvs commit -m 'Added IDL module RED.' CVSROOT
+% cvs release -d CVSROOT
+
+To access a repository on a remote machine:
+-------------------------------------------
+
+% setenv CVS_RSH ssh
+% setenv CVSROOT ioannis@cerebus.as.arizona.edu:/home/ioannis/CVS_repository
+% cd
+% cvs checkout red
+
+CVS notes from Karl Gordon:
+
+
+How to update the CVS tree
+
+listing the current status of a directory in CVS
+cvs history -l -c | grep directoryname
+
+removing files
+cvs remove -f filename (can have *)
+have to commit to actually remove the file
+
+adding files
+cvs add filename (can have *)
+have to commit to actually remove the file
+
+tagging for release
+cvs rtag ver1-51 Pipeline
+
+releasing
+in the directory containing Pipeline
+cvs release *
+
+exporting
+cvs export -r ver1-51 Pipeline

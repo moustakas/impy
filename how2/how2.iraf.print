@@ -1,0 +1,21 @@
+# jm03oct20uofa
+# Printing in IRAF
+
+* To send the output to the printer:
+	:.snap
+
+* To select a printer:
+	:.snap lwX
+
+* To select postscript in a file in /tmp/irafdmpXXXXX.ps
+	:.snap psdump
+
+* To select enapsulated postscript in the file ./sgiXXXXX.ps
+	:.snap epsf
+
+* To select GIF in the file ./sgiXXXXX.gif
+	:.snap gif
+
+And don't forget to follow up with
+	:.gflush
+

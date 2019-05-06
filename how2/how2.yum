@@ -1,0 +1,9 @@
+jm03jul1uofa
+
+yum is an interactive, automated update program which can be used for
+maintaining systems using rpm
+
+examples:
+
+% yum -y install mplayer
+% yum -y update pine

@@ -1,0 +1,69 @@
+% Procedure to separate my idl "impro", "projects", and "ispec"
+  repositories from the larger "ioannis" svn repository on howdy (see
+  http://therightstuff.de/CommentView,guid,b984a8e7-e94d-4eed-a705-5dc479f959e8.aspx)
+
+svnadmin dump /usr/local/svn/ioannis > moustakas.all.dump
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/idl/impro trunk/idl/ispec trunk/idl/projects < moustakas.all.dump > moustakas.dump
+
+svnadmin create ~/moustakas-import
+svn mkdir file:///home/users/ioannis/moustakas-import/trunk/ -m "Made trunk folder"
+svn mkdir file:///home/users/ioannis/moustakas-import/branches/ -m "Made branches folder"
+svn mkdir file:///home/users/ioannis/moustakas-import/tags/ -m "Made tags folder"
+svn mkdir file:///home/users/ioannis/moustakas-import/trunk/idl/ -m "Made idl subdirectory"
+svnadmin load ~/moustakas-import < ~/moustakas.dump
+svn move file:///home/users/ioannis/moustakas-import/trunk/idl/impro file:///home/users/ioannis/moustakas-import/trunk/ -m "Reorganizing..."
+svn move file:///home/users/ioannis/moustakas-import/trunk/idl/ispec file:///home/users/ioannis/moustakas-import/trunk/ -m "Reorganizing..."
+svn move file:///home/users/ioannis/moustakas-import/trunk/idl/projects file:///home/users/ioannis/moustakas-import/trunk/ -m "Reorganizing..."
+svn delete file:///home/users/ioannis/moustakas-import/trunk/idl -m "Reorganizing..."
+svnsync init --username john.moustakas@gmail.com https://idl-moustakas.googlecode.com/svn/ file:///home/users/ioannis/moustakas-import
+svnsync sync --username john.moustakas@gmail.com https://idl-moustakas.googlecode.com/svn/
+
+% Ditto for my "papers" and "catalogs" repositories, etc.
+
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/papers < moustakas.all.dump > moustakas.papers.dump
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/catalogs < moustakas.all.dump > moustakas.catalogs.dump
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/hiiregions < moustakas.all.dump > moustakas.hiiregions.dump
+
+% Move the goods repository onto google
+
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/goods < moustakas.all.dump > moustakas.goods.dump
+svnadmin create ~/goods-import
+svn mkdir file:///home/users/ioannis/goods-import/trunk/ -m "Made trunk folder"
+svn mkdir file:///home/users/ioannis/goods-import/branches/ -m "Made branches folder"
+svn mkdir file:///home/users/ioannis/goods-import/tags/ -m "Made tags folder"
+svnadmin load goods-import < moustakas.goods.dump
+svn move file:///home/users/ioannis/goods-import/trunk/goods/ file:///home/users/ioannis/goods-import/goods/ -m "Reorganizing..."
+svn delete file:///home/users/ioannis/goods-import/trunk -m "Reorganizing..."
+svn move file:///home/users/ioannis/goods-import/goods/ file:///home/users/ioannis/goods-import/trunk/ -m "Reorganizing..."
+svnsync init --username john.moustakas@gmail.com https://idl-goods.googlecode.com/svn/ file:///home/users/ioannis/goods-import
+svnsync sync --username john.moustakas@gmail.com https://idl-goods.googlecode.com/svn/
+
+
+
+svn mkdir file:///home/users/ioannis/goods-import/trunk/ -m "Made trunk folder"
+svn mkdir file:///home/users/ioannis/goods-import/branches/ -m "Made branches folder"
+svn mkdir file:///home/users/ioannis/goods-import/tags/ -m "Made tags folder"
+svnadmin load goods-import < moustakas.goods.dump
+
+
+
+
+
+##################################################
+
+* This ddidn't work below:  
+  
+svnadmin dump /usr/local/svn/ioannis > moustakas.all.dump
+./svndumpfilter2 --drop-empty-revs --renumber-revs /usr/local/svn/ioannis trunk/idl/impro trunk/idl/ispec trunk/idl/projects < moustakas.all.dump > moustakas.dump
+sed 's@trunk/idl/impro@trunk/impro@g' moustakas.dump > moustakas.dump2
+sed 's@trunk/idl/projects@trunk/projects@g' moustakas.dump2 > moustakas.dump3
+sed 's@trunk/idl/ispec@trunk/ispec@g' moustakas.dump3 > moustakas.dump4
+
+svnadmin create ~/moustakas-import
+svn mkdir file:///home/users/ioannis/moustakas-import/trunk/ -m "Made trunk folder"
+svn mkdir file:///home/users/ioannis/moustakas-import/branches/ -m "Made branches folder"
+svn mkdir file:///home/users/ioannis/moustakas-import/tags/ -m "Made tags folder"
+svnadmin load ~/moustakas-import < ~/moustakas.dump4
+
+svnsync init --username john.moustakas@gmail.com https://idl-moustakas.googlecode.com/svn/ file:///home/users/ioannis/moustakas-import
+svnsync sync --username john.moustakas@gmail.com https://idl-moustakas.googlecode.com/svn/

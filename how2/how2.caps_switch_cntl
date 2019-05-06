@@ -1,0 +1,17 @@
+To switch your CAPS LOCK and CNTL buttons on a PC keyboard create the
+following file called .xmodrc and put it in ${HOME}.
+
+          !
+          ! Swap Caps_Lock and Control_L
+          !
+          remove Lock = Caps_Lock
+          remove Control = Control_L
+          keysym Control_L = Caps_Lock
+          keysym Caps_Lock = Control_L
+          add Lock = Caps_Lock
+          add Control = Control_L
+
+Then add the following line to your .cshrc:
+
+	/usr/X11R6/bin/xmodmap ${HOME}/.xmodrc
+

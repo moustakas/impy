@@ -1,0 +1,37 @@
+From cyp@spiff.as.arizona.edu Wed Mar 13 14:25:27 2002
+Date: Wed, 2 Jan 2002 11:17:22 -0700
+From: Chien Peng <cyp@spiff.as.arizona.edu>
+To: ioannis@as.arizona.edu
+Subject: Re: question
+
+
+Hi John,
+
+the easiest way I know how is to create a script to do it.  For
+example, list the files you want to display into a file, e.g.,
+ls *.fits > dispfiles.  Then write a script that takes dispfiles
+and create an IRAF script from it.  So, for example, on your
+Linux prompt, do:
+
+% ls *.fits > dispfiles
+% awk '{print "display", $1, "1 zr+ zs+"}' dispfiles > displayme.cl
+
+Then in IRAF, do:
+
+cl> task $displayme = displayme.cl
+cl> displayme
+
+That should do it.
+
+Chien
+From cyp@spiff.as.arizona.edu Wed Mar 13 14:25:49 2002
+Date: Wed, 2 Jan 2002 12:00:36 -0700
+From: Chien Peng <cyp@spiff.as.arizona.edu>
+To: ioannis@as.arizona.edu
+Subject: Re: question
+
+I think even:
+
+% awk '{print "imexam", $1"[0]"}' list
+
+should work..., i.e. get rid of the comma between $1 and "[0]"

@@ -1,0 +1,1 @@
+html2text -style pretty -o "02tresse_table1.dat" "file:02tresse_table1.html"

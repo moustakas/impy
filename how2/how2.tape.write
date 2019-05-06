@@ -1,0 +1,12 @@
+jm03jan7uofa
+
+Backup your disk to a tape (assume the tape is in a machine called iris).
+
+% /sbin/lsmod              # find the device name of the tape
+% mt -f /dev/st0 status    # print some info on the tape
+% mt -f /dev/st0 rewind    # rewind the tape
+% mt -f /dev/st0 setblk 0  # set the block size
+
+% tar cvbf 127 - . | ssh -l root iris "dd of=/dev/st0 obs=127b"
+
+

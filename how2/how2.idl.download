@@ -1,0 +1,18 @@
+# jm03jun30uofa
+# How to download IDL from RSI.  Be sure to read the README provided
+# by RSI!
+
+% ncftp ftp.rsinc.com
+ncftp / > cd pub/idl/unix
+ncftp / > cat README.TXT
+ncftp / > cd ALL_PLATFORMS
+ncftp / > ascii
+ncftp / > get unpack
+ncftp / > binary
+ncftp / > get base1.tar.gz
+ncftp / > get base2.tar.gz
+ncftp / > get bin.linux.x86.tar.gz
+ncftp / > get idl_help.tar.gz
+ncftp / > get idl_demo.tar.gz
+ncftp / > quit
+

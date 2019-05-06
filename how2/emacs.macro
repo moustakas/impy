@@ -1,0 +1,4 @@
+# How to setup a macro in EMACS.
+
+CNTL-X (ESC L CNTL-X) - defines a macro
+CNTL-U 100 CNTL-X E - repeats previous macro (in this example, uppercase, 100 times)

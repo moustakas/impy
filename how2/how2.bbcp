@@ -1,0 +1,5 @@
+#/bin/tcsh
+# ./bbcp.science >& bbcp.science.log & 
+
+bbcp -v -r -k -a /home/ioannis/bbcp -b 20 -P 10 -s 10 -e -S 'ssh -A -x ioannis@astro.physics.nyu.edu ssh -A -o StrictHostKeyChecking=no -x -p 2213 moon
+ /home/users/bw55/local/bin/bbcp.x86_64' ioannis@moon.cosmo.fas.nyu.edu:/export/moon1/primus/science /global/data/primus/

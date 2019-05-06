@@ -1,0 +1,7 @@
+jm02nov15uofa
+
+This command, or a variant, will enable you to transfer files
+from a tape over the ethernet to your machine (read a tape):
+
+% dd if=/dev/nrst0 | ssh ioannis@cerebus.as.arizona.edu '(cd /path/dir ; tar xBbf 20 -)'
+

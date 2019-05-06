@@ -1,0 +1,11 @@
+jm03jul16uofa
+
+How to install a file system on a partition (e.g., an external drive):
+
+% /sbin/mkfs -V -t ext3 /dev/sda1
+% e2label /dev/sda1 /usbdisk
+% mkdir /usbdisk
+
+Edit fstab to reflect the new file system.
+
+% mount /usbdisk

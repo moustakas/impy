@@ -1,0 +1,16 @@
+
+Examples:
+
+1. Starting (initializing) the globus endpoint on nyx:
+/usr/local/share/globusconnect/globusconnectpersonal -start -restrict-paths rw~/,/global/
+
+2. Start a transfer on the command line (logged into nyx):
+ssh ioannis@cli.globusonline.org
+$ transfer --preserve-mtime -- nersc#edison/scratch1/scratchdirs/desiproc/dr1j/tractor/ ioannis#nyx/global/work/decam/release/dr1/ -r
+
+3. Transfer a list of directories/files.  Create a file, e.g., called
+transfer-list-test.txt with the following content:
+nersc#carver/~/dr1/coadd/156/   ioannis#nyx/global/work/decam/release/dr1/coadd/156/ -r                                                          
+
+Then from the command line:
+cat transfer-list-test.txt | ssh ioannis@cli.globusonline.org transfer -s 2

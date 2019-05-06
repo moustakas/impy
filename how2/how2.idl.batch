@@ -1,0 +1,5 @@
+To run IDL or any other command from the command line
+try
+
+% echo "print, 'Hey man!'" | idl
+

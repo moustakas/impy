@@ -1,0 +1,6 @@
+jm03aug7uofa
+
+To make the backspace key be a true backspace key rather than 'delete',
+remove the following command from your .pinerc.
+
+compose-maps-delete-key-to-ctrl-d
