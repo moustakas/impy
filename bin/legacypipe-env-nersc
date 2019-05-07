@@ -4,30 +4,57 @@
 
 echo 'Loading legacypipe software'
 
-# The desiconda software stack gets loaded by legacypipe-env, below.
+# Use the shifter image...
+echo 'Updating and loading the shifter image'
+shifterimg pull docker:legacysurvey/legacypipe:nersc
+shifter --image docker:legacysurvey/legacypipe:nersc bash
+
+# or use the desiconda software stack.
 #desiconda_version=20190311-1.2.7-img
-#module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version/modulefiles
+#echo 'Loaded desiconda_version='$desiconda_version
+#module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
 #module load desiconda
 
 # Set up the software and dependencies
 export LEGACYPIPE_DIR=$HOME/repos/git/legacypipe
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
 
-source $LEGACYPIPE_DIR/bin/legacypipe-env
+# Required environment variables--
+#source $LEGACYPIPE_DIR/bin/legacypipe-env
+unset PYTHONPATH
+
+export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
+export UNWISE_COADDS_DIR=/global/project/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
+export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
+export GAIA_CAT_VER=2
+export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
+export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies/v2.0
+export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
+UNWISE_PSF_DIR=/src/unwise_psf
+export WISE_PSF_DIR=${UNWISE_PSF_DIR}/etc
+
+export PYTHONPATH=/usr/local/lib/python:/usr/local/lib/python3.5/dist-packages:.:${UNWISE_PSF_DIR}/py
+export PYTHONNOUSERSITE=1 # Don't add ~/.local/ to Python's sys.path
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+#echo 'Custom-built versions of tractor and astrometry.net'
+#export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
+#export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
+export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
-# For calibs, also set up legacyzpts
+# For calibs, also set up legacyzpts and for the web-app add in decals-web.
 #export LEGACYZPTS_DIR=$HOME/repos/git/legacyzpts
-#echo '$LEGACYZPTS_DIR='$LEGACYZPTS_DIR
+#export DECALS_WEB_DIR=$HOME/repos/git/decals-web
 #export PATH=$LEGACYZPTS_DIR/bin:$PATH
 #export PYTHONPATH=$LEGACYZPTS_DIR/py:$PYTHONPATH
+#export PYTHONPATH=$DECALS_WEB_DIR/py:$PYTHONPATH
 
 # Some NERSC-specific options to get MPI working properly.
 export OMP_NUM_THREADS=1
@@ -39,7 +66,7 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 # Notes on custom-installing tractor and astrometry.net
 #
 # desiconda_version=20190311-1.2.7-img
-# module use /global/common/software/desi/$NERSC_HOST/desiconda/$desiconda_version/modulefiles
+# module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
 # module load desiconda
 # cd $HOME/repos/git
 # git clone https://github.com/dstndstn/astrometry.net.git
@@ -56,8 +83,8 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 # export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$EIGEN3_DIR/share/pkgconfig
 # export PYTHON_CONFIG=python3-config
 # make ceres
-# python setup.py install --prefix=$HOME/repos/build/$NERSC_HOST
-
+# python setup.py install --with-ceres --prefix=$HOME/repos/build/$NERSC_HOST
+#
 # export PATH=$HOME/repos/build/$NERSC_HOST/bin:$PATH
 # export PYTHONPATH=$HOME/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 ##################################################

@@ -1,0 +1,33 @@
+#!/bin/bash
+# Set up the software environment we need in order to run various Legacy Surveys
+# code (legacypipe) at NERSC.
+
+echo 'Loading legacypipe software'
+
+# Set up the software and dependencies
+export LEGACYPIPE_DIR=/global/homes/i/ioannis/repos/git/legacypipe
+echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
+
+export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
+export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
+export GAIA_CAT_VER=2
+export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
+export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies/v2.0
+export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
+
+#source $LEGACYPIPE_DIR/bin/legacypipe-env
+export PYTHONNOUSERSITE=1
+export PATH=$LEGACYPIPE_DIR/bin:$PATH
+export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
+
+#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8b
+#echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+
+# Some NERSC-specific options to get MPI working properly.
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export KMP_AFFINITY=disabled
+export MPICH_GNI_FORK_MODE=FULLCOPY
