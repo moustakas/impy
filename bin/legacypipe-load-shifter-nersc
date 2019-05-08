@@ -1,0 +1,10 @@
+#!/bin/bash
+# Load the legacypipe Docker container using shifter then source
+#   legacypipe-shifter-env-nersc
+
+echo 'Updating and loading the shifter image'
+shifterimg pull docker:legacysurvey/legacypipe:nersc
+shifter --image docker:legacysurvey/legacypipe:nersc bash
+
+#shifterimg pull docker:legacysurvey/legacypipe:nersc-dr8.1.2
+#shifter --image docker:legacysurvey/legacypipe:nersc-dr8.1.2 bash

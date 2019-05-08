@@ -1,20 +1,15 @@
 #!/bin/bash
-# Set up the software environment we need in order to run various Legacy Surveys
-# code (legacypipe) at NERSC.
+# Once the legacypipe shifter image has been loaded using
+#  ./legacypipe-load-shifter-nersc execute this script to set up all the
+#  environment variables we need (and to overwrite some stuff that gets set in
+#  docker-nersc/Dockerfile
 
 echo 'Loading legacypipe software'
 
-desiconda_version=20190311-1.2.7-img
-echo 'Loaded desiconda_version='$desiconda_version
-module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
-module load desiconda
-
+# Set up the software and dependencies
 export LEGACYPIPE_DIR=$HOME/repos/git/legacypipe
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
 
-# Required environment variables--
-
-#source $LEGACYPIPE_DIR/bin/legacypipe-env
 unset PYTHONPATH
 
 export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
@@ -25,8 +20,10 @@ export GAIA_CAT_VER=2
 export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
 export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies/v2.0
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
-UNWISE_PSF_DIR=/src/unwise_psf
+
+UNWISE_PSF_DIR=/global/project/projectdirs/cosmo/staging/unwise_psf/dr8
 export WISE_PSF_DIR=${UNWISE_PSF_DIR}/etc
+export PYTHONPATH=$UNWISE_PSF_DIR/py:$PYTHONPATH
 
 #export PYTHONPATH=/usr/local/lib/python:/usr/local/lib/python3.5/dist-packages:${UNWISE_PSF_DIR}/py
 #export PYTHONPATH=/usr/local/lib/python:/usr/local/lib/python3.5/dist-packages:.:${UNWISE_PSF_DIR}/py
