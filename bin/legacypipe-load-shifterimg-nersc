@@ -1,10 +1,23 @@
 #!/bin/bash
 # Load the legacypipe Docker container using shifter then source
 #   legacypipe-shifter-env-nersc
-
+#
+# docker pull legacysurvey/legacypipe:nersc
+# 
+# Create a Dockerfile on my laptop with
+#   FROM legacysurvey/legacypipe:nersc
+#   RUN pip3 install healpy
+# Then 
+#   docker build . -t flagnarg/legacypipe
+#   docker push flagnarg/legacypipe
+   
 echo 'Updating and loading the shifter image'
-shifterimg pull docker:legacysurvey/legacypipe:nersc
-shifter --image docker:legacysurvey/legacypipe:nersc bash
 
-#shifterimg pull docker:legacysurvey/legacypipe:nersc-dr8.1.2
-#shifter --image docker:legacysurvey/legacypipe:nersc-dr8.1.2 bash
+#shifterimg pull docker:flagnarg/legacypipe:latest
+#shifter --image docker:flagnarg/legacypipe:latest bash
+
+#shifterimg pull docker:legacysurvey/legacypipe:nersc
+#shifter --image docker:legacysurvey/legacypipe:nersc bash
+
+shifterimg pull docker:legacysurvey/legacypipe:nersc-dr8.3.0
+shifter --image docker:legacysurvey/legacypipe:nersc-dr8.3.0 bash

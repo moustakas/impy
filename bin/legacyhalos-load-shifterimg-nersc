@@ -1,0 +1,8 @@
+#!/bin/bash
+# Load the legacyhalos Docker container using shifter then source
+#   legacyhalos-shifter-env-nersc
+#
+echo 'Updating and loading the shifter image'
+
+shifterimg pull docker:flagnarg/legacyhalos:latest
+shifter --image docker:flagnarg/legacyhalos:latest bash
