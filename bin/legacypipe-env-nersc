@@ -38,7 +38,8 @@ export PYTHONPATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/lib/python3.6/
 
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
 #export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
+#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr8
+export LEGACY_SURVEY_DIR=/global/u2/i/ioannis/dr8-work
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 # For calibs, also set up legacyzpts and for the web-app add in decals-web.

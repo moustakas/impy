@@ -19,5 +19,5 @@ echo 'Updating and loading the shifter image'
 #shifterimg pull docker:legacysurvey/legacypipe:nersc
 #shifter --image docker:legacysurvey/legacypipe:nersc bash
 
-shifterimg pull docker:legacysurvey/legacypipe:nersc-dr8.3.0
-shifter --image docker:legacysurvey/legacypipe:nersc-dr8.3.0 bash
+shifterimg pull docker:legacysurvey/legacypipe:nersc-dr8.3.1
+shifter --image docker:legacysurvey/legacypipe:nersc-dr8.3.1 bash
