@@ -20,6 +20,8 @@ export HSC_DIR=$LEGACYHALOS_DIR/hsc # temporary
 export HSC_DATA_DIR=$IM_PROJECTS_DIR/hsc-data
 export HSC_HTML_DIR=$IM_PROJECTS_DIR/hsc-html
 
+export TNG_DATA=$IM_DATA_DIR/illustris
+
 export TRACTOR_DIR=/usr/local/tractor
 export ASTROMETRY_DIR=/usr/local/astrometry
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper

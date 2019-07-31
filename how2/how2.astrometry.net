@@ -1,0 +1,8 @@
+brew install netpbm
+brew install cairo
+export CAIRO_INC=-I/usr/local/Cellar/cairo/1.16.0/include/cairo
+export NETPBM_INC=-I/usr/local/Cellar/netpbm/10.73.27/include/netpbm
+
+git clone https://github.com/dstndstn/astrometry.net
+cd astrometry
+python setup.py install --prefix /usr/local/astrometry

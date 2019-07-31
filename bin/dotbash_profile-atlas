@@ -77,7 +77,8 @@ alias polar='ssh polar'
 alias 010='cd ~/teaching/010-S18'
 alias 330='cd ~/teaching/330-S18'
 
-alias py27='source activate py27'
+alias py27='conda activate py27'
+alias py37='conda activate py37'
 
 alias desi='source $IMPY_DIR/bin/desi-env-atlas'
 alias nbodykit='source $IMPY_DIR/bin/nbodykit-env-atlas'
@@ -86,7 +87,6 @@ alias breyo='source $IMPY_DIR/bin/breyo-env-atlas'
 alias LSLGA='source $IMPY_DIR/bin/LSLGA-env-atlas'
 alias hizea='source $IMPY_DIR/bin/hizea-env-atlas'
 alias clash='source $IMPY_DIR/bin/clash-env-atlas'
-alias jwstclusters='source $IMPY_DIR/bin/jwstclusters-env-atlas'
 
 # [[ -s ~/.bashrc ]] && source ~/.bashrc
 export PATH="/usr/local/sbin:$PATH"
