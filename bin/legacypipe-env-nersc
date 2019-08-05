@@ -36,10 +36,7 @@ echo 'Adding custom-built versions of tractor and astrometry.net to path.'
 export PATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/bin:$PATH
 export PYTHONPATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr8
-export LEGACY_SURVEY_DIR=/global/u2/i/ioannis/dr8-work
+export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 # For calibs, also set up legacyzpts and for the web-app add in decals-web.

@@ -43,9 +43,6 @@ export PYTHONNOUSERSITE=1
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr6
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr7
 export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
