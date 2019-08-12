@@ -1,0 +1,8 @@
+#!/bin/bash
+# Set up lslga-inspect code
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+export PYTHONPATH=${IM_GITREPOS}/lslga-inspect
+
+conda activate lslga-inspect
