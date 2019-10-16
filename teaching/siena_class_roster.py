@@ -9,8 +9,8 @@ import os
 # Open the file.
 r = open(sys.argv[1])
 
-if not os.path.isdir('Siena_Class_Roster_files'):
-    os.rename('Siena Class Roster_files', 'Siena_Class_Roster_files')
+if not os.path.isdir('Detail_Class_List_files'):
+    os.rename('Detail Class List_files', 'Detail_Class_List_files')
 
 # Try to parse the webpage by looking for the tables.
 soup = BeautifulSoup(r)
@@ -53,14 +53,24 @@ for table in tables:
                 
                 img = col.findAll('img')
                 
-                a = col.findAll('p')
+                a = col.findAll('a')
+                #if len(a)>0:
+                #    import pdb ; pdb.set_trace()
+                
                 if len(img)>0 and img[0]['src'].find('jpg')>=0:
                     image = img[0]['src']
                     image = image.replace(' ','_').replace('%20', '_')
                     if not os.path.isfile(image):
                         import pdb ; pdb.set_trace()
-                if len(a)>0 and a[0]['class']==['leftaligntext']:
-                    name = a[0].string
+                    #if os.path.isfile(image):
+                    #    import pdb ; pdb.set_trace()
+                        
+                if len(a)>0 and 'mailto' in a[0]['href']:
+                    name = a[0]['target']
+                #if len(a)>0 and a[0]['class']==['leftaligntext']:
+                #    name = a[0].string
+                #    print(image, a[0].string)
+                #import pdb ; pdb.set_trace()
 
                 if name is not None and image is not None:
                     if icount%25==0:

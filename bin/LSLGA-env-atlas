@@ -15,7 +15,7 @@ export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
 export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.6/site-packages:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python/site-packages:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 #export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
