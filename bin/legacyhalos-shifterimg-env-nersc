@@ -45,7 +45,7 @@ export HSC_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/hsc-data
 export HSC_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/hsc-html
 export REDMAPPER_DIR=/global/project/projectdirs/desi/users/ioannis/redmapper
 # export SPS_HOME=$SCRATCH/fsps
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
+export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8-renamed
 
 # Use local check-outs
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH

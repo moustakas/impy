@@ -33,7 +33,7 @@ export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wi
 export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
 export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies/v3.0
+export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v3.0/LSLGA-v3.0.kd.fits
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
 
 export GALEX_DIR=/global/project/projectdirs/cosmo/data/galex/images
