@@ -29,11 +29,11 @@ echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
 
 export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
 export UNWISE_COADDS_DIR=/global/project/projectdirs/cosmo/work/wise/outputs/merge/neo5/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo5
+export UNWISE_COADDS_TIMERESOLVED_DIR=/global/project/projectdirs/cosmo/work/wise/outputs/merge/neo5
 export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
 export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v3.0/LSLGA-v3.0.kd.fits
+export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v4.0/LSLGA-v4.0.kd.fits
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
 
 export GALEX_DIR=/global/project/projectdirs/cosmo/data/galex/images
@@ -43,7 +43,17 @@ export PYTHONNOUSERSITE=1
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr8
+############ need the legacyhalos code to be able to do the large galaxies
+export LEGACYHALOS_DIR=/global/project/projectdirs/desi/users/ioannis/legacyhalos
+export LEGACYHALOS_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/legacyhalos-data
+export LEGACYHALOS_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/legacyhalos-html
+export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/repos/git/legacyhalos
+export LSLGA_DIR=/global/project/projectdirs/desi/users/ioannis/LSLGA
+export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
+export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
+#############
+
+export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr9
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 # Some NERSC-specific options to get MPI working properly.
