@@ -28,14 +28,20 @@ source /project/projectdirs/desi/software/desi_environment.sh master
 
 #for package in desitarget desisurvey desisim; do
 #for package in desitarget desisim; do
-for package in desitarget; do
-  module unload $package
-  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
-  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
-done
+#  echo Loading local check-out of $package
+#  module unload $package
+#  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+#  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+#done
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.0
-#export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v2.6
-#export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/trunk
+
+# Need to reset $DESI_SPECTRO_CALIB when loading a local checkout of desispec
+package=desispec
+module unload $package
+export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+export DESI_SPECTRO_CALIB=/global/project/projectdirs/desi/spectro/desi_spectro_calib/trunk
 
 echo 'DESI_ROOT='$DESI_ROOT
+echo 'DESI_SPECTRO_CALIB='$DESI_SPECTRO_CALIB
 echo 'DESI_BASIS_TEMPLATES='$DESI_BASIS_TEMPLATES
