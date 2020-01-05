@@ -90,3 +90,5 @@ alias clash='source $IMPY_DIR/bin/clash-env-atlas'
 
 # [[ -s ~/.bashrc ]] && source ~/.bashrc
 export PATH="/usr/local/sbin:$PATH"
+
+export BASH_SILENCE_DEPRECATION_WARNING=1

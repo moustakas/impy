@@ -25,6 +25,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 progname=$(basename $0)
+version="1.1.0"
 
 # Save tty state for trap function below
 original_tty_state=$(stty -g)
@@ -39,7 +40,7 @@ id=nersc			# Name of key file
 user=$USER			# Username
 sshdir=~/.ssh			# SSH directory
 scope="default"			# Default scope
-url="sshproxy.nersc.gov"	# hostname for reaching proxy
+url="https://sshproxy.nersc.gov"	# hostname for reaching proxy
 
 #############
 # Functions
@@ -109,13 +110,24 @@ Usage () {
 	if [[ $# -ne 0 ]]; then
 		printf "$progname: %s\n\n", "$*"
 	fi
-	printf "Usage: $progname [-u <user>] [-o <filename>] [-s <scope>] [-a] [-U <server URL>]\n"
+	printf "Usage: $progname [-u <user>] [-o <filename>] [-s <scope>] [-c <account>] [-p] [-a] [-x <proxy-url>] [-U <server URL>] [-v] [-h]\n"
+
 	printf "\n"
-	printf "\t -u <user>\tSpecify remote (NERSC) username (default: $user)\n"
-	printf "\t -o <filename>\tSpecify pathname for private key (default: $sshdir/$id)\n"
+	printf "\t -u <user>\tSpecify remote (NERSC) username\n"
+	printf "\t\t\t(default: $user)\n"
+	printf "\t -o <filename>\tSpecify pathname for private key\n"
+	printf "\t\t\t(default: $sshdir/$id)\n"
 	printf "\t -s <scope>\tSpecify scope (default: '$scope')\n"
-	printf "\t -a \tAdd key to ssh-agent (with expiration)\n"
-	printf "\t -U <URL>\tSpecify alternate URL for sshproxy server (generally only used for testing purposes)\n"
+	printf "\t -p\t\tGet keys in PuTTY compatible (ppk) format\n"
+	printf "\t -a\t\tAdd key to ssh-agent (with expiration)\n"
+	printf "\t -c <account>\tSpecify a collaboration account (no default)\n"
+	printf "\t -x <URL>\tUse socks proxy to connect to sshproxy server.\n"
+	printf "\t\t\t(format: <protocol>://<host>[:port], see curl manpage\n"
+	printf "\t\t\tsection on "--proxy" for details)\n"
+	printf "\t -U <URL>\tSpecify alternate URL for sshproxy server\n"
+	printf "\t\t\t(generally only used for testing purposes)\n"
+	printf "\t -v \t\tPrint version number and exit\n"
+	printf "\t -h \t\tPrint this usage message and exit\n"
 	printf "\n"
 	
 	exit 0
@@ -138,15 +150,22 @@ opt_url=''	# -U
 opt_user=''	# -u
 opt_out=''	# -o
 opt_agent=0	# -a
+opt_version=''	# -v
+opt_putty=''     # -p
+opt_socks=''     # -x
 
 # Process getopts.  See Usage() above for description of arguments
 
-while getopts "ahs:k:U:u:o:" opt; do
+while getopts "aphvs:k:U:u:o:x:c:" opt; do
 	case ${opt} in
 
 		h )
 			Usage
 		;;
+ 		v )
+ 			printf "$progname v$version\n"
+ 			exit 0
+ 		;;
 
 		s )
 			opt_scope=$OPTARG
@@ -167,6 +186,16 @@ while getopts "ahs:k:U:u:o:" opt; do
 		a )
 			opt_agent=1
 		;;
+		p )
+			opt_putty="?putty"
+		;;
+
+		x )
+			opt_socks="--proxy $OPTARG"
+		;;
+		c )
+			opt_collab=$OPTARG
+		;;
 
 		\? )
 			Usage "Unknown argument"
@@ -182,11 +211,19 @@ done
 # If user has specified a keyfile, then use that.
 # Otherwise, if user has specified a scope, use that for the keyfile name
 # And if it's the default, then use the "id" defined above ("nersc")
+data=''
+if [[ "$opt_collab" != "" ]] ; then
+    if [[ "$opt_scope" == "" ]] ; then
+        scope="collab"
+        opt_scope=$opt_collab
+    fi
+    data='{"target_user": "'$opt_collab'"}'
+fi
 
 if [[ $opt_out != "" ]]; then
 	idfile=$opt_out
 elif [[ "$opt_scope" != "" ]]; then
-	idfile="$sshdir/$scope"
+	idfile="$sshdir/$opt_scope"
 else
 	idfile="$sshdir/$id"
 fi
@@ -201,7 +238,7 @@ pubfile="$idfile.pub"
 # prompt is interrupted by ctrl-c.  Otherwise terminal gets left in
 # a weird state.
 
-read -p "Enter your password+OTP: " -s pw
+read -r -p "Enter the password+OTP for ${user}: " -s pw
 
 # read -p doesn't output a newline after entry
 printf "\n"
@@ -216,12 +253,13 @@ tmpcert="$(mktemp $tmpdir/cert.XXXXXX)"
 tmppub="$(mktemp $tmpdir/pub.XXXXXX)"
 
 # And get the key/cert
-curl -s -S -X POST https://$url/create_pair/$scope/ \
-	-o $tmpkey -K - <<< "-u $user:$pw"
+curl -s -S -X POST $opt_socks $url/create_pair/$scope/$opt_putty \
+	-d "$data" -o $tmpkey -K - <<< "-u \"${user}:${pw}\""
 
 # Check for error
-if [[ $? -ne 0 ]] ; then
-	Bail 1 "Failed." "Curl returned" $?
+err=$?
+if [[ $err -ne 0 ]] ; then
+	Bail 1 "Failed." "Curl returned" $err
 fi
 
 # Get the first line of the file to check for errors from the
@@ -237,6 +275,12 @@ if [[ "$x" =~ "Authentication failed. Failed login" ]]; then
 fi
 
 # Check whether the file appears to contain a valid key
+
+if [[ "$x" == "PuTTY-User-Key-File-2: ssh-rsa" ]]; then
+	mv $tmpkey $idfile.ppk
+	printf "Successfully obtained PuTTY Key file %s\n" "$idfile.ppk"
+	exit
+fi
 
 if [[ "$x" != "-----BEGIN RSA PRIVATE KEY-----" ]]; then
 	Error "Did not get in a proper ssh private key. Output was:"

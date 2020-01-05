@@ -1,8 +1,30 @@
+https://docs.globus.org/how-to/globus-connect-personal-linux/
+https://docs.nersc.gov/services/globus/#command-line-globus-transfers
+https://app.globus.org/endpoints?scope=administered-by-me
 
-Examples:
+siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
+nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
+
+
+Logged on at the Siena-DTN:
+
+globus login
+globus endpoint search --filter-scope my-endpoints
+
+./globusconnect &
+
+./globusconnectpersonal -start &
+
+Logged on at cori:
+
+module load globus-sdk
+transfer_files.py --source cori --target 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752 --directory /mnt/jmoustakas/ --infiles junk
+
+#########################
+Old notes:
 
 1. Starting (initializing) the globus endpoint on nyx:
-/usr/local/share/globusconnect/globusconnectpersonal -start -restrict-paths rw~/,/global/
+/usr/local/share/globusconnectpersonal-3.0.2 -start -restrict-paths rw~/,/global/
 
 2. Start a transfer on the command line (logged into nyx):
 ssh ioannis@cli.globusonline.org

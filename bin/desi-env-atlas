@@ -43,7 +43,8 @@ export PATH=/usr/local/astrometry/bin:${PATH}
 #cd $DESI_ROOT/spectro/templates/basis_templates
 #svn export svn+ssh://${username}@dtn01.nersc.gov/global/project/projectdirs/desi/spectro/calib/svn/basis_templates/tags/v2.5
 
-export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
+export DESI_SPECTRO_CALIB=$DESI_ROOT/spectro/desi_spectro_calib/trunk
+#export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
 
 # Templates
 export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates

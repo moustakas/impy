@@ -4,7 +4,7 @@
 if [ -n "$DESI_PRODUCT_ROOT" ]; then
     echo "Cloning and updating into $DESI_PRODUCT_ROOT"
     pushd $DESI_PRODUCT_ROOT
-    for package in desiutil specter specsim desitarget desispec desisim speclite \
+    for package in desiutil specter specsim desitarget desispec desisim speclite desitest \
                             fiberassign desisurvey surveysim desimodel redrock \
                             redrock-templates; do
       if [ -d $package ]; then

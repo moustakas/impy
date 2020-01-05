@@ -26,7 +26,6 @@ export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
 export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v3.0/LSLGA-v3.0.kd.fits
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
 export UNWISE_PSF_DIR=/global/project/projectdirs/cosmo/staging/unwise_psf/dr9
-export WISE_PSF_DIR=${UNWISE_PSF_DIR}/etc
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
