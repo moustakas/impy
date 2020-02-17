@@ -23,7 +23,7 @@ export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wi
 export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
 export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v4.0/LSLGA-v4.0.kd.fits
+export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v5.0/LSLGA-v5.0.kd.fits
 export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
@@ -34,8 +34,13 @@ echo 'Adding custom-built versions of tractor and astrometry.net to path.'
 export PATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/bin:$PATH
 export PYTHONPATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
 
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr9
+export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desimpp/dr9e
+#export LEGACY_SURVEY_DIR=/global/cfs/projectdirs/cosmo/work/legacysurvey/dr9
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+
+export DESIMODEL=$HOME/repos/desihub/desimodel
+export PYTHONPATH=$HOME/repos/desihub/desimodel/py:${PYTHONPATH}
+export PYTHONPATH=$HOME/repos/desihub/desiutil/py:${PYTHONPATH}
 
 # For calibs, also set up legacyzpts and for the web-app add in decals-web.
 #export LEGACYZPTS_DIR=/global/homes/i/ioannis/repos/git/legacyzpts

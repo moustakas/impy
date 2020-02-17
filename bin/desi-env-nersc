@@ -40,8 +40,20 @@ package=desispec
 module unload $package
 export PATH=$HOME/repos/desihub/$package/bin:${PATH}
 export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+export SPECPROD=daily
 export DESI_SPECTRO_CALIB=/global/project/projectdirs/desi/spectro/desi_spectro_calib/trunk
+
+## Hack!
+#package=redrock
+#module unload $package
+#export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+#export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+#export RR_TEMPLATE_DIR=/global/common/software/desi/cori/desiconda/20190804-1.3.0-spec/code/redrock-templates/master
 
 echo 'DESI_ROOT='$DESI_ROOT
 echo 'DESI_SPECTRO_CALIB='$DESI_SPECTRO_CALIB
+echo 'DESI_SPECTRO_REDUX='$DESI_SPECTRO_REDUX
+echo 'SPECPROD='$SPECPROD
+
 echo 'DESI_BASIS_TEMPLATES='$DESI_BASIS_TEMPLATES
+echo 'RR_TEMPLATE_DIR='$RR_TEMPLATE_DIR

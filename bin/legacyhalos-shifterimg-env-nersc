@@ -23,37 +23,41 @@ alias rgrep='find . -type f -exec grep -HI \!$ {} \;'
 alias pwd='pwd -P'
 
 # Set up the software and dependencies
-export DUST_DIR=/global/project/projectdirs/cosmo/data/dust/v0_1
-export UNWISE_COADDS_DIR=/global/project/projectdirs/cosmo/work/wise/outputs/merge/neo5/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED_DIR=/global/project/projectdirs/cosmo/work/wise/outputs/merge/neo5
-export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
+export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
+export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5
+export GAIA_CAT_DIR=/global/cfs/cdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
-export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_CAT=/global/project/projectdirs/cosmo/staging/largegalaxies/v4.0/LSLGA-v4.0.kd.fits
-#export LARGEGALAXIES_DIR=/global/project/projectdirs/cosmo/staging/largegalaxies/v2.0
-export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
-e
-xport GALEX_DIR=/global/project/projectdirs/cosmo/data/galex/images
+export TYCHO2_KD_DIR=/global/cfs/cdirs/cosmo/staging/tycho2
+export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v5.0/LSLGA-v5.0.kd.fits
+export PS1CAT_DIR=/global/cfs/cdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
+export GALEX_DIR=/global/cfs/cdirs/cosmo/data/galex/images
 
 export PYTHONNOUSERSITE=1
 
 # Custom variables
 export LEGACYPIPE_DIR=/global/homes/i/ioannis/repos/git/legacypipe
-export LEGACYHALOS_DIR=/global/project/projectdirs/desi/users/ioannis/legacyhalos
-export LEGACYHALOS_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/legacyhalos-data
-export LEGACYHALOS_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/legacyhalos-html
+
+export LEGACYHALOS_DIR=/global/projecta/projectdirs/desi/users/ioannis/legacyhalos
+export LEGACYHALOS_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/legacyhalos-data
+export LEGACYHALOS_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/repos/git/legacyhalos
 
-export LSLGA_DIR=/global/project/projectdirs/desi/users/ioannis/LSLGA
+export LSLGA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA
+#export LSLGA_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA-data
+#export LSLGA_HTML_DIR=/global/projecta/projectdirs/cosmo/www/temp/ioannis/LSLGA-html
+export LSLGA_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA-data-dr9e
+export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-dr9e
 
 #export HSC_DIR=${LEGACYHALOS_DIR}/hsc # temporary
-#export HSC_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/hsc-data
-#export HSC_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/hsc-html
+#export HSC_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/hsc-data
+#export HSC_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/hsc-html
 
-export REDMAPPER_DIR=/global/project/projectdirs/desi/users/ioannis/redmapper
+export REDMAPPER_DIR=/global/projecta/projectdirs/desi/users/ioannis/redmapper
 # export SPS_HOME=$SCRATCH/fsps
 
-export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr9
+#export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
+export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desimpp/dr9e
 
 # Use local check-outs
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
@@ -62,11 +66,11 @@ export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
+echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 echo '$LEGACYHALOS_DIR='$LEGACYHALOS_DIR
 echo '$LEGACYHALOS_DATA_DIR='$LEGACYHALOS_DATA_DIR
 echo '$LEGACYHALOS_HTML_DIR='$LEGACYHALOS_HTML_DIR
 echo '$LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR
-echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 # Some NERSC-specific options to get MPI working properly.
 export OMP_NUM_THREADS=1
