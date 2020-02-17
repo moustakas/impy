@@ -15,7 +15,7 @@ export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
 export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python/site-packages:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 #export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
@@ -23,6 +23,6 @@ export PYTHONPATH=${LSLGA_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 
 export PATH=${IM_GITREPOS}/LSLGA/bin:$PATH
-export PATH=/usr/local/astrometry/bin:${PATH}
+export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
 conda activate LSLGA
