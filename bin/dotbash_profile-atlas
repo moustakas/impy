@@ -37,9 +37,9 @@ export PATH=$IMPY_DIR/bin:$PATH
 
 ##########################
 # Set up conda
-# export PATH=/usr/local/anaconda3/bin:$PATH
-source /usr/local/anaconda3/etc/profile.d/conda.sh
-conda activate
+# export PATH=$HOME/anaconda3/bin:$PATH
+# source /usr/local/anaconda3/etc/profile.d/conda.sh  # commented out by conda initialize
+# conda activate  # commented out by conda initialize
 
 ##################################################
 # Personal aliases
@@ -92,3 +92,19 @@ alias clash='source $IMPY_DIR/bin/clash-env-atlas'
 export PATH="/usr/local/sbin:$PATH"
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/ioannis/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/ioannis/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ioannis/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/ioannis/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
