@@ -6,7 +6,7 @@
 
 echo 'Loading legacypipe software and convenient aliases.'
 
-umask 003
+umask 0002
 #export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "                                                     
 alias l='ls -lp --color=auto'
 alias lt='ls -ltrp --color=auto '

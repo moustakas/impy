@@ -6,25 +6,28 @@ echo "Loading legacyhalos project"
 
 source $IMPY_DIR/bin/legacypipe-env-nersc
 
-export LEGACYHALOS_DIR=/global/projecta/projectdirs/desi/users/ioannis/legacyhalos
-export LEGACYHALOS_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/legacyhalos-data
-export LEGACYHALOS_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/legacyhalos-html
+export LEGACYHALOS_DIR=/global/cfs/cdirs/desi/users/ioannis/legacyhalos
+export LEGACYHALOS_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/legacyhalos-data
+export LEGACYHALOS_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/repos/git/legacyhalos
 
-export LSLGA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA
-#export LSLGA_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA-data
-#export LSLGA_HTML_DIR=/global/projecta/projectdirs/cosmo/www/temp/ioannis/LSLGA-html
-export LSLGA_DATA_DIR=/global/projecta/projectdirs/desi/users/ioannis/LSLGA-data-dr9e
-export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-dr9e
+export LSLGA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA
+#export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data
+#export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html
+#export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data-dr9e
+#export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-dr9e
+#export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data-DR9
+export LSLGA_DATA_DIR=/global/cscratch1/sd/ioannis/LSLGA-data-DR9
+export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-DR9
 
 #export LEGACYLSBS_DIR=${LEGACYHALOS_DIR}/legacylsbs # temporary
-#export LEGACYLSBS_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/legacylsbs-data
+#export LEGACYLSBS_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/legacylsbs-data
 #
 #export HSC_DIR=${LEGACYHALOS_DIR}/hsc # temporary
-#export HSC_DATA_DIR=/global/project/projectdirs/desi/users/ioannis/hsc-data
-#export HSC_HTML_DIR=/global/project/projectdirs/cosmo/www/temp/ioannis/hsc-html
+#export HSC_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/hsc-data
+#export HSC_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/hsc-html
 
-export REDMAPPER_DIR=/global/projecta/projectdirs/desi/users/ioannis/redmapper
+export REDMAPPER_DIR=/global/cfs/cdirs/desi/users/ioannis/redmapper
 # export SPS_HOME=$SCRATCH/fsps
 
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
