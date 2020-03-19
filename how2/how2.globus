@@ -1,24 +1,36 @@
-https://docs.globus.org/how-to/globus-connect-personal-linux/
-https://docs.nersc.gov/services/globus/#command-line-globus-transfers
-https://app.globus.org/endpoints?scope=administered-by-me
+Below are my notes for transferring large amounts of data between NERSC and
+the Siena data transfer node (DTN).
 
-siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
-nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
+Useful documentation can be found in the following places--
+  https://docs.globus.org/how-to/globus-connect-personal-linux/
+  https://docs.nersc.gov/services/globus/#command-line-globus-transfers
+  https://docs.pace.gatech.edu/storage/globus/
 
+1. First, we need to create an endpoint on the Siena-DTN following these
+instructions (or this can be done in the globus.org portal)--
+  https://docs.globus.org/how-to/globus-connect-personal-linux/#globus-connect-personal-cli
 
-Logged on at the Siena-DTN:
+Once this has been created, you can view it in the Endpoints tab--
+  https://app.globus.org/endpoints?scope=administered-by-me
 
-globus login
-globus endpoint search --filter-scope my-endpoints
+  siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
+  nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
 
-./globusconnect &
+2. Next, log onto the DTN and launch the endpoint--
+  cd globusconnectpersonal-3.0.2
+  ./globusconnectpersonal -start &
 
-./globusconnectpersonal -start &
+3. Third, on globus.org, navigate to the File Manager tab and select the NERSC
+DTN endpoint (logging in using MFA), as described here--
+  https://docs.nersc.gov/services/globus/#command-line-globus-transfers
+
 
 Logged on at cori:
 
 module load globus-sdk
 transfer_files.py --source cori --target 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752 --directory /mnt/jmoustakas/ --infiles junk
+
+
 
 #########################
 Old notes:
@@ -36,3 +48,11 @@ nersc#carver/~/dr1/coadd/156/   ioannis#nyx/global/work/decam/release/dr1/coadd/
 
 Then from the command line:
 cat transfer-list-test.txt | ssh ioannis@cli.globusonline.org transfer -s 2
+
+
+
+globus login
+globus endpoint search --filter-scope my-endpoints
+
+./globusconnect &
+

@@ -57,4 +57,4 @@ export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.2
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 
 echo "Loading DESI environment"
-source activate desi
+conda activate desi
