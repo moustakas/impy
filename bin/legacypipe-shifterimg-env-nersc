@@ -55,7 +55,7 @@ export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
 #export PYTHONPATH=/usr/common/software/python/3.7-anaconda-2019.07/lib/python3.7/site-packages/seaborn:$PYTHONPATH
 #############
 
-export LEGACY_SURVEY_DIR=/global/cfs/projectdirs/cosmo/work/legacysurvey/dr9
+export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 # Some NERSC-specific options to get MPI working properly.

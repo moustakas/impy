@@ -16,9 +16,8 @@
 #
 
 echo 'Loading DESI software.'
-#source /project/projectdirs/desi/software/desi_environment.sh master
-source /project/projectdirs/desi/software/desi_environment.sh 19.12
-#source /project/projectdirs/desi/software/desi_environment_18.2.sh 18.2a
+source /global/cfs/cdirs/desi/software/desi_environment.sh master
+source /global/cfs/cdirs/desi/software/desi_environment.sh 19.12
 
 #module switch desisim/0.18.1
 #module switch desiutil/1.9.3
@@ -41,7 +40,7 @@ source /project/projectdirs/desi/software/desi_environment.sh 19.12
 #export PATH=$HOME/repos/desihub/$package/bin:${PATH}
 #export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
 #export SPECPROD=daily
-#export DESI_SPECTRO_CALIB=/global/project/projectdirs/desi/spectro/desi_spectro_calib/trunk
+#export DESI_SPECTRO_CALIB=/global/cfs/cdirs/desi/spectro/desi_spectro_calib/trunk
 
 ## Hack!
 #package=redrock

@@ -5,7 +5,7 @@ echo "Loading LSLGA project"
 
 source /global/homes/i/ioannis/repos/git/impy/bin/legacypipe-shifterimg-env-nersc
 
-export LSLGA_DIR=/global/project/projectdirs/desi/users/ioannis/LSLGA
+export LSLGA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA
 export LSLGA_CODE_DIR=/global/homes/i/ioannis/repos/git/LSLGA
 #export SPS_HOME=$SCRATCH/fsps
 
