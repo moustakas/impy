@@ -12,12 +12,7 @@ export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 
 
 # Legacy Surveys variables
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/dstn/dr6plus
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/data/legacysurvey/dr5
-#export LEGACY_SURVEY_DIR=/global/project/projectdirs/cosmo/work/legacysurvey/dr5
-#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/work/legacysurvey/dr6  
-#export LEGACY_SURVEY_DIR=/global/projecta/projectdirs/cosmo/data/legacysurvey/dr6
-export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desiproc/dr7
+export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
 echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 
 export LEGACYPIPE_DIR=$CSCRATCH/repos/legacypipe
@@ -29,19 +24,15 @@ export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 # export PYTHONPATH=$CSCRATCH/repos/build/lib/python3.6/site-packages:$PYTHONPATH
 
 # Set a bunch of environment variables we need
-export DUST_DIR=/global/project/projectdirs/desi/software/${NERSC_HOST}/dust/v0_0
-
-export UNWISE_COADDS_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4/fulldepth:/global/project/projectdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED_DIR=/global/projecta/projectdirs/cosmo/work/wise/outputs/merge/neo4
-
-export GAIA_CAT_DIR=/global/project/projectdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom/
+export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
+export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5
+export GAIA_CAT_DIR=/global/cfs/cdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
-
-export TYCHO2_KD_DIR=/global/project/projectdirs/cosmo/staging/tycho2
-
-export PS1CAT_DIR=/global/project/projectdirs/cosmo/work/ps1/cats/chunks-qz-star-v3 # calibration only
-
-export GALEX_DIR=/project/projectdirs/cosmo/data/galex/images
+export TYCHO2_KD_DIR=/global/cfs/cdirs/cosmo/staging/tycho2
+export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v6.0/LSLGA-v6.0.kd.fits
+export PS1CAT_DIR=/global/cfs/cdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
+export GALEX_DIR=/global/cfs/cdirs/cosmo/data/galex/images
 
 # Some NERSC-specific options to get MPI working properly.
 #   Force MKL single-threaded and avoid problems with MPI and Python multiprocessing
