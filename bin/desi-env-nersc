@@ -17,7 +17,7 @@
 
 echo 'Loading DESI software.'
 source /global/cfs/cdirs/desi/software/desi_environment.sh master
-source /global/cfs/cdirs/desi/software/desi_environment.sh 19.12
+#source /global/cfs/cdirs/desi/software/desi_environment.sh 19.12
 
 #module switch desisim/0.18.1
 #module switch desiutil/1.9.3
@@ -27,12 +27,13 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh 19.12
 
 #for package in desitarget desisurvey desisim; do
 #for package in desitarget desisim; do
-#  echo Loading local check-out of $package
-#  module unload $package
-#  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
-#  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
-#done
-#export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.0
+for package in desitarget; do
+  echo Loading local check-out of $package
+  module unload $package
+  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+done
+#export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.2
 
 ## Need to reset $DESI_SPECTRO_CALIB when loading a local checkout of desispec
 #package=desispec
