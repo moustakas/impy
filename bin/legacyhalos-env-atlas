@@ -29,7 +29,7 @@ export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
 
 export LEGACYPIPE_DIR=$IM_GITREPOS/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH

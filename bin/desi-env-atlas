@@ -18,10 +18,9 @@ for package in desiutil specter desitarget desispec desisim \
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
+#export PYTHONPATH=$DESI_PRODUCT_ROOT/speclite:$PYTHONPATH
 export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
- export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
-#export PYTHONPATH=$HOME/repos/simqso:$PYTHONPATH
-#echo 'Temporarily using local checkout of simqso!'
+export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
 
 ###############
 # Not official, but useful
