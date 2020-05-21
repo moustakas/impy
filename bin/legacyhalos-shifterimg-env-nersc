@@ -24,14 +24,18 @@ alias pwd='pwd -P'
 
 # Set up the software and dependencies
 export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
-export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo5
+export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/data/unwise/neo6/unwise-coadds/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+export UNWISE_MODEL_SKY_DIR=/global/cfs/cdirs/cosmo/work/wise/unwise_catalog/dr3/mod
+export SKY_TEMPLATE_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/sky-templates
 export GAIA_CAT_DIR=/global/cfs/cdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
 export GAIA_CAT_VER=2
 export TYCHO2_KD_DIR=/global/cfs/cdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v6.0/LSLGA-v6.0.kd.fits
+export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v3.0/LSLGA-v3.0.kd.fits
 export PS1CAT_DIR=/global/cfs/cdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
 export GALEX_DIR=/global/cfs/cdirs/cosmo/data/galex/images
+
+# uncomment to do the time-resolved photometry
+#export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo6
 
 export PYTHONNOUSERSITE=1
 
@@ -44,8 +48,14 @@ export LEGACYHALOS_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/legacyhalos
 export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/repos/git/legacyhalos
 
 export LSLGA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA
-export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data-DR9
-export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-DR9
+export LSLGA_DATA_DIR=/global/cscratch1/sd/ioannis/LSLGA-data-dr9i
+export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-dr9i
+#export LSLGA_DATA_DIR=/global/cscratch1/sd/ioannis/LSLGA-data-DR9-1arcmin
+#export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-DR9-1arcmin
+#export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data-DR9-5arcmin
+#export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-DR9-5arcmin
+#export LSLGA_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA-data-DR9-SAGA
+#export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-DR9-SAGA
 
 #export HSC_DIR=${LEGACYHALOS_DIR}/hsc # temporary
 #export HSC_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/hsc-data
@@ -64,11 +74,15 @@ export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
-echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
 echo '$LEGACYHALOS_DIR='$LEGACYHALOS_DIR
+echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+
 echo '$LEGACYHALOS_DATA_DIR='$LEGACYHALOS_DATA_DIR
 echo '$LEGACYHALOS_HTML_DIR='$LEGACYHALOS_HTML_DIR
 echo '$LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR
+
+echo '$LSLGA_DATA_DIR='$LSLGA_DATA_DIR
+echo '$LSLGA_HTML_DIR='$LSLGA_HTML_DIR
 
 # Some NERSC-specific options to get MPI working properly.
 export OMP_NUM_THREADS=1

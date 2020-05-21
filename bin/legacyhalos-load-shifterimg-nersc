@@ -4,8 +4,8 @@
 #
 echo 'Updating and loading the shifter image'
 
-#shifterimg pull docker:flagnarg/legacyhalos:v0.0.7
-#shifter --image docker:flagnarg/legacyhalos:v0.0.7 bash
+shifterimg pull docker:legacysurvey/legacyhalos:v0.0.1
+shifter --image docker:legacysurvey/legacyhalos:v0.0.1 bash
 
-shifterimg pull docker:flagnarg/legacyhalos:latest
-shifter --image docker:flagnarg/legacyhalos:latest bash
+#shifterimg pull docker:legacysurvey/legacyhalos:latest
+#shifter --image docker:legacysurvey/legacyhalos:latest bash

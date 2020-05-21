@@ -16,5 +16,5 @@ echo 'Updating and loading the shifter image'
 #shifterimg pull docker:flagnarg/legacypipe:latest
 #shifter --image docker:flagnarg/legacypipe:latest bash
 
-shifterimg pull docker:legacysurvey/legacypipe:dr9.2
-shifter --image docker:legacysurvey/legacypipe:dr9.2 bash
+shifterimg pull docker:legacysurvey/legacypipe:DR9.4.1
+shifter --image docker:legacysurvey/legacypipe:DR9.4.1 bash
