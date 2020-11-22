@@ -5,6 +5,8 @@ echo 'Loading legacyhalos project'
 
 unset PYTHONPATH # clear PYTHONPATH
 
+export ASTROMETRY_DIR=${HOME}/anaconda3/envs/legacyhalos
+
 export LEGACYHALOS_DIR=$IM_PROJECTS_DIR/legacyhalos
 export LEGACYHALOS_DATA_DIR=$IM_PROJECTS_DIR/legacyhalos-data
 export LEGACYHALOS_ISEDFIT_DIR=$IM_PROJECTS_DIR/legacyhalos-isedfit
@@ -22,15 +24,16 @@ export HSC_HTML_DIR=$IM_PROJECTS_DIR/hsc-html
 
 export TNG_DATA=$IM_DATA_DIR/illustris
 
-export TRACTOR_DIR=/usr/local/tractor
-export ASTROMETRY_DIR=/usr/local/astrometry
+#export TRACTOR_DIR=/usr/local/tractor
+#export ASTROMETRY_DIR=/usr/local/astrometry
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
 export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
 
 export LEGACYPIPE_DIR=$IM_GITREPOS/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
-export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
+#export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${IM_GITREPOS}/illustris_python:$PYTHONPATH
@@ -38,7 +41,7 @@ export PYTHONPATH=${IM_GITREPOS}/illustris_python:$PYTHONPATH
 export PATH=${IM_GITREPOS}/legacyhalos/bin:$PATH
 export PATH=${IM_GITREPOS}/legacyhalos/science/paper1:$PATH
 export PATH=${IM_GITREPOS}/legacyhalos/science/paper2:$PATH
-export PATH=/usr/local/astrometry/bin:${PATH}
+#export PATH=/usr/local/astrometry/bin:${PATH}
 
 conda activate legacyhalos
 

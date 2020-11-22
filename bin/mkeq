@@ -49,10 +49,10 @@ def Exec(command):
     """Execute a command and exit if it fails"""
     ret = os.system(command)
     if verbose:
-        print '------------- Command'
-        print '         ',command
+        print('------------- Command')
+        print('         ',command)
     if ret != 0:
-        print 'Error executing command:',command
+        print('Error executing command:',command)
         sys.exit(ret)
 
 def GetNames(file, output=None):
@@ -70,15 +70,15 @@ def GetNames(file, output=None):
 
     # final output file
     if output is None:
-        output = base + '.pdf'
+        output = '{}.pdf'.format(base)
     fdict['pdfile'] = output
 
     # temporary directory. This creates dir and returns the name as a string
-    tmpdir = tempfile.mkdtemp(prefix='mkeq-'+base)
+    tmpdir = tempfile.mkdtemp(prefix='mkeq-{}'.format(base))
     fdict['tmpdir'] = tmpdir
-    fdict['tmptex'] = os.path.join(tmpdir, base+'.tex')
-    fdict['tmpdvi'] = os.path.join(tmpdir, base+'.dvi')
-    fdict['tmpeps'] = os.path.join(tmpdir, base+'.eps')
+    fdict['tmptex'] = os.path.join(tmpdir, '{}.tex'.format(base))
+    fdict['tmpdvi'] = os.path.join(tmpdir, '{}.dvi'.format(base))
+    fdict['tmpeps'] = os.path.join(tmpdir, '{}.eps'.format(base))
 
     return fdict
 
@@ -88,20 +88,20 @@ def MakeTex(fdict):
     tmptex = open(fdict['tmptex'], 'w')
 
     tmptex.write('\documentclass[12pt]{article}\n')
-    tmptex.write('\usepackage{color}\n')
-    tmptex.write('\usepackage{amsmath}\n')
+    tmptex.write('\\usepackage{color}\n')
+    tmptex.write('\\usepackage{amsmath}\n')
     tmptex.write('\pagestyle{empty}\n')
     tmptex.write('\pagecolor{white}\n')
     tmptex.write('\\begin{document}\n')
     tmptex.write('{\color{%s}\n' % (fdict['color'],))
-    tmptex.write('\\begin{eqnarray*}\n')
+    tmptex.write('\\begin{align*}\n')
 
     # Insert the equation
     for line in input:
         if line.strip() != '':
             tmptex.write(line)
 
-    tmptex.write('\end{eqnarray*}}\n')
+    tmptex.write('\end{align*}}\n')
     tmptex.write('\end{document}\n')
 
     input.close()

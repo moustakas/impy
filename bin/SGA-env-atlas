@@ -5,8 +5,9 @@ echo 'Loading SGA project'
 
 unset PYTHONPATH # Clear PYTHONPATH
 
-export TRACTOR_DIR=/usr/local/tractor
-export ASTROMETRY_DIR=/usr/local/astrometry
+export ASTROMETRY_DIR=${HOME}/anaconda3/envs/SGA
+#export TRACTOR_DIR=/usr/local/tractor
+#export ASTROMETRY_DIR=/usr/local/astrometry
 export SPS_HOME=${IM_RESEARCH_DIR}/synthesis/fsps
 
 export SGA_DIR=${IM_PROJECTS_DIR}/SGA
@@ -15,7 +16,8 @@ export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
 
 export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
 export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
 #export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
@@ -23,6 +25,6 @@ export PYTHONPATH=${SGA_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 
 export PATH=${IM_GITREPOS}/SGA/bin:$PATH
-export PATH=$ASTROMETRY_DIR/bin:${PATH}
+#export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
 conda activate SGA
