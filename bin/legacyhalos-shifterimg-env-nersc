@@ -3,24 +3,24 @@
 #  ./legacyhalos-load-shifter-nersc execute this script to set up all the
 #  environment variables we need.
 
-echo 'Loading legacyhalos software and convenient aliases.'
+#echo 'Loading legacyhalos software and convenient aliases.'
 
-umask 0002
-#export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "                                                     
-alias l='ls -lp --color=auto'
-alias lt='ls -ltrp --color=auto '
-alias lm='ls -lp --color=auto | more'
-alias dirs='ls -lp --color=auto | grep ^d'
-alias cls='clear'
-alias df='df -kH'
-alias du='du -ksh'
-alias mv='mv -i'
-alias rm='rm -i'
-alias cp='cp -ip'        # make copy preserve timestamp of files
-alias cx='chmod +x'
-alias findf='find . -name "\!*"  -print'
-alias rgrep='find . -type f -exec grep -HI \!$ {} \;'
-alias pwd='pwd -P'
+#umask 0002
+##export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "                                                     
+#alias l='ls -lp --color=auto'
+#alias lt='ls -ltrp --color=auto '
+#alias lm='ls -lp --color=auto | more'
+#alias dirs='ls -lp --color=auto | grep ^d'
+#alias cls='clear'
+#alias df='df -kH'
+#alias du='du -ksh'
+#alias mv='mv -i'
+#alias rm='rm -i'
+#alias cp='cp -ip'        # make copy preserve timestamp of files
+#alias cx='chmod +x'
+#alias findf='find . -name "\!*"  -print'
+#alias rgrep='find . -type f -exec grep -HI \!$ {} \;'
+#alias pwd='pwd -P'
 
 # Set up the software and dependencies
 export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
@@ -47,7 +47,7 @@ export LEGACYHALOS_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/legacyhalos-dat
 export LEGACYHALOS_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/legacyhalos-html
 export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/repos/git/legacyhalos
 
-export LSLGA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA
+LSLGA_DIR=/global/cfs/cdirs/desi/users/ioannis/LSLGA
 export LSLGA_DATA_DIR=/global/cscratch1/sd/ioannis/LSLGA-data-dr9i
 export LSLGA_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/LSLGA-html-dr9i
 #export LSLGA_DATA_DIR=/global/cscratch1/sd/ioannis/LSLGA-data-DR9-1arcmin

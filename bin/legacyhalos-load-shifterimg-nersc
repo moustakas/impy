@@ -3,9 +3,8 @@
 #   legacyhalos-shifter-env-nersc
 #
 echo 'Updating and loading the shifter image'
+#export SHIFTER=docker:legacysurvey/legacyhalos:latest
+export SHIFTER=docker:legacysurvey/legacyhalos:v0.0.1
 
-shifterimg pull docker:legacysurvey/legacyhalos:v0.0.1
-shifter --image docker:legacysurvey/legacyhalos:v0.0.1 bash
-
-#shifterimg pull docker:legacysurvey/legacyhalos:latest
-#shifter --image docker:legacysurvey/legacyhalos:latest bash
+shifterimg pull $SHIFTER
+shifter --image $SHIFTER --env-file $IMPY_DIR/bin/legacyhalos-shifterimg-env-nersc bash

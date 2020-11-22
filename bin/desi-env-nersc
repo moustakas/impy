@@ -13,7 +13,6 @@
 # of desispec, desitarget, etc, I can do:
 #   module use /global/common/$NERSC_HOST/contrib/desi/desiconda/current/modulefiles/
 #   module load desiconda
-#
 
 echo 'Loading DESI software.'
 source /global/cfs/cdirs/desi/software/desi_environment.sh master
@@ -25,14 +24,18 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh master
 #module switch desispec/0.13.1
 #module switch desimodel/0.5.1
 
+package=prospect
+export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+
 #for package in desitarget desisurvey desisim; do
 #for package in desitarget desisim; do
-for package in desitarget; do
-  echo Loading local check-out of $package
-  module unload $package
-  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
-  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
-done
+#for package in desitarget; do
+#  echo Loading local check-out of $package
+#  module unload $package
+#  export PATH=$HOME/repos/desihub/$package/bin:${PATH}
+#  export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+#done
 #export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.2
 
 ## Need to reset $DESI_SPECTRO_CALIB when loading a local checkout of desispec
