@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Load the desigal Docker container using shifter
+
+SHIFTER=docker:legacysurvey/desi-outflows:latest
+
+echo 'Updating and loading the shifter image '$SHIFTER
+echo 'Load the environment with: '
+echo '  source bin/desigal-env'
+
+shifterimg pull $SHIFTER
+shifter --image $SHIFTER bash
+#shifter --image $SHIFTER --env-file $LEGACYHALOS_CODE_DIR/bin/SGA/SGA-env bash
+#source $LEGACYHALOS_CODE_DIR/bin/SGA/SGA-env 

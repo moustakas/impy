@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Little script to allow me to develop DESI code.  See
+#  https://desi.lbl.gov/trac/wiki/Pipeline/GettingStarted/NERSC#OptionA
+# for some details.
+
+# In the script below I simply source the desi_environment.sh script.
+# Equivalently, I could do
+#   module use /global/common/$NERSC_HOST/contrib/desi/desiconda/startup/modulefiles/
+#   module load desimodules
+#
+# Or finally, if I just want the external packages in desiconda but not the rest
+# of desispec, desitarget, etc, I can do:
+#   module use /global/common/$NERSC_HOST/contrib/desi/desiconda/current/modulefiles/
+#   module load desiconda
+
+package=desigal
+export PATH=/global/homes/i/ioannis/repos/desihub/$package/bin:${PATH}
+export PYTHONPATH=/global/homes/i/ioannis/repos/desihub/$package/py:${PYTHONPATH}
+
+# kind of a hack
+export DESIGAL_DATA=/global/cfs/cdirs/desi/users/ioannis/igalfit
+export DESIGAL_TEMPLATES=/global/cfs/cdirs/desi/science/gqp/templates/SSP-CKC14z/

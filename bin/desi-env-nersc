@@ -24,7 +24,7 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh master
 #module switch desispec/0.13.1
 #module switch desimodel/0.5.1
 
-package=prospect
+package=desigal
 export PATH=$HOME/repos/desihub/$package/bin:${PATH}
 export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
 
