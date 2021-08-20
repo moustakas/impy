@@ -42,6 +42,14 @@ export PATH=$IMPY_DIR/bin:$PATH
 # conda activate  # commented out by conda initialize
 
 ##################################################
+# Projects
+export LEGACYHALOS_CODE_DIR=/Users/ioannis/repos/legacyhalos
+export PATH=${LEGACYHALOS_CODE_DIR}/bin/legacyhalos:${PATH}
+export PATH=${LEGACYHALOS_CODE_DIR}/bin/SGA:${PATH}
+export PATH=${LEGACYHALOS_CODE_DIR}/bin/virgofilaments:${PATH}
+export PATH=${LEGACYHALOS_CODE_DIR}/bin/manga:${PATH}
+
+##################################################
 # Personal aliases
 
 alias l='ls -lp'
@@ -78,7 +86,7 @@ alias 010='cd ~/teaching/010-S18'
 alias 330='cd ~/teaching/330-S18'
 
 alias py27='conda activate py27'
-alias py37='conda activate py37'
+alias py39='conda activate py39'
 
 alias desi='source $IMPY_DIR/bin/desi-env-atlas'
 alias nbodykit='source $IMPY_DIR/bin/nbodykit-env-atlas'
