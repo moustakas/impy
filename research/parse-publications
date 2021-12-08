@@ -1,0 +1,346 @@
+#!/usr/bin/env python
+
+"""Parse my list of publications for my CV.
+
+First, navigate to ADS and find all *refereed* papers with me as a coauthor (any
+position) and then download in bibtex format:
+
+https://ui.adsabs.harvard.edu/search/filter_property_fq_property=AND&filter_property_fq_property=property%3A%22refereed%22&fq=%7B!type%3Daqp%20v%3D%24fq_property%7D&fq_property=(property%3A%22refereed%22)&q=%20author%3A%22moustakas%2C%20john%22&sort=date%20desc%2C%20bibcode%20desc&p_=0
+
+https://bibtexparser.readthedocs.io/en/master/tutorial.html#step-1-prepare-a-bibtex-file
+
+To get the citation count for each paper, choose
+  Export --> Custom Format
+and then enter the following code:
+  %R %c
+
+/Users/ioannis/repos/impy/research/parse-publications
+
+"""
+import os, pdb
+import numpy as np
+import bibtexparser
+from bibtexparser.bparser import BibTexParser
+#from bibtexparser.customization import homogenize_latex_encoding
+from bibtexparser.customization import *
+
+def customizations(record):
+    """Use some functions delivered by the library
+
+    :param record: a record
+    :returns: -- customized record
+    """
+    record = type(record)
+    record = author(record)
+    record = editor(record)
+    record = journal(record)
+    record = keyword(record)
+    record = link(record)
+    record = page_double_hyphen(record)
+    record = doi(record)
+    return record
+
+def get_journal(journal):
+    decode = {'\\mnras': 'MNRAS',
+              '\\nat': 'Nature',
+              '\\aj': 'AJ',
+              '\\aap': 'A\&A',
+              '\\apj': 'ApJ',
+              '\\araa': 'ARA\&A',
+              '\\apjl': 'ApJL',
+              '\\apjs': 'ApJS',
+              'Astroparticle Physics': 'Astroparticle Physics',
+              'Astronomische Nachrichten': 'Astronomische Nachrichten',
+              }
+    try:
+        out = decode[journal]
+    except:
+        print(journal)
+        pdb.set_trace()
+    
+    return out
+
+def parse_author(author):
+    auth = author.split(',')
+    try:
+        pauth = auth[1].strip()[0]+'. '+auth[0].strip() # first initial, last name
+    except:
+        pdb.set_trace()
+    if 'Moustakas' in pauth:
+        pauth = '\\textbf{'+pauth+'}'
+    
+    return pauth
+
+def parse_title(title, maxlentitle=82):
+    # title hacks / fixes!
+    title = title.replace('z\\textbackslashsim 0.5', '$z\\sim0.5$')
+    title = title.replace('z {\\ensuremath{\\approx}} 11', '$z\\approx11$')
+    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 1', '$z\\sim1$')
+    title = title.replace('H{\\ensuremath{\\alpha}}', 'H$\\alpha$')
+    title = title.replace('0.2 < z < 0.9', '$0.2<z<0.9$')
+    title = title.replace('0.2>z>1.2', '$0.2<z<1.2$')
+    title = title.replace('0.2 < z < 1', '$0.2<z<1$')
+    title = title.replace('Z \\raisebox{-0.5ex}\\textasciitilde 9-10', '$z\\sim$9-10')
+    title = title.replace('Z \\raisebox{-0.5ex}\\textasciitilde 9.2', '$z\\sim9.2$')
+    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 7', '$z\\sim7$')
+    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde= 6.2', '$z\\sim6.2$')    
+    title = title.replace('H{\\ensuremath{\\alpha}}', 'H$\alpha$')
+    title = title.replace('z 0.5', '$z\\sim0.5$')
+    title = title.replace('z < 0.8', '$z<0.8$')
+    title = title.replace('z = 0.209', '$z=0.209$')
+    title = title.replace('0.2 < z < 0.9', '$0.2<z<0.9$')
+    title = title.replace('0.0 <= z <= 1.2', '$0.0\le z\le1.2$')
+    title = title.replace('z {\\ensuremath{\\sim}} 1.0', '$z\\sim1$')
+    title = title.replace('z\\raisebox{-0.5ex}\\textasciitilde0.7', '$z\\sim0.7$')
+    title = title.replace('24 {\ensuremath{\mu}}m', '$24~\\mu$m')
+    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 6-8', '$z\\sim$6-8')
+        
+    title1, title2, title3 = None, None, None
+    if len(title) > maxlentitle:
+        words = title.split(' ')
+        title1 = ''
+        for iword, word in enumerate(words):
+            title1 += word+' '
+            if len(title1) > maxlentitle:
+                title1 = '\\textit'+title1.lstrip().rstrip()
+                if title1[-1] != '}':
+                    title1 = title1+'}'
+                break
+        #if ipub == 163:
+        #    pdb.set_trace()
+        if iword == len(words) - 1:
+            title = title1
+        else:
+            title2 = ' '.join(words[iword+1:])
+            if len(title2) > maxlentitle:
+                words = title2.split(' ')
+                _title2 = ''
+                for iword, word in enumerate(words):
+                    _title2 += word+' '
+                    if len(_title2) > maxlentitle:
+                        title2 = '\\textit{'+_title2.lstrip().rstrip()
+                        if title2[-1] != '}':
+                            title2 = title2+'}'
+                        break
+                if iword < len(words) - 1:
+                    title3 = '\\textit{'+' '.join(words[iword+1:])
+            else:
+                title2 = '\\textit{'+' '.join(words[iword+1:])
+    else:
+        title1 = '\\textit'+title
+
+    return title1, title2, title3
+     
+pubfile = '/Users/ioannis/repos/papers/cv/publications-refereed-2021nov28.tex'
+bibfile = '/Users/ioannis/repos/papers/cv/publications-refereed-2021nov28.bib'
+citefile = '/Users/ioannis/repos/papers/cv/publications-citations-2021nov28.txt'
+
+# read the citation count file
+citations = {}
+pub, ncite = np.loadtxt(citefile, dtype=str, unpack=True)
+for _pub, _ncite in zip(pub, ncite):
+    citations[_pub] = int(_ncite)
+    
+# this fails on month names
+#with open(bibfile) as bib:
+#    db = bibtexparser.load(bib)
+
+# https://github.com/sciunto-org/python-bibtexparser/issues/263#issuecomment-729174175
+P = BibTexParser(common_strings=True)
+#P.ignore_nonstandard_types = False
+#P.homogenise_fields = False
+#P.customization = homogenize_latex_encoding
+P.customization = customizations
+
+with open(bibfile, 'r') as bib:
+    db = bibtexparser.load(bib, parser=P)
+npub = len(db.entries)
+
+# find all the papers where I'm either first, second, or third author
+mepos = []
+for idata in np.arange(npub):
+    data = db.entries[idata]
+
+    # not my papers
+    if (data['ID'] == '2019Mate...12.2498S' or # not me
+        data['ID'] == '2020ApJ...892...72C' or # erratum
+        data['ID'] == '2008ApJ...685..678E' or # erratum
+        data['ID'] == '2006PhDT........23M'): # my PhD thesis
+        me = [-1]
+        #continue
+    else:
+        auth = data['author']
+        nauth = len(auth)
+        me = np.where(['{Moustakas}, J' in _auth for _auth in auth])[0]
+        
+    mepos.append(me)
+
+mepos = np.hstack(mepos)
+mytop = np.where((mepos >= 0) * (mepos < 3))[0]
+other = np.where(mepos >= 3)[0]
+
+ntop = len(mytop)
+nother = len(other)
+
+# first, second, or third-author papers
+with open(pubfile, 'w') as out:
+    out.write('\\medskip\n')
+    out.write('\\hspace{-5mm}\\textsc{Refereed Publications As First, Second, or Third Author}\n')
+    out.write('\\setlength{\\tabcolsep}{2pt}\n')
+    out.write('\\begin{longtable}{ll}\n')
+
+    icount, ntotcite = 0, 0
+    for idata in mytop:
+        data = db.entries[idata]
+
+        ipub = ntop - icount
+        ncite = citations[data['ID']]
+        print('Publication {} ({}), citations = {}'.format(icount, data['ID'], ncite))
+
+        ntotcite += ncite
+
+        # parse the author list
+        auth = data['author']
+        nauth = len(auth)
+
+        me = mepos[idata]
+        authlist = parse_author(auth[0])
+        if nauth > 1:
+            if nauth == 2:
+                authlist = authlist+' \& '+parse_author(auth[1])
+            elif nauth == 3:
+                authlist = authlist+', '+parse_author(auth[1])+', \& '+parse_author(auth[2])
+            elif nauth > 3:
+                authlist = authlist+', '+parse_author(auth[1])+', '+parse_author(auth[2])+' et al.'
+                
+        #pdb.set_trace()
+        
+        #if len(me) > 0 and me[0] > 3:
+        #    #authlist = parse_author(auth[0])+', '+parse_author(auth[1])+', '+parse_author(auth[2])
+        #    authlist = parse_author(auth[0])+', '+parse_author(auth[1])
+        #    #authlist = authlist+', (\\textbf{J. Moustakas}, $'+str(me[0]+1)+'^{th}$ coauthor) et al.'
+        #if me[0] <= 3:
+        #    if me[0] == 0:
+        #        authlist = parse_author(auth[0])
+        #    else:
+        #        try:
+        #            authlist = parse_author(auth[0])+' \& '+parse_author(auth[1])
+        #            #    authlist = parse_author(auth[0])+', '+parse_author(auth[1])+', '+parse_author(auth[2])+' et al.'
+        #        except:
+        #            pdb.set_trace()
+
+        # parse the title
+        title1, title2, title3 = parse_title(data['title'].strip())
+        #if data['ID'] == '2012ApJ...747L...9Z':
+        #    pdb.set_trace()
+
+        # parse the publication
+        if 'volume' in data.keys():
+            pubinfo = data['volume']+', '+data['pages']
+        else:
+            pubinfo = 'in press'
+            
+        if 'journal' in data.keys():
+            journal = get_journal(data['journal']['name'])
+        else:
+            pdb.set_trace()
+            
+        thispub = '{}, {}, {}'.format(data['year'], journal, pubinfo)
+
+        #if data['ID'] == '2021MNRAS.501.3309Z':
+        #    pdb.set_trace()
+
+        # put it all together
+        out.write('{}. & {} {} \\\ \n'.format(ipub, authlist, thispub))
+        #out.write('{}. & {} \\\ \n'.format(ipub, authlist))
+        #out.write('    & {} \\\ \n'.format(thispub))
+
+        if title2 is None and title3 is None:
+            out.write('   & {} \smallskip\\\ \n'.format(title1))
+        elif title2 is not None and title3 is None:
+            out.write('   & {} \\\ \n'.format(title1))
+            out.write('   & {} \smallskip\\\ \n'.format(title2))
+        elif title2 is not None and title3 is not None:
+            out.write('   & {} \\\ \n'.format(title1))
+            out.write('   & {} \\\ \n'.format(title2))
+            out.write('   & {} \smallskip\\\ \n'.format(title3))
+        else:
+            pass
+
+        icount += 1
+
+    out.write('\end{longtable}\n')
+
+    print('Total publications = {}, total citations = {}'.format(icount, ntotcite))
+
+    # additional publications
+    out.write('\\vspace*{-5mm}\n')
+    out.write('\\hspace{-5mm}\\textsc{Additional Refereed Publications}\n')
+    out.write('\\setlength{\\tabcolsep}{2pt}\n')
+    out.write('\\begin{longtable}{ll}\n')
+
+    icount = 0
+    for idata in other:
+        data = db.entries[idata]
+
+        ipub = nother - icount
+        #print(icount, ipub, idata)
+
+        # parse the author list
+        auth = data['author']
+        nauth = len(auth)
+
+        me = mepos[idata]
+        authlist = parse_author(auth[0])+', '+parse_author(auth[1])
+        authlist = authlist+', (\\textbf{J. Moustakas}, $'+str(me+1)+'^{th}$ coauthor) et al.'
+        
+        # parse the title
+        title1, title2, title3 = parse_title(data['title'].strip())
+
+        # parse the publication
+        if 'volume' in data.keys():
+            pubinfo = data['volume']+', '+data['pages']
+        else:
+            pubinfo = 'in press'
+            
+        if 'journal' in data.keys():
+            journal = get_journal(data['journal']['name'])
+        else:
+            pdb.set_trace()
+            
+        thispub = '{}, {}, {}'.format(data['year'], journal, pubinfo)
+
+        # put it all together
+        out.write('{}. & {} {} \\\ \n'.format(ipub, authlist, thispub))
+
+        if title2 is None and title3 is None:
+            out.write('   & {} \smallskip\\\ \n'.format(title1))
+        elif title2 is not None and title3 is None:
+            out.write('   & {} \\\ \n'.format(title1))
+            out.write('   & {} \smallskip\\\ \n'.format(title2))
+        elif title2 is not None and title3 is not None:
+            out.write('   & {} \\\ \n'.format(title1))
+            out.write('   & {} \\\ \n'.format(title2))
+            out.write('   & {} \smallskip\\\ \n'.format(title3))
+        else:
+            pass
+
+        icount += 1
+
+    out.write('\end{longtable}\n')
+
+    # telegrams
+    out.write('\\vspace*{-5mm}\n')
+    out.write('\\hspace{-5mm}\\textsc{Conference Proceedings \& Astronomical Telegrams}\n')
+    out.write('\\setlength{\\tabcolsep}{2pt}\n')
+    out.write('\\begin{longtable}{ll}\n')
+
+#\hspace{-5mm}{\sc Contributed White Papers \& Unrefereed Publications}
+#\setlength{\tabcolsep}{2pt}
+#\begin{longtable}{ll}
+
+    out.write('\end{longtable}\n')
+
+#pdb.set_trace()
+
+
