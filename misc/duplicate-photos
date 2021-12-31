@@ -1,0 +1,191 @@
+#!/usr/bin/env python
+import os, sys
+import numpy as np
+import multiprocessing
+
+# see also
+# https://github.com/cw-somil/Duplicate-Remover
+
+def _image_metadata(args):
+    return image_metadata(*args)
+
+#def image_metadata(image, hash_size):
+def image_metadata(image):
+    from PIL import Image
+    from PIL.ExifTags import TAGS
+    #import imagehash
+
+    limage = image.lower()
+    if ('.mp4' in limage or '.mov' in limage or '.3gp' in limage or 
+        '.avi' in limage or '.tif' in limage):
+        return [], []
+    else:
+        try:
+            with Image.open(image) as img:
+                exif = img.getexif()
+                meta = {}
+                for tag in exif:
+                    meta.update({TAGS.get(tag, tag): exif.get(tag)})
+                #hash = imagehash.average_hash(img, hash_size)
+            #return image, hash
+            if 'DateTime' in meta.keys():
+                return image, meta['DateTime']
+            else:
+                return [], []
+        except:
+            print('Problem reading {}'.format(image))
+            return [], []
+
+class DuplicateRemover:
+    def __init__(self,dirname, hash_size = 64):
+        self.dirname = dirname
+        self.hash_size = hash_size
+        
+    def find_duplicates(self):
+        """
+        Find and Delete Duplicates
+        """
+        
+        #fnames = os.listdir(self.dirname)
+        allfnames = np.array(glob(topdir+'/**/*', recursive=True))
+        fnames = np.array([allfname for allfname in allfnames if os.path.isfile(allfname)])
+        fnames = fnames[15000:]
+
+        basefnames = np.array([os.path.basename(fname) for fname in fnames])
+
+        hashes = {}
+        duplicates = []
+        print("Finding Duplicates!\n")
+        for ii, (image, baseimage) in enumerate(zip(fnames, basefnames)):
+            if ii % 1000 == 0:
+                print('Working on image {}/{}'.format(ii, len(fnames)))
+            if '.mp4' in image or '.MOV' in image or '.mov' in image or '.3gp' in image or '.avi' in image:
+                continue
+            # is there more than one matching filename?
+            #pdb.set_trace()
+            if np.sum(np.isin(basefnames, baseimage)) > 1:
+                #if baseimage == 'IMG_3202.JPG':
+                pdb.set_trace()
+                with Image.open(os.path.join(self.dirname,image)) as img:
+                    temp_hash = imagehash.average_hash(img, self.hash_size)
+                    if temp_hash in hashes and '9999-' in image:
+                        print(image)
+                        print(hashes[temp_hash])
+                        #print("Duplicate {} \nfound for Image {}!\n".format(image, hashes[temp_hash]))
+                        duplicates.append(image)
+                    else:
+                        hashes[temp_hash] = image
+    
+        pdb.set_trace()
+        if len(duplicates) != 0:
+            a = input("Do you want to delete these {} Images? Press Y or N:  ".format(len(duplicates)))
+            space_saved = 0
+            if(a.strip().lower() == "y"):
+                for duplicate in duplicates:
+                    space_saved += os.path.getsize(os.path.join(self.dirname,duplicate))
+                    
+                    os.remove(os.path.join(self.dirname,duplicate))
+                    print("{} Deleted Succesfully!".format(duplicate))
+    
+                print("\n\nYou saved {} mb of Space!".format(round(space_saved/1000000),2))
+            else:
+                print("Thank you for Using Duplicate Remover")
+        else:
+            print("No Duplicates Found :(")
+            
+        
+if __name__ == '__main__':
+                    
+    import os, pdb
+    from glob import glob
+    import numpy as np
+    
+    mp = 8
+    hash_size = 128
+    
+    topdir = '/Users/ioannis/Photos'
+    #topdir = '/Users/ioannis/Photos-to-process'
+    #topdir = '/Users/ioannis/Photos-to-process/9999-2017-08-10-john'
+
+    allfnames = np.array(glob(topdir+'/**/*', recursive=True))
+    if len(allfnames) == 0:
+        sys.exit(1)
+    fnames = np.array([allfname for allfname in allfnames if os.path.isfile(allfname)])
+    #fnames = fnames[15000:15050]
+
+    # gather metadata for every image
+    mpargs = [(fname, ) for fname in fnames]
+    #mpargs = [(fname, hash_size) for fname in fnames]
+
+    if mp > 1:
+        with multiprocessing.Pool(mp) as P:
+            out = P.map(_image_metadata, mpargs)
+    else:
+        out = [image_metadata(*_mpargs) for _mpargs in mpargs]
+    out = list(zip(*out))
+
+    images = np.hstack(out[0]) # filenames
+    dates = np.hstack(out[1]) # date/time
+    #hashes = np.hstack(out[1]) # hashes
+
+    # identify duplicates based on the date/time of creation
+    alldups = []
+    I = np.arange(len(images))
+    skipI = []
+    for ii in I:
+        if len(skipI) > 0:
+            #print(ii, np.hstack(skipI))
+            if np.isin(ii, np.hstack(skipI)):
+                continue
+
+        dups = np.where(np.isin(dates, dates[ii]))[0]
+
+        if len(dups) > 1:
+            #print(images[dups])
+            #print()
+            alldups.append(images[dups])
+            skipI.append(dups)
+            #pdb.set_trace()
+
+    if len(alldups) > 0:
+        print('Found {} duplicates among {} images'.format(len(alldups), len(np.hstack(alldups))))
+
+    for dups in alldups:
+        if len(dups) == 2:
+            if os.path.basename(dups[0]) != os.path.basename(dups[1]):
+                continue
+            if '9999-' in dups[0]:
+                rem = dups[0]
+                keep = dups[1]
+            elif '9999-' in dups[1]:
+                rem = dups[1]
+                keep = dups[0]
+            else:
+                continue
+                dups = dups[np.argsort(dups)]
+                rem = dups[0]
+                keep = dups[1]
+                #pdb.set_trace()
+        else:
+            continue
+            dups = dups[np.argsort(dups)][::-1]
+            rem = dups[0]
+            keep = dups[1:]
+            #pdb.set_trace()
+
+        if False:
+            if len(np.atleast_1d(keep)) > 1:
+                for kk in keep:
+                    print('Keep  : {}'.format(kk))
+            else:
+                print('Keep  : {}'.format(keep))
+
+        rrem = r'{}'.format(rem).replace(' ', '\ ') # make a raw string
+        cmd = '/bin/rm {}'.format(rrem)
+        #print(cmd)
+        print('Remove: {}'.format(rem))
+        #print()
+        os.system(cmd)
+
+    #pdb.set_trace()
+

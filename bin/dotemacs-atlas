@@ -6,11 +6,11 @@
 
 ; Color Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
+(load-theme 'twilight t)
 
 ; Set the default EMACS window size
 (add-to-list 'default-frame-alist '(height . 50))
-(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(width . 100))
 
 ;; Don't use TABS for indentations.
 (setq-default indent-tabs-mode nil)
@@ -80,9 +80,9 @@
 ;; --------------------------------------------------
 ; Python preferences:
 ;; --------------------------------------------------
-(setq py-install-directory "~/.emacs.d/python-mode.el-6.2.0")
-(add-to-list 'load-path py-install-directory)
-(require 'python-mode)
+; (setq py-install-directory "~/.emacs.d/python-mode.el-6.2.0")
+; (add-to-list 'load-path py-install-directory)
+; (require 'python-mode)
 
 ;; use IPython
 ;(setq-default py-shell-name "ipython")
