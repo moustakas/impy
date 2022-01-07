@@ -1,0 +1,59 @@
+#!/bin/bash
+# Set up DESI code
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+export DESI_ROOT=$IM_WORK_DIR/desi
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
+export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
+export DESI_SPECTRO_SIM=$DESI_ROOT/spectro/sim
+export DESI_SPECTRO_DATA=$DESI_ROOT/spectro/data
+export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
+export SPECPROD=dailytest
+export PIXPROD=dailytest
+
+# Update PATH and PYTHONPATH
+for package in desiutil specter desitarget desispec desisim \
+                        desisurvey surveysim desimodel redrock; do
+  export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
+  export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
+done
+#export PYTHONPATH=$DESI_PRODUCT_ROOT/speclite:$PYTHONPATH
+export PYTHONPATH=$DESI_PRODUCT_ROOT/specsim:$PYTHONPATH
+export PYTHONPATH=$DESI_PRODUCT_ROOT/simqso:$PYTHONPATH
+
+###############
+# Not official, but useful
+export TRACTOR_DIR=/usr/local/tractor
+export ASTROMETRY_DIR=/usr/local/astrometry
+export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
+export PATH=/usr/local/astrometry/bin:${PATH}
+###############
+
+# Check out the desimodel data files (in svn)
+# cd $DESIMODEL
+# svn export https://desi.lbl.gov/svn/code/desimodel/trunk/data
+
+# Check out calibration and template files
+#username=my_nersc_account_username
+#export DESI_ROOT=$HOME/desi/
+#mkdir -p $DESI_ROOT/spectro/templates/basis_templates
+#cd $DESI_ROOT/spectro/templates/basis_templates
+#svn export svn+ssh://${username}@dtn01.nersc.gov/global/project/projectdirs/desi/spectro/calib/svn/basis_templates/tags/v2.5
+
+export DESI_SPECTRO_CALIB=$DESI_ROOT/spectro/desi_spectro_calib/trunk
+#export DESI_CCD_CALIBRATION_DATA=$DESI_ROOT/spectro/calib/ccd_calibration_data
+
+# Templates
+export RR_TEMPLATE_DIR=$DESI_PRODUCT_ROOT/redrock-templates
+#export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v2.6
+#export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.0
+#export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.1
+export DESI_BASIS_TEMPLATES=$DESI_ROOT/spectro/templates/basis_templates/v3.2
+
+# Additional variables
+export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
+
+echo "Loading DESI environment"
+conda activate desi

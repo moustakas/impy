@@ -12,7 +12,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 ##################################################
 # Some convenience variables
 # export IM_SVNREPOS=${HOME}/code/svn
-export IM_GITREPOS=${HOME}/code
+export IM_CODE_DIR=${HOME}/code
 export TEACHING_DIR=${HOME}/teaching
 
 export IM_WORK_DIR=${HOME}/work
@@ -24,18 +24,20 @@ export IM_PROJECTS_DIR=${HOME}/research/projects
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export CATALOGS_DIR=${HOME}/research/data/catalogs
 
-export IMPRO_DIR=${IM_GITREPOS}/impro
-export IMPY_DIR=${IM_GITREPOS}/impy
+export IMPRO_DIR=${IM_CODE_DIR}/impro
+export IMPY_DIR=${IM_CODE_DIR}/impy
 
-# export SIENA_ASTROPHYSICS_DIR=${IM_GITREPOS}/siena-astrophysics
+# export SIENA_ASTROPHYSICS_DIR=${IM_CODE_DIR}/siena-astrophysics
 # export ARCHETYPES_DIR=${IM_PROJECTS_DIR}/archetypes
 
 ##################################################
 # Expand my PATH
-export PATH=$IM_GITREPOS/software/bin:$PATH
-export PATH=/usr/local/share/cfitsio/build/bin:$PATH # funpack utilities
+export PATH=$IM_CODE_DIR/software/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH # ads2bibdesk
 export PATH=$IMPY_DIR/bin:$PATH
-#export PATH=$IM_GITREPOS/CUTE/CUTE:$PATH
+
+# export PATH=/usr/local/share/cfitsio/build/bin:$PATH # funpack utilities
+# export PATH=$IM_CODE_DIR/CUTE/CUTE:$PATH
 
 ##########################
 # Set up conda
@@ -71,8 +73,8 @@ alias pwd='pwd -P'
 alias em='open -a /Applications/Emacs.app $1'
 
 alias olsen='ssh jmoustakas@olsen.cs.siena.edu'
-alias edison='sshnersc.sh edison'
-alias cori='sshnersc.sh cori'
+alias cori='ssh -XY cori.nersc.gov'
+# alias cori='${IM_CODE_DIR}/impy/bin/sshnersc.sh cori'
 alias dtn01='sshnersc.sh dtn01'
 alias nyx='ssh -XY nyx'
 alias sos='ssh -XY sos'
@@ -90,13 +92,11 @@ alias 330='cd ~/teaching/330-S18'
 alias py27='conda activate py27'
 alias py39='conda activate py39'
 
-alias desi='source $IMPY_DIR/bin/desi-env-atlas'
-alias nbodykit='source $IMPY_DIR/bin/nbodykit-env-atlas'
-alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-atlas'
-alias breyo='source $IMPY_DIR/bin/breyo-env-atlas'
-alias SGA='source $IMPY_DIR/bin/SGA-env-atlas'
-alias hizea='source $IMPY_DIR/bin/hizea-env-atlas'
-alias clash='source $IMPY_DIR/bin/clash-env-atlas'
+alias desi='source $IMPY_DIR/bin/desi-env-chronos'
+alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-chronos'
+alias breyo='source $IMPY_DIR/bin/breyo-env-chronos'
+alias SGA='source $IMPY_DIR/bin/SGA-env-chronos'
+alias hizea='source $IMPY_DIR/bin/hizea-env-chronos'
 
 # [[ -s ~/.bashrc ]] && source ~/.bashrc
 export PATH="/usr/local/sbin:$PATH"
