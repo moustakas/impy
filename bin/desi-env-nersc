@@ -24,9 +24,9 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh master
 #module switch desispec/0.13.1
 #module switch desimodel/0.5.1
 
-package=desigal
-export PATH=$HOME/repos/desihub/$package/bin:${PATH}
-export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
+package=fastspecfit
+export PATH=$HOME/code/desihub/$package/bin:${PATH}
+export PYTHONPATH=$HOME/code/desihub/$package/py:${PYTHONPATH}
 
 #for package in desitarget desisurvey desisim; do
 #for package in desitarget desisim; do
@@ -46,12 +46,12 @@ export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
 #export SPECPROD=daily
 #export DESI_SPECTRO_CALIB=/global/cfs/cdirs/desi/spectro/desi_spectro_calib/trunk
 
-## Hack!
+### Hack!
 #package=redrock
 #module unload $package
 #export PATH=$HOME/repos/desihub/$package/bin:${PATH}
 #export PYTHONPATH=$HOME/repos/desihub/$package/py:${PYTHONPATH}
-#export RR_TEMPLATE_DIR=/global/common/software/desi/cori/desiconda/20190804-1.3.0-spec/code/redrock-templates/master
+##export RR_TEMPLATE_DIR=/global/common/software/desi/cori/desiconda/20190804-1.3.0-spec/code/redrock-templates/master
 
 echo 'DESI_ROOT='$DESI_ROOT
 echo 'DESI_SPECTRO_CALIB='$DESI_SPECTRO_CALIB
