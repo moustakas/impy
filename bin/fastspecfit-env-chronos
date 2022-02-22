@@ -1,0 +1,22 @@
+#!/bin/bash
+# Set up DESI/FastSpecFit code
+
+unset PYTHONPATH # Clear PYTHONPATH
+
+export DESI_ROOT=$IM_WORK_DIR/desi
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
+export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
+
+# Update PATH and PYTHONPATH
+for package in desiutil desitarget desispec redrock fastspecfit; do
+  export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
+  export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
+done
+export PYTHONPATH=$DESI_PRODUCT_ROOT/speclite:$PYTHONPATH
+
+# Additional variables
+export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
+export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
+
+echo "Loading FastSpecFit environment"
+conda activate fastspecfit
