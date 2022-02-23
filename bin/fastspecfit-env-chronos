@@ -3,16 +3,28 @@
 
 unset PYTHONPATH # Clear PYTHONPATH
 
+export IM_WORK_DIR=${HOME}/work
+export IM_CODE_DIR=${HOME}/code
+
 export DESI_ROOT=$IM_WORK_DIR/desi
-export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub-fastspecfit
 export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
+#export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
 
 # Update PATH and PYTHONPATH
-for package in desiutil desitarget desispec redrock fastspecfit; do
+#for package in desiutil desimodel desitarget desispec redrock fastspecfit; do
+for package in desiutil desimodel desitarget desispec redrock; do
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
-export PYTHONPATH=$DESI_PRODUCT_ROOT/speclite:$PYTHONPATH
+
+# development hack!
+export PATH=$IM_CODE_DIR/desihub/fastspecfit/bin:$PATH
+export PYTHONPATH=$IM_CODE_DIR/desihub/fastspecfit/py:$PYTHONPATH
+
+# Check out the desimodel data files (in svn)
+# cd $DESIMODEL
+# svn export https://desi.lbl.gov/svn/code/desimodel/trunk/data
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
