@@ -92,6 +92,7 @@ alias 330='cd ~/teaching/330-S18'
 alias py27='conda activate py27'
 alias py39='conda activate py39'
 
+alias fastspecfit='source $IMPY_DIR/bin/fastspecfit-env-chronos'
 alias desi='source $IMPY_DIR/bin/desi-env-chronos'
 alias legacyhalos='source $IMPY_DIR/bin/legacyhalos-env-chronos'
 alias breyo='source $IMPY_DIR/bin/breyo-env-chronos'
