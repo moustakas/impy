@@ -6,12 +6,14 @@ echo 'Loading legacypipe software'
 
 unset PYTHONPATH
 
-desiconda_version=20190311-1.2.7-img
-echo 'Loaded desiconda_version='$desiconda_version
-module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
-module load desiconda
+source /global/cfs/cdirs/desi/software/desi_environment.sh master
 
-export LEGACYPIPE_DIR=/global/homes/i/ioannis/repos/git/legacypipe
+#desiconda_version=20190311-1.2.7-img
+#echo 'Loaded desiconda_version='$desiconda_version
+#module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
+#module load desiconda
+
+export LEGACYPIPE_DIR=/global/homes/i/ioannis/code/git/legacypipe
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
 
 # Required environment variables--
@@ -31,8 +33,8 @@ export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
 echo 'Adding custom-built versions of tractor and astrometry.net to path.'
-export PATH=/global/homes/i/ioannis/repos/build/cori/bin:$PATH
-export PYTHONPATH=/global/homes/i/ioannis/repos/build/cori/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=/global/homes/i/ioannis/code/build/cori/bin:$PATH
+export PYTHONPATH=/global/homes/i/ioannis/code/build/cori/lib/python3.6/site-packages:$PYTHONPATH
 
 export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
 #export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desimpp/dr9e
@@ -58,26 +60,26 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 ##################################################
 # Notes on custom-installing tractor and astrometry.net
 #
-# desiconda_version=20190311-1.2.7-img
+# desiconda_version=current # 20190311-1.2.7-img
 # module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
 # module load desiconda
-# cd /global/homes/i/ioannis/repos/git
+# cd /global/homes/i/ioannis/code/git
 # git clone https://github.com/dstndstn/astrometry.net.git
 # cd astrometry.net/
-# python setup.py install --prefix=/global/homes/i/ioannis/repos/build/$NERSC_HOST
+# python setup.py install --prefix=/global/homes/i/ioannis/code/build/$NERSC_HOST
 
 # cd ..
-#git clone https://github.com/dstndstn/tractor.git
-#cd tractor/
-#make
-#export SUITESPARSE_LIB_DIR="${SuiteSparse_PREFIX}/lib"
-#export BLAS_LIB="${blas_LIBS_CC}"
-#module load eigen3
-#export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$EIGEN3_DIR/share/pkgconfig:/usr/common/software/gflags/2.1.2
-#export PYTHON_CONFIG=python3-config
-#make ceres
-#python setup.py install --with-ceres --prefix=/global/homes/i/ioannis/repos/build/$NERSC_HOST
-#
-# export PATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/bin:$PATH
-# export PYTHONPATH=/global/homes/i/ioannis/repos/build/$NERSC_HOST/lib/python3.6/site-packages:$PYTHONPATH
+# git clone https://github.com/dstndstn/tractor.git
+# cd tractor/
+# make
+# export SUITESPARSE_LIB_DIR="${SuiteSparse_PREFIX}/lib"
+# export BLAS_LIB="${blas_LIBS_CC}"
+# module load eigen3
+# export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$EIGEN3_DIR/share/pkgconfig:/usr/common/software/gflags/2.1.2
+# export PYTHON_CONFIG=python3-config
+# make ceres
+# python setup.py install --with-ceres --prefix=/global/homes/i/ioannis/code/build/$NERSC_HOST
+
+export PATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/bin:$PATH
+export PYTHONPATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/lib/python3.8/site-packages:$PYTHONPATH
 ##################################################
