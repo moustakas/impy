@@ -17,7 +17,7 @@ Once this has been created, you can view it in the Endpoints tab--
   nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
 
 2. Next, log onto the DTN and launch the endpoint--
-  cd globusconnectpersonal-3.0.2
+  cd /usr/local/share/globusconnectpersonal-3.0.2/
   ./globusconnectpersonal -start &
 
 3. Third, on globus.org, navigate to the File Manager tab and select the NERSC

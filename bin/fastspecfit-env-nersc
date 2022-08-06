@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo 'Loading FastSpecFit.'
+source /global/cfs/cdirs/desi/software/desi_environment.sh master
+# module load fastspecfit/main
+
+for package in fastspecfit; do
+    echo Loading local check-out of $package
+    export PATH=$HOME/code/desihub/$package/bin:$PATH
+    export PYTHONPATH=$HOME/code/desihub/$package/py:$PYTHONPATH
+done
+
+echo 'FASTSPECFIT_TEMPLATES='$FASTSPECFIT_TEMPLATES
+echo 'DUST_DIR='$DUST_DIR

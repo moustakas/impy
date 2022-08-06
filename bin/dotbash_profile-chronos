@@ -9,6 +9,9 @@ export PS1="\u@\[$(tput bold)\]\h\[$(tput sgr0)\]:\w\[$(tput sgr0)\]% "
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+export DOCKER_BUILDKIT=0
+export COMPOSE_DOCKER_CLI_BUILD=0
+
 ##################################################
 # Some convenience variables
 # export IM_SVNREPOS=${HOME}/code/svn
