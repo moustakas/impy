@@ -50,7 +50,7 @@ export PATH=$IMPY_DIR/bin:$PATH
 
 ##################################################
 # Projects
-export LEGACYHALOS_CODE_DIR=/Users/ioannis/repos/legacyhalos
+export LEGACYHALOS_CODE_DIR=/Users/ioannis/code/legacyhalos
 export PATH=${LEGACYHALOS_CODE_DIR}/bin/legacyhalos:${PATH}
 export PATH=${LEGACYHALOS_CODE_DIR}/bin/SGA:${PATH}
 export PATH=${LEGACYHALOS_CODE_DIR}/bin/virgofilaments:${PATH}

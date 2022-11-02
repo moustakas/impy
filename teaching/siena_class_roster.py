@@ -61,8 +61,9 @@ for table in tables:
                     image = image.replace(' ', '_')
                     #image = image.replace(' ','_').replace('%20', '_')
                     if not os.path.isfile(image):
-                        print('Missing image!')
-                        import pdb ; pdb.set_trace()
+                        image = './smiley.png'
+                        #print('Missing image!')
+                        #import pdb ; pdb.set_trace()
                     #if os.path.isfile(image):
                     #    pdb.set_trace()
                         
