@@ -16,7 +16,7 @@
 
 echo 'Loading DESI software.'
 source /global/cfs/cdirs/desi/software/desi_environment.sh master
-#source /global/cfs/cdirs/desi/software/desi_environment.sh 19.12
+#source /global/cfs/cdirs/desi/software/desi_environment.sh 22.2
 
 #module switch desisim/0.18.1
 #module switch desiutil/1.9.3

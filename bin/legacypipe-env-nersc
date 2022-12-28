@@ -5,8 +5,7 @@
 echo 'Loading legacypipe software'
 
 unset PYTHONPATH
-
-source /global/cfs/cdirs/desi/software/desi_environment.sh master
+source /global/cfs/cdirs/desi/software/desi_environment.sh main
 
 #desiconda_version=20190311-1.2.7-img
 #echo 'Loaded desiconda_version='$desiconda_version
@@ -16,29 +15,50 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh master
 export LEGACYPIPE_DIR=/global/homes/i/ioannis/code/git/legacypipe
 echo '$LEGACYPIPE_DIR='$LEGACYPIPE_DIR
 
-# Required environment variables--
-#source $LEGACYPIPE_DIR/bin/legacypipe-env
-export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
-export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo6/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
-export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo6
-export UNWISE_MODEL_SKY_DIR=/global/cfs/cdirs/cosmo/work/wise/unwise_catalog/dr3/mod
-export GAIA_CAT_DIR=/global/cfs/cdirs/cosmo/work/gaia/chunks-gaia-dr2-astrom-2
-export GAIA_CAT_VER=2
+# Pipeline variables---only change these if you know what you're doing!
+export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
+export SKY_TEMPLATE_DIR=/global/cfs/cdirs/cosmo/data/legacysurvey/dr9/calib/sky_pattern
+echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+
+#export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v3.0/SGA-ellipse-v3.0.kd.fits
+export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v3.0/SGA-parent-v3.0.kd.fits
+
+export GAIA_CAT_DIR=/global/cfs/cdirs/desi/target/gaia_edr3/healpix
+export GAIA_CAT_PREFIX=healpix
+export GAIA_CAT_SCHEME=nested
+export GAIA_CAT_VER=E
+
+# Uncomment this variable if you want time-resolved unWISE photometry (generally not needed). 
+#export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo7
+export UNWISE_COADDS_DIR=/global/cfs/cdirs/cosmo/data/unwise/neo7/unwise-coadds/fulldepth:/global/cfs/cdirs/cosmo/data/unwise/allwise/unwise-coadds/fulldepth
+#export UNWISE_MODEL_SKY_DIR=/global/cfs/cdirs/cosmo/work/wise/unwise_catalog/dr3/mod
+
 export TYCHO2_KD_DIR=/global/cfs/cdirs/cosmo/staging/tycho2
-export LARGEGALAXIES_CAT=/global/cfs/cdirs/cosmo/staging/largegalaxies/v7.0/LSLGA-7.0.kd.fits
 export PS1CAT_DIR=/global/cfs/cdirs/cosmo/work/ps1/cats/chunks-qz-star-v3
+export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
+
 export GALEX_DIR=/global/cfs/cdirs/cosmo/data/galex/images
+export REDMAPPER_DIR=/global/cfs/cdirs/desi/users/ioannis/redmapper
+# Uncomment this variable if you want time-resolved unWISE photometry (generally not needed). 
+#export UNWISE_COADDS_TIMERESOLVED_DIR=/global/cfs/cdirs/cosmo/work/wise/outputs/merge/neo6
 
 export PATH=$LEGACYPIPE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYPIPE_DIR/py:$PYTHONPATH
 
-echo 'Adding custom-built versions of tractor and astrometry.net to path.'
-export PATH=/global/homes/i/ioannis/code/build/cori/bin:$PATH
-export PYTHONPATH=/global/homes/i/ioannis/code/build/cori/lib/python3.6/site-packages:$PYTHONPATH
+##################################################
+#echo 'Adding custom-built versions of tractor and astrometry.net to path.'
+#PRODUCT_DIR=/global/common/software/desi/users/dstn
+#export PATH=$PRODUCT_DIR/conda-env/bin:$PRODUCT_DIR/bin:$PATH
+#export PKG_CONFIG_PATH=$PRODUCT_DIR/lib/pkgconfig:$PRODUCT_DIR/conda-env/lib/pkgconfig
+#export LD_LIBRARY_PATH=/lib64:/global/common/software/desi/users/dstn/lib:/global/common/software/desi/users/dstn/conda-lib:/opt/cray/job/2.2.4-7.0.1.1_3.40__g36b56f4.ari/lib64:/opt/intel/compilers_and_libraries_2019.3.199/linux/compiler/lib/intel64:/opt/intel/compilers_and_libraries_2019.3.199/linux/mkl/lib/intel64 
+#
+#export PATH=/global/homes/d/dstn/astrometry/bin:$PATH
+#export PYTHONPATH=/global/homes/d/dstn/astrometry:$PYTHONPATH
+#export PYTHONPATH=/global/homes/d/dstn/tractor:$PYTHONPATH
 
-export LEGACY_SURVEY_DIR=/global/cfs/cdirs/cosmo/work/legacysurvey/dr9
-#export LEGACY_SURVEY_DIR=/global/cscratch1/sd/desimpp/dr9e
-echo '$LEGACY_SURVEY_DIR='$LEGACY_SURVEY_DIR
+export PATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/bin:$PATH
+export PYTHONPATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/lib/python3.9/site-packages:$PYTHONPATH
+##################################################
 
 #export DESIMODEL=$HOME/repos/desihub/desimodel
 #export PYTHONPATH=$HOME/repos/desihub/desimodel/py:${PYTHONPATH}
@@ -60,14 +80,13 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 ##################################################
 # Notes on custom-installing tractor and astrometry.net
 #
-# desiconda_version=current # 20190311-1.2.7-img
-# module use /global/common/software/desi/cori/desiconda/$desiconda_version/modulefiles
+# module use /global/common/software/desi/cori/desiconda/current/modulefiles
 # module load desiconda
 # cd /global/homes/i/ioannis/code/git
 # git clone https://github.com/dstndstn/astrometry.net.git
 # cd astrometry.net/
 # python setup.py install --prefix=/global/homes/i/ioannis/code/build/$NERSC_HOST
-
+#
 # cd ..
 # git clone https://github.com/dstndstn/tractor.git
 # cd tractor/
@@ -80,6 +99,6 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 # make ceres
 # python setup.py install --with-ceres --prefix=/global/homes/i/ioannis/code/build/$NERSC_HOST
 
-export PATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/bin:$PATH
-export PYTHONPATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/lib/python3.8/site-packages:$PYTHONPATH
+#export PATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/bin:$PATH
+#export PYTHONPATH=/global/homes/i/ioannis/code/build/$NERSC_HOST/lib/python3.8/site-packages:$PYTHONPATH
 ##################################################

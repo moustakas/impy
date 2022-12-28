@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo 'Loading FastSpecFit.'
-source /global/cfs/cdirs/desi/software/desi_environment.sh master
+source /global/cfs/cdirs/desi/software/desi_environment.sh main
 # module load fastspecfit/main
 
 for package in fastspecfit; do
@@ -9,6 +9,13 @@ for package in fastspecfit; do
     export PATH=$HOME/code/desihub/$package/bin:$PATH
     export PYTHONPATH=$HOME/code/desihub/$package/py:$PYTHONPATH
 done
+
+for package in pyneb; do
+    echo Loading local check-out of $package
+    export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
+done
+
+export FASTSPECFIT_TEMPLATES='/global/cfs/cdirs/desi/external/templates/SSP-CKC14z'
 
 echo 'FASTSPECFIT_TEMPLATES='$FASTSPECFIT_TEMPLATES
 echo 'DUST_DIR='$DUST_DIR
