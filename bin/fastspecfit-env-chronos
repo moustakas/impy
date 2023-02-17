@@ -7,7 +7,8 @@ export IM_WORK_DIR=${HOME}/work
 export IM_CODE_DIR=${HOME}/code
 
 export DESI_ROOT=$IM_WORK_DIR/desi
-export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub-fastspecfit
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
+#export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub-fastspecfit
 export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
 #export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
 
@@ -20,7 +21,10 @@ done
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
-export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
+export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/fastspecfit
+#export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
+export DR9_DIR=${IM_WORK_DIR}/legacysurvey/dr9
+export SPS_HOME=${IM_CODE_DIR}/fsps
 
 echo "Loading FastSpecFit environment"
 conda activate fastspecfit

@@ -207,7 +207,10 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
     
                 me = mepos[idata]
                 authlist = parse_author(auth[0])
-    
+
+                #if data['ID'] == '2022AJ....164..207A':
+                #    pdb.set_trace()
+
                 #if nauth > 1:
                 if me > 2:
                     authlist = parse_author(auth[0])+', '+parse_author(auth[1])
@@ -319,7 +322,7 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
         out.write('\end{longtable}\n')
         print('{}: publications={}, citations={}'.format(heading, icount, ntotcite))
 
-date = '2022sep21'
+date = '2023jan19'
 
 pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date) # output
 bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date) # from ADS
@@ -368,7 +371,26 @@ for idata in np.arange(npub):
         auth = data['author']
         nauth = len(auth)
         me = np.where(['{Moustakas}, J' in _auth for _auth in auth])[0]
+
+        if len(me) == 0:
+            if 'The DESI Experiment Part II:' in data['title']:
+                me = 185
+            elif 'The DESI Experiment Part I:' in data['title']:
+                me = 185
+            elif 'Overview of the Instrumentation for the Dark Energy Spectroscopic Instrument' in data['title']:
+                me = 167
+            else:
+                print('Missing Moustakas from author list for {}!'.format(data['title']))
+                me = -1
+
         mepos[idata] = me
+
+        #if len(me) == 0:
+        #    pdb.set_trace()            
+        #try:
+        #    print(me, me[0])
+        #except:
+        #    pdb.set_trace()
 
         if ('AAS' in pubid or
             'egcc.conf' in pubid or # a talk(?)
@@ -395,7 +417,7 @@ for idata in np.arange(npub):
               pubid == '2022arXiv220904322S' or
               pubid == '2016arXiv161100037D'):
             pubtype.append('unref') # white papers and unrefereed publications
-        elif 'ascl' in pubid:
+        elif 'ascl' in pubid or 'zenodo' in pubid:
             pubtype.append('code')
         elif me < 3:
             pubtype.append('mytop') # first, second, or third author
@@ -418,13 +440,13 @@ heading = 'First-author Papers in Preparation'
 mydb = [
     {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Schlegel}, David J.', '{Meyers}, Adam D.'],
      'title': '{Siena Galaxy Atlas 2020}',
-     'year': 2022, 'journal': 'The Astrophysical Journal'},
+     'year': 2023, 'journal': 'The Astrophysical Journal'},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
      'title': '{Stellar Mass Density Profiles of Red, Low-Redshift Central Galaxies}',
-     'year': 2022, 'journal': 'The Astrophysical Journal'},
+     'year': 2023, 'journal': 'The Astrophysical Journal'},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
      'title': '{Stellar Mass Function of Red, Low-Redshift Central Galaxies}',
-     'year': 2022, 'journal': 'The Astrophysical Journal'},
+     'year': 2023, 'journal': 'The Astrophysical Journal'},
     {'author': ['{Moustakas}, John', '{Juneau}, St\'{e}phanie', '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
      'title': '{FastSpecFit: Spectrophotometric Modeling of 3.6 Million Extragalactic Targets from the DESI Early Data Release and Data Release 1}',
      'year': 2023, 'journal': 'The Astrophysical Journal'},

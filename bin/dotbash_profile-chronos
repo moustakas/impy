@@ -93,7 +93,7 @@ alias 010='cd ~/teaching/010-S18'
 alias 330='cd ~/teaching/330-S18'
 
 alias py27='conda activate py27'
-alias py39='conda activate py39'
+alias py310='conda activate py310'
 
 alias fastspecfit='source $IMPY_DIR/bin/fastspecfit-env-chronos'
 alias desi='source $IMPY_DIR/bin/desi-env-chronos'
@@ -108,15 +108,21 @@ export PATH="/usr/local/sbin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ioannis/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#__conda_setup="$('/Users/ioannis/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/ioannis/opt/anaconda3/bin:$PATH"
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
     fi
+    # if [ -f "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+    #     . "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh"
+    # else
+    #     export PATH="/Users/ioannis/opt/anaconda3/bin:$PATH"
+    # fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<

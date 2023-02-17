@@ -5,27 +5,37 @@ echo 'Loading SGA project'
 
 unset PYTHONPATH # Clear PYTHONPATH
 
+#export SGA_DIR=${IM_PROJECTS_DIR}/SGA
+export LEGACYHALOS_DIR=$IM_PROJECTS_DIR/SGA
+export LEGACYHALOS_DATA_DIR=$IM_PROJECTS_DIR/SGA/2020/data
+export LEGACYHALOS_HTML_DIR=$IM_PROJECTS_DIR/SGA/2020/html
+export LEGACYHALOS_CODE_DIR=$IM_CODE_DIR/legacyhalos
+export SGA_CODE_DIR=${IM_CODE_DIR}/SGA
+
 # brew install astrometry-net
-export ASTROMETRY_DIR=/usr/local/astrometry
-#export TRACTOR_DIR=/usr/local/tractor
+# pip install --no-cache -e git+http://github.com/dstndstn/astrome...@0.86#egg=astrometry
+export ASTROMETRY_DIR=$IM_CODE_DIR/astrometry
 #export ASTROMETRY_DIR=/usr/local/astrometry
-export SPS_HOME=${IM_RESEARCH_DIR}/synthesis/fsps
+#export TRACTOR_DIR=/usr/local/tractor
+#export SPS_HOME=${IM_RESEARCH_DIR}/synthesis/fsps
 
-export SGA_DIR=${IM_PROJECTS_DIR}/SGA
-export SGA_CODE_DIR=${IM_GITREPOS}/SGA
-export LEGACYHALOS_CODE_DIR=${IM_GITREPOS}/legacyhalos
+export LEGACYPIPE_DIR=${IM_CODE_DIR}/legacysurvey/legacypipe
 
-export LEGACYPIPE_DIR=${IM_GITREPOS}/legacysurvey/legacypipe
-
+#export PYTHONPATH=/opt/homebrew/Cellar/astrometry-net/0.91/libexec/lib/python3.11/site-packages/astrometry:$PYTHONPATH
 export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
-#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
-export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
-export PYTHONPATH=${LEGACYPIPE_DIR}/py:${PYTHONPATH}
-#export PYTHONPATH=${IM_GITREPOS}/mge_2017_07_28:$PYTHONPATH
+#export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${LEGACYPIPE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${SGA_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 
-export PATH=${IM_GITREPOS}/SGA/bin:$PATH
+export PATH=${IM_CODE_DIR}/SGA/bin:$PATH
+export PATH=${IM_CODE_DIR}/legacyhalos/bin:$PATH
+export PATH=${IM_CODE_DIR}/legacyhalos/science/SGA-2020:$PATH
 #export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
 conda activate SGA
+
+echo 'LEGACYHALOS_DIR='$LEGACYHALOS_DIR
+echo 'LEGACYHALOS_DATA_DIR='$LEGACYHALOS_DATA_DIR
+echo 'LEGACYHALOS_HTML_DIR='$LEGACYHALOS_HTML_DIR
+echo 'LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR
