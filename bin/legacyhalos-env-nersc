@@ -26,13 +26,13 @@ export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/code/git/legacyhalos
 #export HSC_DATA_DIR=/global/cfs/cdirs/desi/users/ioannis/hsc-data
 #export HSC_HTML_DIR=/global/cfs/cdirs/cosmo/www/temp/ioannis/hsc-html
 
-export REDMAPPER_DIR=/global/cfs/cdirs/desi/users/ioannis/redmapper
+#export REDMAPPER_DIR=/global/cfs/cdirs/desi/users/ioannis/redmapper
 # export SPS_HOME=$SCRATCH/fsps
 
 export PATH=$LEGACYHALOS_CODE_DIR/bin:$PATH
 export PYTHONPATH=$LEGACYHALOS_CODE_DIR/py:$PYTHONPATH
 
-echo 'Loading k-correct and pydl!'
+echo 'Loading k-correct and pydl'
 export PYTHONPATH=$HOME/code/git/kcorrect/python:${PYTHONPATH}
 export PYTHONPATH=$HOME/code/git/pydl:${PYTHONPATH}
 export KCORRECT_DIR=/global/u2/i/ioannis/code/git/kcorrect
