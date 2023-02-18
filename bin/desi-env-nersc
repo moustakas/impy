@@ -15,7 +15,7 @@
 #   module load desiconda
 
 echo 'Loading DESI software.'
-source /global/cfs/cdirs/desi/software/desi_environment.sh master
+source /global/cfs/cdirs/desi/software/desi_environment.sh main
 #source /global/cfs/cdirs/desi/software/desi_environment.sh 22.2
 
 #module switch desisim/0.18.1
@@ -24,16 +24,12 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh master
 #module switch desispec/0.13.1
 #module switch desimodel/0.5.1
 
-package=fastspecfit
-export PATH=$HOME/code/desihub/$package/bin:${PATH}
-export PYTHONPATH=$HOME/code/desihub/$package/py:${PYTHONPATH}
-
 package=desi-photometry
 export PATH=$HOME/code/desihub/$package:${PATH}
 
 #for package in desitarget desisim; do
 #for package in desitarget desisim; do
-for package in desispec; do
+for package in fastspecfit desispec; do
   echo Loading local check-out of $package
   module unload $package
   export PATH=$HOME/code/desihub/$package/bin:${PATH}
