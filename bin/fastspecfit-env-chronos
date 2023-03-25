@@ -21,7 +21,7 @@ done
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
-export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/fastspecfit
+export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit
 #export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
 export DR9_DIR=${IM_WORK_DIR}/legacysurvey/dr9
 export SPS_HOME=${IM_CODE_DIR}/fsps
