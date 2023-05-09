@@ -1,8 +1,8 @@
 #!/bin/bash
 echo 'Requesting an interactive node.'
 if [[ $NERSC_HOST == "perlmutter" ]]; then
-    salloc -N 1 -C cpu -A desi -t 04:00:00 --qos interactive -L SCRATCH,cfs
+    salloc -N 1 -C cpu -A desi -t 04:00:00 --qos interactive
 else
-    salloc -N 1 -C haswell -A desi -t 04:00:00 --qos interactive -L SCRATCH,cfs
+    salloc -N 1 -C haswell -A desi -t 04:00:00 --qos interactive
 fi
 

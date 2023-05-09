@@ -5,9 +5,9 @@ source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
 module swap desispec/0.57.0
 
 #module load fastspecfit/main
-#module load fastspecfit/2.1.0
+#module load fastspecfit/2.1.2
 
-#for package in fastspecfit desispec; do
+##for package in fastspecfit desispec; do
 for package in fastspecfit; do
     echo Loading local check-out of $package
     export PATH=$HOME/code/desihub/$package/bin:$PATH
@@ -19,9 +19,10 @@ for package in pyneb; do
     export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
 done
 
+export DESI_ROOT='/global/cfs/cdirs/desi'
 export DR9_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
 export DUST_DIR='/global/cfs/cdirs/cosmo/data/dust/v0_1'
-export FTEMPLATES_DIR='/global/cfs/cdirs/desi/external/templates/fastspecfit'
+export FTEMPLATES_DIR='/global/cfs/cdirs/desi/science/gqp/templates/fastspecfit'
 
 echo 'DR9_DIR='$DR9_DIR
 echo 'DUST_DIR='$DUST_DIR
