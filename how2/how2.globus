@@ -13,7 +13,7 @@ instructions (or this can be done in the globus.org portal)--
 Once this has been created, you can view it in the Endpoints tab--
   https://app.globus.org/endpoints?scope=administered-by-me
 
-  siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
+  siena-dtn1 endpoint: d07d50fe-de1c-11ed-9721-e54704575ba0
   nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
 
 2. Next, log onto the DTN and launch the endpoint--
@@ -55,4 +55,12 @@ globus login
 globus endpoint search --filter-scope my-endpoints
 
 ./globusconnect &
+
+
+
+
+#####
+  siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
+  nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
+
 
