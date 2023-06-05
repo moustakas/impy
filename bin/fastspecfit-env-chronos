@@ -19,6 +19,8 @@ for package in desiutil desimodel desitarget desispec fastspecfit; do
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
 
+export PYTHONPATH=$IM_CODE_DIR/spender:$PYTHONPATH
+
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit

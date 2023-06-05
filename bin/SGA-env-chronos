@@ -11,10 +11,12 @@ export LEGACYHALOS_DATA_DIR=$IM_PROJECTS_DIR/SGA/2020/data
 export LEGACYHALOS_HTML_DIR=$IM_PROJECTS_DIR/SGA/2020/html
 export LEGACYHALOS_CODE_DIR=$IM_CODE_DIR/legacyhalos
 export SGA_CODE_DIR=${IM_CODE_DIR}/SGA
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
 
 # brew install astrometry-net
 # pip install --no-cache -e git+http://github.com/dstndstn/astrome...@0.86#egg=astrometry
-export ASTROMETRY_DIR=$IM_CODE_DIR/astrometry
+export ASTROMETRY_DIR=/opt/homebrew/Cellar/astrometry-net/0.94_1/libexec/lib/python3.11/site-packages
+#export ASTROMETRY_DIR=$IM_CODE_DIR/astrometry
 #export ASTROMETRY_DIR=/usr/local/astrometry
 #export TRACTOR_DIR=/usr/local/tractor
 #export SPS_HOME=${IM_RESEARCH_DIR}/synthesis/fsps
@@ -22,11 +24,14 @@ export ASTROMETRY_DIR=$IM_CODE_DIR/astrometry
 export LEGACYPIPE_DIR=${IM_CODE_DIR}/legacysurvey/legacypipe
 
 #export PYTHONPATH=/opt/homebrew/Cellar/astrometry-net/0.91/libexec/lib/python3.11/site-packages/astrometry:$PYTHONPATH
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}:${PYTHONPATH}
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 #export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${SGA_CODE_DIR}/py:$PYTHONPATH
+export PYTHONPATH=${IM_CODE_DIR}/tractor:$PYTHONPATH
 export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
+export PYTHONPATH=${DESI_PRODUCT_ROOT}/desiutil/py:$PYTHONPATH
 
 export PATH=${IM_CODE_DIR}/SGA/bin:$PATH
 export PATH=${IM_CODE_DIR}/legacyhalos/bin:$PATH

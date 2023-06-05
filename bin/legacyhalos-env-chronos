@@ -23,14 +23,17 @@ export LEGACY_SURVEY_DIR=$LEGACYHALOS_DATA_DIR
 export TNG_DATA=$IM_DATA_DIR/illustris
 
 #export TRACTOR_DIR=/usr/local/tractor
-export ASTROMETRY_DIR=/usr/local/astrometry
+export ASTROMETRY_DIR=/opt/homebrew/Cellar/astrometry-net/0.94/libexec/lib/python3.11/site-packages
+#export ASTROMETRY_DIR=/usr/local/astrometry
 #export ASTROMETRY_DIR=${HOME}/anaconda3/envs/legacyhalos
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
 export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
 
 export LEGACYPIPE_DIR=$IM_CODE_DIR/legacysurvey/legacypipe
 
-export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+export PYTHONPATH=${ASTROMETRY_DIR}:${PYTHONPATH}
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
+#export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 #export PYTHONPATH=${ASTROMETRY_DIR}/lib/python3.7/site-packages:${PYTHONPATH}
 #export PYTHONPATH=${TRACTOR_DIR}/lib/python:${PYTHONPATH}
 export PYTHONPATH=${LEGACYPIPE_DIR}/py:$PYTHONPATH
@@ -48,3 +51,4 @@ conda activate legacyhalos
 echo 'LEGACYHALOS_DIR='$LEGACYHALOS_DIR
 echo 'LEGACYHALOS_DATA_DIR='$LEGACYHALOS_DATA_DIR
 echo 'LEGACYHALOS_CODE_DIR='$LEGACYHALOS_CODE_DIR
+echo 'ASTROMETRY_DIR='$ASTROMETRY_DIR

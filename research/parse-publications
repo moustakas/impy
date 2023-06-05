@@ -52,6 +52,7 @@ def get_journal(journal):
               'Transient Name Server AstroNote': 'TNSAN',
               'arXiv e-prints': 'arXiv',
               'The Messenger': '\\textit{Messenger}',
+              'IAU Focus Meeting': '\\textit{IAU Focus Meeting}',
               'Central Bureau Electronic Telegrams': 'CBET',
               "The Astronomer's Telegram": 'ATel',
               'Astroparticle Physics': 'Astroparticle Physics',
@@ -322,7 +323,7 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
         out.write('\end{longtable}\n')
         print('{}: publications={}, citations={}'.format(heading, icount, ntotcite))
 
-date = '2023jan19'
+date = '2023jun01' # '2023jan19'
 
 pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date) # output
 bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date) # from ADS
