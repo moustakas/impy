@@ -76,7 +76,7 @@ alias pwd='pwd -P'
 alias em='open -a /Applications/Emacs.app $1'
 
 alias olsen='ssh jmoustakas@olsen.cs.siena.edu'
-alias cori='ssh -XY cori.nersc.gov'
+alias nersc='ssh perlmutter'
 # alias cori='${IM_CODE_DIR}/impy/bin/sshnersc.sh cori'
 alias dtn01='sshnersc.sh dtn01'
 alias nyx='ssh -XY nyx'

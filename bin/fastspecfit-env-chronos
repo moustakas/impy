@@ -21,6 +21,9 @@ done
 
 export PYTHONPATH=$IM_CODE_DIR/spender:$PYTHONPATH
 
+export PYTHONPATH=$HOME/code/NonnegMFPy:$PYTHONPATH
+export PYTHONPATH=$HOME/code/empca:$PYTHONPATH
+
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit

@@ -34,8 +34,8 @@ export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${DESI_PRODUCT_ROOT}/desiutil/py:$PYTHONPATH
 
 export PATH=${IM_CODE_DIR}/SGA/bin:$PATH
+export PATH=${IM_CODE_DIR}/SGA/science/SGA2020:$PATH
 export PATH=${IM_CODE_DIR}/legacyhalos/bin:$PATH
-export PATH=${IM_CODE_DIR}/legacyhalos/science/SGA-2020:$PATH
 #export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
 conda activate SGA
