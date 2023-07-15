@@ -1,8 +1,9 @@
 #!/bin/bash
 
 echo 'Loading FastSpecFit.'
-source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
-module swap desispec/0.57.0
+source /global/cfs/cdirs/desi/software/desi_environment.sh main
+#source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
+#module swap desispec/0.58.4
 
 #module load fastspecfit/main
 #module load fastspecfit/2.1.2
@@ -14,17 +15,20 @@ for package in fastspecfit; do
     export PYTHONPATH=$HOME/code/desihub/$package/py:$PYTHONPATH
 done
 
-for package in pyneb; do
+echo 'Loading local check-out of speclite'
+export PYTHONPATH=/global/homes/i/ioannis/code/desihub/speclite:$PYTHONPATH
+
+for package in pyneb NonnegMFPy SetCoverPy; do
     echo Loading local check-out of $package
     export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
 done
 
 export DESI_ROOT='/global/cfs/cdirs/desi'
-export DR9_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
 export DUST_DIR='/global/cfs/cdirs/cosmo/data/dust/v0_1'
+export FPHOTO_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
 export FTEMPLATES_DIR='/global/cfs/cdirs/desi/science/gqp/templates/fastspecfit'
 
-echo 'DR9_DIR='$DR9_DIR
-echo 'DUST_DIR='$DUST_DIR
 echo 'DESI_ROOT='$DESI_ROOT
+echo 'DUST_DIR='$DUST_DIR
+echo 'FPHOTO_DIR='$FPHOTO_DIR
 echo 'FTEMPLATES_DIR='$FTEMPLATES_DIR
