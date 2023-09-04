@@ -32,6 +32,7 @@ caption = 'Default'
 for h in h2s:
     if h.string.find('Class Roster For')>=0:
         caption = h.string
+        caption = caption.replace('&', '\&')
 
 tables = soup.find_all('table')
 
@@ -59,7 +60,7 @@ for table in tables:
                 if len(img)>0 and img[0]['src'].find('jpg') >= 0:
                     image = img[0]['src']
                     image = image.replace(' ', '_')
-                    #image = image.replace(' ','_').replace('%20', '_')
+                    image = image.replace(' ','_').replace('%20', '_')
                     if not os.path.isfile(image):
                         image = './smiley.png'
                         #print('Missing image!')
