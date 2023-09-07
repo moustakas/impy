@@ -23,13 +23,14 @@ export LEGACY_SURVEY_DIR=$LEGACYHALOS_DATA_DIR
 export TNG_DATA=$IM_DATA_DIR/illustris
 
 #export TRACTOR_DIR=/usr/local/tractor
-export ASTROMETRY_DIR=/opt/homebrew/Cellar/astrometry-net/0.94/libexec/lib/python3.11/site-packages
+export ASTROMETRY_DIR=/opt/homebrew/Cellar/astrometry-net/0.94_1/libexec/lib/python3.11/site-packages
 #export ASTROMETRY_DIR=/usr/local/astrometry
 #export ASTROMETRY_DIR=${HOME}/anaconda3/envs/legacyhalos
 export REDMAPPER_DIR=$IM_DATA_DIR/redmapper
 export SPS_HOME=$IM_RESEARCH_DIR/synthesis/fsps
 
 export LEGACYPIPE_DIR=$IM_CODE_DIR/legacysurvey/legacypipe
+export PYTHONPATH=${IM_CODE_DIR}/tractor:$PYTHONPATH
 
 export PYTHONPATH=${ASTROMETRY_DIR}:${PYTHONPATH}
 #export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
@@ -41,7 +42,7 @@ export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
 export PYTHONPATH=${IM_CODE_DIR}/illustris_python:$PYTHONPATH
 
 export PATH=${IM_CODE_DIR}/legacyhalos/bin:$PATH
-export PATH=${IM_CODE_DIR}/legacyhalos/science/SGA-2020:$PATH
+export PATH=${IM_CODE_DIR}/legacyhalos/science/mnsa:$PATH
 export PATH=${IM_CODE_DIR}/legacyhalos/science/profiles:$PATH
 export PATH=${IM_CODE_DIR}/legacyhalos/science/smf:$PATH
 #export PATH=/usr/local/astrometry/bin:${PATH}

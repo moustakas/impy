@@ -13,7 +13,7 @@ export SPECPROD=dailytest
 export PIXPROD=dailytest
 
 # Update PATH and PYTHONPATH
-for package in desiutil desitarget desispec desisim desimodel redrock prospec; do
+for package in desiutil desitarget desispec desisim desimodel redrock desigal fastspecfit; do
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done

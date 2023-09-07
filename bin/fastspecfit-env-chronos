@@ -7,6 +7,8 @@ export IM_WORK_DIR=${HOME}/work
 export IM_CODE_DIR=${HOME}/code
 
 export DESI_ROOT=$IM_WORK_DIR/desi
+export DESI_TARGET=$DESI_ROOT/target
+export DESI_SURVEYOPS=$DESI_ROOT/survey/ops/surveyops/trunk
 export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
 #export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub-fastspecfit
 export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
@@ -14,22 +16,33 @@ export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
 
 # Update PATH and PYTHONPATH
 #for package in desiutil desimodel desitarget desispec redrock fastspecfit; do
-for package in desiutil desimodel desitarget desispec fastspecfit; do
+for package in desiutil desimodel desitarget desispec fastspecfit desigal redrock; do
   export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
   export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
 done
 
-export PYTHONPATH=$IM_CODE_DIR/spender:$PYTHONPATH
-
-export PYTHONPATH=$HOME/code/NonnegMFPy:$PYTHONPATH
-export PYTHONPATH=$HOME/code/empca:$PYTHONPATH
+#echo 'Loading local check-out of speclite'
+#export PYTHONPATH=$DESI_PRODUCT_ROOT/speclite:$PYTHONPATH
+#
+#echo 'Loading local check-out of spender'
+#export PYTHONPATH=$IM_CODE_DIR/spender:$PYTHONPATH
+#
+#echo 'Loading local check-out of NMF'
+#export PYTHONPATH=$HOME/code/NonnegMFPy:$PYTHONPATH
+#
+#echo 'Loading local check-out of empca'
+#export PYTHONPATH=$HOME/code/empca:$PYTHONPATH
 
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit
 #export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
-export DR9_DIR=${IM_WORK_DIR}/legacysurvey/dr9
+export FPHOTO_DIR=${IM_WORK_DIR}/legacysurvey/dr9
 export SPS_HOME=${IM_CODE_DIR}/fsps
+
+#export RR_TEMPLATE_DIR=/Users/ioannis/work/desi/users/ioannis/fastspecfit/laelbg-templates
+#echo 'HACKING RR_TEMPLATE_DIR!'
+#echo $RR_TEMPLATE_DIR
 
 echo "Loading FastSpecFit environment"
 conda activate fastspecfit

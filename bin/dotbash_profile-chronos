@@ -89,9 +89,9 @@ alias cass='ssh cass.ucsd.edu'
 alias howdy='ssh -p 4426 howdy'
 alias polar='ssh polar'
 
-alias 010='cd ~/teaching/010-S18'
-alias 330='cd ~/teaching/330-S18'
+alias 110='cd $TEACHING_DIR/SCDV110-F23'
 
+alias edav='conda activate scdv110'
 alias py27='conda activate py27'
 alias py310='conda activate py310'
 
