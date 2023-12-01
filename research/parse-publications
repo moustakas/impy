@@ -215,7 +215,16 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
                 #if nauth > 1:
                 if me > 2:
                     authlist = parse_author(auth[0])+', '+parse_author(auth[1])
-                    authlist = authlist+', (\\textbf{J. Moustakas}, $'+str(me+1)+'^{th}$ coauthor) et al.'
+                    digit = str(me+1)[-1]
+                    if digit == '1':
+                        suffix = 'st'
+                    elif digit == '2':
+                        suffix = 'nd'
+                    elif digit == '3':
+                        suffix = 'rd'
+                    else:
+                        suffix = 'th'
+                    authlist = authlist+', (\\textbf{J. Moustakas}, $'+str(me+1)+'^{\mathrm{'+suffix+'}}$ coauthor) et al.'
                 else:
                     if nauth == 2:
                         authlist = authlist+' \& '+parse_author(auth[1])
@@ -323,7 +332,7 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
         out.write('\end{longtable}\n')
         print('{}: publications={}, citations={}'.format(heading, icount, ntotcite))
 
-date = '2023jun01' # '2023jan19'
+date = '2023sep30' # '2023jan19'
 
 pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date) # output
 bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date) # from ADS
@@ -405,6 +414,7 @@ for idata in np.arange(npub):
               'ASPC' in pubid or
               'ATel' in pubid or
               'IAU' in pubid or
+              'TNSAN' in pubid or
               'AIPC' in pubid or
               'ASSP' in pubid):
             pubtype.append('conf') # conference proceeding or telegrams
@@ -416,6 +426,7 @@ for idata in np.arange(npub):
               pubid == '2018arXiv181204897L' or
               pubid == '2019arXiv190308177L' or
               pubid == '2022arXiv220904322S' or
+              pubid == '2023arXiv230611784H' or
               pubid == '2016arXiv161100037D'):
             pubtype.append('unref') # white papers and unrefereed publications
         elif 'ascl' in pubid or 'zenodo' in pubid:
@@ -439,17 +450,14 @@ write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=verbose)
 # papers in preparation
 heading = 'First-author Papers in Preparation'
 mydb = [
-    {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Schlegel}, David J.', '{Meyers}, Adam D.'],
-     'title': '{Siena Galaxy Atlas 2020}',
-     'year': 2023, 'journal': 'The Astrophysical Journal'},
+    {'author': ['{Moustakas}, John', '{Juneau}, St\'{e}phanie', '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
+     'title': '{FastSpecFit: Spectrophotometric Modeling of 1.4 Million Extragalactic Targets from the DESI Early Data Release}',
+     'year': 2023, 'journal': 'The Astronomical Journal'},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
      'title': '{Stellar Mass Density Profiles of Red, Low-Redshift Central Galaxies}',
      'year': 2023, 'journal': 'The Astrophysical Journal'},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
      'title': '{Stellar Mass Function of Red, Low-Redshift Central Galaxies}',
-     'year': 2023, 'journal': 'The Astrophysical Journal'},
-    {'author': ['{Moustakas}, John', '{Juneau}, St\'{e}phanie', '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
-     'title': '{FastSpecFit: Spectrophotometric Modeling of 3.6 Million Extragalactic Targets from the DESI Early Data Release and Data Release 1}',
      'year': 2023, 'journal': 'The Astrophysical Journal'},
 ]
 
