@@ -1,32 +1,36 @@
 #!/bin/bash
 
 echo 'Loading FastSpecFit.'
-source /global/cfs/cdirs/desi/software/desi_environment.sh main
+source /dvs_ro/common/software/desi/desi_environment.sh main
+#source /dvs_ro/common/software/desi/desi_environment.sh 23.1
+#source /global/cfs/cdirs/desi/software/desi_environment.sh main
 #source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
-#module swap desispec/0.58.4
+#module swap desispec/0.59.2
 
 #module load fastspecfit/main
-#module load fastspecfit/2.1.2
-
-##for package in fastspecfit desispec; do
+#module load fastspecfit/2.4.0
 for package in fastspecfit; do
     echo Loading local check-out of $package
     export PATH=$HOME/code/desihub/$package/bin:$PATH
     export PYTHONPATH=$HOME/code/desihub/$package/py:$PYTHONPATH
 done
 
-echo 'Loading local check-out of speclite'
-export PYTHONPATH=/global/homes/i/ioannis/code/desihub/speclite:$PYTHONPATH
-
-for package in pyneb NonnegMFPy SetCoverPy; do
-    echo Loading local check-out of $package
-    export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
-done
+#echo 'Loading local check-out of speclite'
+#export PYTHONPATH=/global/homes/i/ioannis/code/desihub/speclite:$PYTHONPATH
+#for package in pyneb NonnegMFPy SetCoverPy; do
+#    echo Loading local check-out of $package
+#    export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
+#done
 
 export DESI_ROOT='/global/cfs/cdirs/desi'
 export DUST_DIR='/global/cfs/cdirs/cosmo/data/dust/v0_1'
 export FPHOTO_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
 export FTEMPLATES_DIR='/global/cfs/cdirs/desi/science/gqp/templates/fastspecfit'
+
+#export DESI_ROOT='/global/cfs/cdirs/desi'
+#export DUST_DIR='/global/cfs/cdirs/cosmo/data/dust/v0_1'
+#export FPHOTO_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
+#export FTEMPLATES_DIR='/global/cfs/cdirs/desi/science/gqp/templates/fastspecfit'
 
 echo 'DESI_ROOT='$DESI_ROOT
 echo 'DUST_DIR='$DUST_DIR
