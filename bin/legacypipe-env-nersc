@@ -5,7 +5,7 @@
 echo 'Loading legacypipe software'
 
 unset PYTHONPATH
-source /global/cfs/cdirs/desi/software/desi_environment.sh main
+source /global/common/software/desi/desi_environment.sh
 
 #desiconda_version=20190311-1.2.7-img
 #echo 'Loaded desiconda_version='$desiconda_version
