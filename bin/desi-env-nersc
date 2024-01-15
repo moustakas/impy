@@ -19,7 +19,7 @@ source /dvs_ro/common/software/desi/desi_environment.sh main
 #source /dvs_ro/common/software/desi/desi_environment.sh 23.1
 #source /global/cfs/cdirs/desi/software/desi_environment.sh main
 #source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
-module swap desispec/0.59.2
+#module swap desispec/0.59.2
 
 #module switch desisim/0.18.1
 #module switch desiutil/1.9.3
