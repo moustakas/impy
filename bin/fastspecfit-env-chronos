@@ -38,7 +38,7 @@ export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit
 #export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
 export FPHOTO_DIR=${IM_WORK_DIR}/legacysurvey/dr9
-export SPS_HOME=${IM_CODE_DIR}/fsps
+export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
 
 #export RR_TEMPLATE_DIR=/Users/ioannis/work/desi/users/ioannis/fastspecfit/laelbg-templates
 #echo 'HACKING RR_TEMPLATE_DIR!'
