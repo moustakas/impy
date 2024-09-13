@@ -8,11 +8,8 @@ export IM_CODE_DIR=${HOME}/code
 
 export DESI_ROOT=$IM_WORK_DIR/desi
 export DESI_TARGET=$DESI_ROOT/target
-export DESI_SURVEYOPS=$DESI_ROOT/survey/ops/surveyops/trunk
 export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
-#export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub-fastspecfit
 export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
-#export DESIMODEL=$DESI_PRODUCT_ROOT/desimodel
 
 # Update PATH and PYTHONPATH
 #for package in desiutil desimodel desitarget desispec redrock fastspecfit; do
@@ -36,13 +33,8 @@ done
 # Additional variables
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit
-#export FASTSPECFIT_TEMPLATES=${DESI_ROOT}/science/gqp/templates/SSP-CKC14z
 export FPHOTO_DIR=${IM_WORK_DIR}/legacysurvey/dr9
 export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
-
-#export RR_TEMPLATE_DIR=/Users/ioannis/work/desi/users/ioannis/fastspecfit/laelbg-templates
-#echo 'HACKING RR_TEMPLATE_DIR!'
-#echo $RR_TEMPLATE_DIR
 
 echo "Loading FastSpecFit environment"
 conda activate fastspecfit
