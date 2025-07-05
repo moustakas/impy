@@ -36,11 +36,14 @@ export IMPY_DIR=${IM_CODE_DIR}/impy
 ##################################################
 # Expand my PATH
 export PATH=$IM_CODE_DIR/software/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH # ads2bibdesk
+export PATH=$HOME/Library/Python/3.13/bin:$PATH # ads2bibdesk
+#export PATH=$HOME/.local/bin:$PATH # ads2bibdesk
 export PATH=$IMPY_DIR/bin:$PATH
 
 # export PATH=/usr/local/share/cfitsio/build/bin:$PATH # funpack utilities
 # export PATH=$IM_CODE_DIR/CUTE/CUTE:$PATH
+
+export PATH=$HOME/.emacs.d/bin:$PATH
 
 ##########################
 # Set up conda
@@ -92,8 +95,7 @@ alias polar='ssh polar'
 alias 110='cd $TEACHING_DIR/SCDV110-F23'
 
 alias edav='conda activate scdv110'
-alias py27='conda activate py27'
-alias py310='conda activate py310'
+alias py312='conda activate py312'
 
 alias fastspecfit='source $IMPY_DIR/bin/fastspecfit-env-chronos'
 alias desi='source $IMPY_DIR/bin/desi-env-chronos'
@@ -108,8 +110,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-#__conda_setup="$('/Users/ioannis/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -118,11 +119,6 @@ else
     else
         export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
     fi
-    # if [ -f "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-    #     . "/Users/ioannis/opt/anaconda3/etc/profile.d/conda.sh"
-    # else
-    #     export PATH="/Users/ioannis/opt/anaconda3/bin:$PATH"
-    # fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<

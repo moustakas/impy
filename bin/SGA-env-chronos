@@ -5,7 +5,7 @@ echo 'Loading SGA project'
 
 unset PYTHONPATH # Clear PYTHONPATH
 
-project=SGA2024
+project=SGA2025
 
 export SGA_CODE_DIR=${IM_CODE_DIR}/SGA
 export LEGACYHALOS_CODE_DIR=$IM_CODE_DIR/legacyhalos
@@ -13,9 +13,15 @@ export LEGACYPIPE_CODE_DIR=${IM_CODE_DIR}/legacysurvey/legacypipe
 export PYTHONPATH=$SGA_CODE_DIR/py:$LEGACYHALOS_CODE_DIR/py:$LEGACYPIPE_CODE_DIR/py:$PYTHONPATH
 export PATH=$SGA_CODE_DIR/bin/$project:$PATH
 
-export SGA_DIR=$IM_PROJECTS_DIR/SGA/2024
-export SGA_DATA_DIR=$IM_PROJECTS_DIR/SGA/2024/data
-export SGA_HTML_DIR=$IM_PROJECTS_DIR/SGA/2024/html
+export DESI_PRODUCT_ROOT=$IM_CODE_DIR/desihub
+for package in desiutil desimodel; do
+    export PATH=$DESI_PRODUCT_ROOT/$package/bin:$PATH
+    export PYTHONPATH=$DESI_PRODUCT_ROOT/$package/py:$PYTHONPATH
+done
+
+export SGA_DIR=$IM_PROJECTS_DIR/SGA/2025
+export SGA_DATA_DIR=$IM_PROJECTS_DIR/SGA/2025/data
+export SGA_HTML_DIR=$IM_PROJECTS_DIR/SGA/2025/html
 
 export ASTROMETRY_DIR=${IM_CODE_DIR}/astrometry/lib/python
 
@@ -38,7 +44,6 @@ export PYTHONPATH=${TRACTOR_DIR}:${PYTHONPATH}
 #export PYTHONPATH=${ASTROMETRY_DIR}/lib/python:${PYTHONPATH}
 #export PYTHONPATH=${IM_CODE_DIR}/tractor:$PYTHONPATH
 #export PYTHONPATH=${LEGACYHALOS_CODE_DIR}/py:$PYTHONPATH
-#export PYTHONPATH=${DESI_PRODUCT_ROOT}/desiutil/py:$PYTHONPATH
 
 #export PATH=${IM_CODE_DIR}/SGA/bin:$PATH
 #export PATH=${IM_CODE_DIR}/SGA/science/SGA2020:$PATH
@@ -46,6 +51,9 @@ export PYTHONPATH=${TRACTOR_DIR}:${PYTHONPATH}
 #export PATH=$ASTROMETRY_DIR/bin:${PATH}
 
 #export PYTHONPATH=/opt/homebrew/Caskroom/miniforge/base/envs/SGA/lib/python3.11/site-packages:${PYTHONPATH}
+
+#export LEGACY_SURVEY_DIR=$HOME/work/legacysurvey/dr9
+export LEGACY_SURVEY_BASEDIR=$HOME/work/legacysurvey
 
 conda activate SGA
 
