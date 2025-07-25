@@ -15,31 +15,20 @@
 #   module load desiconda
 
 echo 'Loading DESI software.'
-source /dvs_ro/common/software/desi/desi_environment.sh main
-#source /dvs_ro/common/software/desi/desi_environment.sh 23.1
-#source /global/cfs/cdirs/desi/software/desi_environment.sh main
-#source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
-#module swap desispec/0.59.2
-
-#module switch desisim/0.18.1
-#module switch desiutil/1.9.3
-#module switch desitarget/0.9.0
-#module switch desispec/0.13.1
-#module switch desimodel/0.5.1
-
+source /global/common/software/desi/desi_environment.sh main
 #module load fastspecfit/main
 
-package=desi-photometry
-export PATH=$HOME/code/desihub/$package/bin:${PATH}
-export PYTHONPATH=$HOME/code/desihub/$package/py:${PYTHONPATH}
+#package=desi-photometry
+#export PATH=/global/common/software/desi/users/ioannis/$package/bin:${PATH}
+#export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:${PYTHONPATH}
 
 #for package in desitarget desisim; do
 #for package in desitarget desisim; do
-for package in fastspecfit; do
+for package in desispec fastspecfit; do
   echo Loading local check-out of $package
   #module unload $package
-  export PATH=$HOME/code/desihub/$package/bin:${PATH}
-  export PYTHONPATH=$HOME/code/desihub/$package/py:${PYTHONPATH}
+  export PATH=/global/common/software/desi/users/ioannis/$package/bin:${PATH}
+  export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:${PYTHONPATH}
 done
 
 # echo 'Loading local check-out of speclite'
@@ -71,10 +60,12 @@ done
 
 #module use /global/common/software/desi/users/dstn/modulefiles/
 #module load legacypipe/DR9
-export PYTHONPATH=$HOME/code/git/legacypipe/py:${PYTHONPATH}
+#export PYTHONPATH=$HOME/code/git/legacypipe/py:${PYTHONPATH}
+#echo "TEMPORARY HACK OF LEGACYPIPE!"
+#export PYTHONPATH=$HOME/tmp/legacypipe/py:${PYTHONPATH}
 
-export DUST_DIR='/dvs_ro/cfs/cdirs/cosmo/data/dust/v0_1'
-#export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
+#export DUST_DIR='/dvs_ro/cfs/cdirs/cosmo/data/dust/v0_1'
+export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
 export DESI_SPECTRO_CALIB=/global/cfs/cdirs/desi/spectro/desi_spectro_calib/trunk
 export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.2
 

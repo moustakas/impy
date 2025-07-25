@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo 'Loading spender software stack'
+
+module load pytorch/2.1.0-cu12
+export PYTHONPATH=$HOME/code/desihub/spender:$HOME/.local/perlmutter/2.1.0-cu12/lib/python3.10/site-packages:$PYTHONPATH
+
+#module load pytorch/2.0.1
+#export PYTHONPATH=$HOME/code/desihub/spender:$HOME/.local/perlmutter/pytorch2.0.1/lib/python3.9/site-packages:$PYTHONPATH
+
+for package in desiutil desimodel desitarget desispec; do
+    echo Loading local check-out of $package
+    export PATH=$HOME/code/desihub/$package/bin:$PATH
+    export PYTHONPATH=$HOME/code/desihub/$package/py:$PYTHONPATH
+done
+
+export SPENDER_CODE_DIR=$HOME/code/desihub

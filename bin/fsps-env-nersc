@@ -1,0 +1,13 @@
+echo 'Loading FSPS software stack'
+module load conda
+conda activate fsps
+# export SPS_HOME=$HOME/code/git/fsps
+
+export SPS_HOME=$HOME/code/git/python-fsps/src/fsps/libfsps
+export DESI_ROOT=$CFS/desi
+
+export PYTHONPATH=$HOME/desihub/fastspecfit/py:$HOME/desihub/desiutil/py:$PYTHONPATH:$HOME/desihub/desispec/py:$PYTHONPATH
+export PATH=$HOME/code/desihub/fastspecfit/bin:$PATH
+
+echo "SPS_HOME="$SPS_HOME
+
