@@ -44,13 +44,16 @@ def get_journal(journal):
     decode = {'\\mnras': 'MNRAS',
               '\\nat': 'Nature',
               '\\aj': 'AJ',
-              '\\aap': 'A\&A',
+              '\\aap': r'A\&A',
               '\\apj': 'ApJ',
-              '\\araa': 'ARA\&A',
+              '\\araa': r'ARA\&A',
               '\\apjl': 'ApJL',
+              '\\pasp': 'PASP',
+              '\\prl': 'PRL',
               '\\apjs': 'ApJS',
               '\\jcap': 'JCAP', # Journal of Cosmology and Astroparticle Physics
               '\\prd': 'PRD', # 'Physical Review D'
+              'Nature Astronomy': 'Nature Astronomy',
               'The Open Journal of Astrophysics': 'OJAp',
               'Transient Name Server AstroNote': 'TNSAN',
               'arXiv e-prints': 'arXiv',
@@ -89,6 +92,8 @@ def parse_author(author):
 
 def parse_title(title, maxlentitle=80):#83):
     # title hacks / fixes!
+    title = title.replace('Ly$α$', 'Ly$\\alpha$')
+    title = title.replace('${\\rm S{\\scriptsize pender}Q}$', 'SpenderQ')
     title = title.replace('z {\\ensuremath{\\sim}} 0.5', '$z\\sim0.5$')
     title = title.replace('3.2 {\ensuremath{\leq}} z {\ensuremath{\leq}} 4.6', '$3.2\leq z\leq 4.6$')
     title = title.replace('\{\\textbackslashLambda\}', '$\\Lambda$ ')
@@ -355,7 +360,7 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
         out.write('\end{longtable}\n')
         print('{}: publications={}, citations={}'.format(heading, icount, ntotcite))
 
-date = '2025jun02' # '2024nov10' # '2023sep30' # '2023jan19'
+date = '2026jan12' # '2025jun02' # '2024nov10' # '2023sep30' # '2023jan19'
 
 pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date) # output
 bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date) # from ADS
@@ -486,19 +491,19 @@ heading = 'First-author Papers in Preparation'
 mydb = [
     {'author': ['{Moustakas}, John', '{Scholte}, Dirk'],
      'title': '{A New Oxygen Abundance Floor: Discovery of Two Ultra Metal-Poor Galaxies in the Dark Energy Spectroscopic Instrument Survey}',
-     'year': 2025, 'journal': 'The Astrophysical Journal', 'etal': True},
+     'year': 2026, 'journal': 'The Astrophysical Journal', 'etal': True},
     {'author': ['{Moustakas}, John', '{Buhler}, Jeremy', '{Juneau}, St\'{e}phanie', '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
      'title': '{FastSpecFit: Spectrophotometric Modeling of 1.4 Million Extragalactic Targets from the DESI Early Data Release}',
-     'year': 2025, 'journal': 'The Astronomical Journal', 'etal': True},
+     'year': 2026, 'journal': 'The Astronomical Journal', 'etal': True},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin'],
      'title': '{Siena Galaxy Atlas 2025}',
-     'year': 2025, 'journal': 'The Astrophysical Journal Supplements', 'etal': True},
+     'year': 2026, 'journal': 'The Astrophysical Journal', 'etal': True},
     #{'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
     # 'title': '{Stellar Mass Density Profiles of Red, Low-Redshift Central Galaxies}',
-    # 'year': 2025, 'journal': 'The Astrophysical Journal'},
+    # 'year': 2026, 'journal': 'The Astrophysical Journal'},
     #{'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
     # 'title': '{Stellar Mass Function of Red, Low-Redshift Central Galaxies}',
-    # 'year': 2025, 'journal': 'The Astrophysical Journal'},
+    # 'year': 2026, 'journal': 'The Astrophysical Journal'},
 ]
 
 indx = np.arange(len((mydb)))

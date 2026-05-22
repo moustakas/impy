@@ -1,0 +1,25 @@
+#!/bin/bash
+# Set up DESI/FastSpecFit code
+#
+# micromamba create -n fastspec python
+# micromamba activate fastspec
+#
+# cd ~/code/desihub/fastspecfit
+# python -m pip install -e ".[test]"
+# python -m pip show fastspecfit
+# python -m pip list --format=columns | grep -E "desispec|speclite|fastspecfit"
+#
+
+export IM_WORK_DIR=${HOME}/work
+export IM_CODE_DIR=${HOME}/code
+
+export DESI_ROOT=$IM_WORK_DIR/desi
+export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
+
+export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
+export FTEMPLATES_DIR=${DESI_ROOT}/science/gqp/templates/fastspecfit
+export FPHOTO_DIR=${IM_WORK_DIR}/legacysurvey/dr9
+export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
+
+echo "Loading FastSpecFit environment"
+micromamba activate fastspec

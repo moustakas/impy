@@ -1,0 +1,17 @@
+#!/bin/bash
+# Set up Breyo Observatory code
+
+echo 'Loading Breyo data reduction pipeline'
+
+unset PYTHONPATH # clear PYTHONPATH
+
+export BREYO_DIR=$IM_CODE_DIR/breyo
+export BREYO_DATA_DIR=$IM_DATA_DIR/breyo
+export ASTROMETRY_DIR=${IM_CODE_DIR}/astrometry/lib/python
+
+export PYTHONPATH=${ASTROMETRY_DIR}:${PYTHONPATH}
+export PYTHONPATH=${BREYO_DIR}/py:${PYTHONPATH}
+
+export PATH=${BREYO_DIR}/bin:$PATH
+
+micromamba activate breyo
