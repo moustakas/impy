@@ -24,7 +24,7 @@ source /global/common/software/desi/desi_environment.sh main
 
 #for package in desitarget desisim; do
 #for package in desitarget desisim; do
-for package in desispec fastspecfit; do
+for package in desigal desispec fastspecfit; do
   echo Loading local check-out of $package
   #module unload $package
   export PATH=/global/common/software/desi/users/ioannis/$package/bin:${PATH}

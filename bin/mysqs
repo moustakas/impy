@@ -1,0 +1,4 @@
+#!/bin/bash
+#squeue --format "%16i %2t %9u %12j  %5D %.10l %.10M  %20V %15q %20S %14f %15R" --me "$@"
+
+squeue --format "%14i %4t %25j %4D %.10l %.10M %20V %15q %15R" --me "$@"

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo 'Loading FastSpecFit.'
-source /global/common/software/desi/desi_environment.sh main
-#source /dvs_ro/common/software/desi/desi_environment.sh 23.1
+#source /global/common/software/desi/desi_environment.sh main
+source /dvs_ro/common/software/desi/desi_environment.sh 26.3
 #source /global/cfs/cdirs/desi/software/desi_environment.sh main
 #source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
 #module swap desispec/0.59.2
@@ -25,17 +25,20 @@ done
 #    export PYTHONPATH=$HOME/code/git/$package:$PYTHONPATH
 #done
 
+#echo 'Loading local check-out of desigal'
+#export PYTHONPATH=$HOME/code/desigal/py:$PYTHONPATH
+
 #echo 'Loading local check-out of empca, nearly_nmf, and Y3-templates'
 #export PYTHONPATH=$HOME/code/desihub/empca:$PYTHONPATH
 #export PYTHONPATH=$HOME/code/desihub/nearly_nmf/py:$PYTHONPATH
 #export PATH=$HOME/code/desihub/fastspecfit-projects/redrock-templates/Y3-templates:$PATH
 #export PYTHONPATH=$HOME/code/desihub/fastspecfit-projects/redrock-templates/Y3-templates/py:$PYTHONPATH
 
-export DESI_SPECTRO_REDUX='/global/cfs/cdirs/desi/spectro/redux'
-export DUST_DIR='/global/cfs/cdirs/desi/external/dust/v0_1'
-export FPHOTO_DIR='/global/cfs/cdirs/desi/external/legacysurvey/dr9'
-#export FTEMPLATES_DIR='/global/cfs/cdirs/desi/users/ioannis/fastspecfit/templates'
-export FTEMPLATES_DIR='/global/cfs/cdirs/desi/public/external/templates/fastspecfit'
+export DESI_SPECTRO_REDUX='/dvs_ro/cfs/cdirs/desi/spectro/redux'
+export DUST_DIR='/dvs_ro/cfs/cdirs/desi/external/dust/v0_1'
+export FPHOTO_DIR='/dvs_ro/cfs/cdirs/desi/external/legacysurvey/dr9'
+#export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/users/ioannis/fastspecfit/templates'
+export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/public/external/templates/fastspecfit'
 
 echo 'DESI_SPECTRO_REDUX='$DESI_SPECTRO_REDUX
 echo 'DUST_DIR='$DUST_DIR
