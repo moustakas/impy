@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo 'Loading FastSpecFit.'
-#source /global/common/software/desi/desi_environment.sh main
-source /dvs_ro/common/software/desi/desi_environment.sh 26.3
+source /dvs_ro/common/software/desi/desi_environment.sh main
+#source /dvs_ro/common/software/desi/desi_environment.sh 26.3
 #source /global/cfs/cdirs/desi/software/desi_environment.sh main
 #source /global/cfs/cdirs/desi/software/desi_environment.sh 23.1
 #module swap desispec/0.59.2

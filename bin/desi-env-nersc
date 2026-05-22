@@ -15,7 +15,7 @@
 #   module load desiconda
 
 echo 'Loading DESI software.'
-source /global/common/software/desi/desi_environment.sh main
+source /dvs_ro/common/software/desi/desi_environment.sh main
 #module load fastspecfit/main
 
 #package=desi-photometry
@@ -23,8 +23,7 @@ source /global/common/software/desi/desi_environment.sh main
 #export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:${PYTHONPATH}
 
 #for package in desitarget desisim; do
-#for package in desitarget desisim; do
-for package in desigal desispec fastspecfit; do
+for package in desigal fastspecfit; do
   echo Loading local check-out of $package
   #module unload $package
   export PATH=/global/common/software/desi/users/ioannis/$package/bin:${PATH}
@@ -65,15 +64,14 @@ done
 #export PYTHONPATH=$HOME/tmp/legacypipe/py:${PYTHONPATH}
 
 #export DUST_DIR='/dvs_ro/cfs/cdirs/cosmo/data/dust/v0_1'
-export DUST_DIR=/global/cfs/cdirs/cosmo/data/dust/v0_1
-export DESI_SPECTRO_CALIB=/global/cfs/cdirs/desi/spectro/desi_spectro_calib/trunk
-export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.2
+export DUST_DIR=/dvs_ro/cfs/cdirs/cosmo/data/dust/v0_1
+export DESI_SPECTRO_CALIB=/dvs_ro/cfs/cdirs/desi/spectro/desi_spectro_calib/trunk
+#export DESI_BASIS_TEMPLATES=${DESI_ROOT}/spectro/templates/basis_templates/v3.2
 
 echo 'DESI_ROOT='$DESI_ROOT
 echo 'DESI_SPECTRO_CALIB='$DESI_SPECTRO_CALIB
 echo 'DESI_SPECTRO_REDUX='$DESI_SPECTRO_REDUX
 echo 'SPECPROD='$SPECPROD
-
-echo 'DESI_BASIS_TEMPLATES='$DESI_BASIS_TEMPLATES
+#echo 'DESI_BASIS_TEMPLATES='$DESI_BASIS_TEMPLATES
 echo 'RR_TEMPLATE_DIR='$RR_TEMPLATE_DIR
 echo 'DUST_DIR='$DUST_DIR
