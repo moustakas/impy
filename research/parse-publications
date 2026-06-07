@@ -17,15 +17,16 @@ and then enter the following code:
 /Users/ioannis/code/impy/research/parse-publications
 
 """
-import os, pdb
+import os
 import numpy as np
 import bibtexparser
 from bibtexparser.bparser import BibTexParser
-#from bibtexparser.customization import homogenize_latex_encoding
-from bibtexparser.customization import *
+from bibtexparser.customization import (
+    type, author, editor, journal, keyword, link, page_double_hyphen, doi
+)
 
 def customizations(record):
-    """Use some functions delivered by the library
+    """Use some functions delivered by the library.
 
     :param record: a record
     :returns: -- customized record
@@ -41,18 +42,18 @@ def customizations(record):
     return record
 
 def get_journal(journal):
-    decode = {'\\mnras': 'MNRAS',
-              '\\nat': 'Nature',
-              '\\aj': 'AJ',
-              '\\aap': r'A\&A',
-              '\\apj': 'ApJ',
-              '\\araa': r'ARA\&A',
-              '\\apjl': 'ApJL',
-              '\\pasp': 'PASP',
-              '\\prl': 'PRL',
-              '\\apjs': 'ApJS',
-              '\\jcap': 'JCAP', # Journal of Cosmology and Astroparticle Physics
-              '\\prd': 'PRD', # 'Physical Review D'
+    decode = {r'\mnras': 'MNRAS',
+              r'\nat': 'Nature',
+              r'\aj': 'AJ',
+              r'\aap': r'A\&A',
+              r'\apj': 'ApJ',
+              r'\araa': r'ARA\&A',
+              r'\apjl': 'ApJL',
+              r'\pasp': 'PASP',
+              r'\prl': 'PRL',
+              r'\apjs': 'ApJS',
+              r'\jcap': 'JCAP',  # Journal of Cosmology and Astroparticle Physics
+              r'\prd': 'PRD',    # Physical Review D
               'Nature Astronomy': 'Nature Astronomy',
               'The Open Journal of Astrophysics': 'OJAp',
               'Transient Name Server AstroNote': 'TNSAN',
@@ -66,13 +67,9 @@ def get_journal(journal):
               'The NOIRLab Mirror': 'The NOIRLab Mirror',
               '1999 SAO Summer Intern Program': 'SAO Summer Intern Program',
               }
-    try:
-        out = decode[journal]
-    except:
-        print(f'Need code to parse journal {journal}')
-        pdb.set_trace()
-
-    return out
+    if journal not in decode:
+        raise ValueError(f'Need code to parse journal {journal}')
+    return decode[journal]
 
 def parse_author(author):
     auth = author.split(',')
@@ -82,61 +79,69 @@ def parse_author(author):
         elif auth[0] == '{DESI Collaboration}':
             pauth = 'DESI Collaboration'
         else:
-            pauth = auth[1].strip()[0]+'. '+auth[0].strip() # first initial, last name
-    except:
-        print('Problem parsing author list')
-        pdb.set_trace()
+            pauth = auth[1].strip()[0] + '. ' + auth[0].strip()  # first initial, last name
+    except IndexError:
+        raise ValueError(f'Problem parsing author: {author!r}')
     if 'Moustakas' in pauth:
-        pauth = '\\textbf{'+pauth+'}'
+        pauth = '\\textbf{' + pauth + '}'
     return pauth
 
-def parse_title(title, maxlentitle=80):#83):
+def parse_title(title, maxlentitle=80):
+    # strip outer braces that ADS wraps around titles in the .bib file
+    title = title.strip()
+    if title.startswith('{') and title.endswith('}'):
+        title = title[1:-1]
+    # replace Unicode punctuation that LaTeX can't handle
+    title = title.replace('\u2500', '---')  # box-drawing horizontal (used as em-dash)
+    title = title.replace('\u2012', '---')  # figure dash
+    title = title.replace('\u2013', '--')   # en-dash
+    title = title.replace('\u2014', '---')  # em-dash
     # title hacks / fixes!
-    title = title.replace('Ly$α$', 'Ly$\\alpha$')
-    title = title.replace('${\\rm S{\\scriptsize pender}Q}$', 'SpenderQ')
+    title = title.replace(r'Ly$\u03b1$', 'Ly$\\alpha$')
+    title = title.replace(r'Ly$α$', 'Ly$\\alpha$')
+    title = title.replace(r'Lyman-{\ensuremath{\alpha}}', 'Ly$\\alpha$')
+    title = title.replace(r'${\rm S{\scriptsize pender}Q}$', r'SpenderQ')
     title = title.replace('z {\\ensuremath{\\sim}} 0.5', '$z\\sim0.5$')
-    title = title.replace('3.2 {\ensuremath{\leq}} z {\ensuremath{\leq}} 4.6', '$3.2\leq z\leq 4.6$')
-    title = title.replace('\{\\textbackslashLambda\}', '$\\Lambda$ ')
-    title = title.replace('{\\ensuremath{\\alpha}}', '$\\alpha$')
-    title = title.replace('$a$', '$\\alpha$')
-    title = title.replace('z {\ensuremath{\gtrsim}} 5', '$z>5$')
+    title = title.replace(r'3.2 {\ensuremath{\leq}} z {\ensuremath{\leq}} 4.6', r'$3.2\leq z\leq 4.6$')
+    title = title.replace(r'\{\\textbackslashLambda\}', r'$\\Lambda$ ')
+    title = title.replace(r'{\\ensuremath{\\alpha}}', r'$\\alpha$')
+    title = title.replace(r'$a$', r'$\\alpha$')
+    title = title.replace(r'z {\ensuremath{\gtrsim}} 5', r'$z>5$')
     title = title.replace('z\\textbackslashsim 0.5', '$z\\sim0.5$')
-    title = title.replace('z {\\ensuremath{\\approx}} 11', '$z\\approx11$')
-    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 1', '$z\\sim1$')
-    title = title.replace('H{\\ensuremath{\\alpha}}', 'H$\\alpha$')
-    title = title.replace('0.2 < z < 0.9', '$0.2<z<0.9$')
-    title = title.replace('0.2>z>1.2', '$0.2<z<1.2$')
-    title = title.replace('0.2 < z < 1', '$0.2<z<1$')
-    title = title.replace('Z \\raisebox{-0.5ex}\\textasciitilde 9-10', '$z\\sim$9-10')
-    title = title.replace('Z \\raisebox{-0.5ex}\\textasciitilde 9.2', '$z\\sim9.2$')
-    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 7', '$z\\sim7$')
-    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde= 6.2', '$z\\sim6.2$')
-    title = title.replace('H{\\ensuremath{\\alpha}}', 'H$\alpha$')
-    title = title.replace('z 0.5', '$z\\sim0.5$')
-    title = title.replace('z < 0.8', '$z<0.8$')
-    title = title.replace('z = 0.209', '$z=0.209$')
-    title = title.replace('0.2 < z < 0.9', '$0.2<z<0.9$')
-    title = title.replace('0.0 <= z <= 1.2', '$0.0\le z\le1.2$')
-    title = title.replace('z {\\ensuremath{\\sim}} 1.0', '$z\\sim1$')
-    title = title.replace('z\\raisebox{-0.5ex}\\textasciitilde0.7', '$z\\sim0.7$')
-    title = title.replace('24 {\ensuremath{\mu}}m', '$24~\\mu$m')
-    title = title.replace('70 {\ensuremath{\mu}}m', '$70~\\mu$m')
-    title = title.replace('160 {\ensuremath{\mu}}m', '$160~\\mu$m')
-    title = title.replace('z \\raisebox{-0.5ex}\\textasciitilde 6-8', '$z\\sim$6-8')
+    title = title.replace(r'z {\\ensuremath{\\approx}} 11', r'$z\\approx11$')
+    title = title.replace(r'z \\raisebox{-0.5ex}\\textasciitilde 1', r'$z\\sim1$')
+    title = title.replace('H{\\ensuremath{\\alpha}}', r'H$\alpha$')
+    title = title.replace('H{\\ensuremath{\\beta}}', r'H$\beta$')
+    title = title.replace(r'0.2 < z < 0.9', r'$0.2<z<0.9$')
+    title = title.replace(r'0.2>z>1.2', r'$0.2<z<1.2$')
+    title = title.replace(r'0.2 < z < 1', r'$0.2<z<1$')
+    title = title.replace(r'Z \\raisebox{-0.5ex}\\textasciitilde 9-10', r'$z\\sim$9-10')
+    title = title.replace(r'Z \\raisebox{-0.5ex}\\textasciitilde 9.2', r'$z\\sim9.2$')
+    title = title.replace(r'z \\raisebox{-0.5ex}\\textasciitilde 7', r'$z\\sim7$')
+    title = title.replace(r'z \\raisebox{-0.5ex}\\textasciitilde= 6.2', r'$z\\sim6.2$')
+    title = title.replace(r'H{\\ensuremath{\\alpha}}', r'H$\alpha$')
+    title = title.replace(r'z 0.5', r'$z\sim0.5$')
+    title = title.replace(r'z < 0.8', r'$z<0.8$')
+    title = title.replace(r'z = 0.209', r'$z=0.209$')
+    title = title.replace(r'0.0 <= z <= 1.2', r'$0.0\le z\le1.2$')
+    title = title.replace(r'z {\\ensuremath{\\sim}} 1.0', r'$z\\sim1$')
+    title = title.replace(r'z\\raisebox{-0.5ex}\\textasciitilde0.7', r'$z\\sim0.7$')
+    title = title.replace(r'24 {\ensuremath{\mu}}m', '$24~\\mu$m')
+    title = title.replace(r'70 {\ensuremath{\mu}}m', '$70~\\mu$m')
+    title = title.replace(r'160 {\ensuremath{\mu}}m', '$160~\\mu$m')
+    title = title.replace(r'z \\raisebox{-0.5ex}\\textasciitilde 6-8', r'$z\\sim$6-8')
 
     title1, title2, title3 = None, None, None
     if len(title) > maxlentitle:
         words = title.split(' ')
         title1 = ''
         for iword, word in enumerate(words):
-            title1 += word+' '
+            title1 += word + ' '
             if len(title1) > maxlentitle:
-                title1 = '\\textit'+title1.lstrip().rstrip()
+                title1 = '\\textit{' + title1.strip()
                 if title1[-1] != '}':
-                    title1 = title1+'}'
+                    title1 = title1 + '}'
                 break
-        #if ipub == 163:
-        #    pdb.set_trace()
         if iword == len(words) - 1:
             title = title1
         else:
@@ -145,20 +150,36 @@ def parse_title(title, maxlentitle=80):#83):
                 words = title2.split(' ')
                 _title2 = ''
                 for iword, word in enumerate(words):
-                    _title2 += word+' '
+                    _title2 += word + ' '
                     if len(_title2) > maxlentitle:
-                        title2 = '\\textit{'+_title2.lstrip().rstrip()
+                        title2 = '\\textit{' + _title2.strip()
                         if title2[-1] != '}':
-                            title2 = title2+'}'
+                            title2 = title2 + '}'
                         break
                 if iword < len(words) - 1:
-                    title3 = '\\textit{'+' '.join(words[iword+1:])
+                    title3 = '\\textit{' + ' '.join(words[iword+1:])
             else:
-                title2 = '\\textit{'+' '.join(words[iword+1:])
+                title2 = '\\textit{' + ' '.join(words[iword+1:])
     else:
-        title1 = '\\textit'+title
+        title1 = '\\textit{' + title + '}'
 
     return title1, title2, title3
+
+def close_brace(s):
+    """Ensure a string ending with an unclosed \\textit{ gets its closing }."""
+    return s if s.endswith('}') else s + '}'
+
+def write_title_lines(out, title1, title2, title3):
+    """Write the (up to three) title continuation lines."""
+    if title2 is None and title3 is None:
+        out.write('   & {} \\smallskip\\\\\n'.format(close_brace(title1)))
+    elif title2 is not None and title3 is None:
+        out.write('   & {} \\\\\n'.format(close_brace(title1)))
+        out.write('   & {} \\smallskip\\\\\n'.format(close_brace(title2)))
+    elif title2 is not None and title3 is not None:
+        out.write('   & {} \\\\\n'.format(close_brace(title1)))
+        out.write('   & {} \\\\\n'.format(close_brace(title2)))
+        out.write('   & {} \\smallskip\\\\\n'.format(close_brace(title3)))
 
 def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False,
                      isdict=False):
@@ -167,9 +188,9 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
     icount, ntotcite = 0, 0
 
     with open(pubfile, 'a') as out:
-        out.write('\\hspace{-5mm} {\\color{blue} \\textsc{'+heading+'}}\n')
+        out.write('\\hspace{-5mm} {\\color{blue} \\textsc{' + heading + '}}\n')
         out.write('\\setlength{\\tabcolsep}{2pt}\n')
-        out.write('\\setlength\LTleft{-4mm}\n') # move left a little bit
+        out.write('\\setlength\\LTleft{-4mm}\n')  # move left a little bit
         out.write('\\begin{longtable}{ll}\n')
 
         if isdict:
@@ -184,42 +205,30 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
 
                 if nauth == 2:
                     if 'etal' in data and data['etal']:
-                        authlist = authlist+', '+parse_author(auth[1])+' et~al.'
+                        authlist = authlist + ', ' + parse_author(auth[1]) + ' et~al.'
                     else:
-                        authlist = authlist+' \& '+parse_author(auth[1])
+                        authlist = authlist + ' \\& ' + parse_author(auth[1])
                 elif nauth == 3:
                     if 'etal' in data and data['etal']:
-                        authlist = authlist+', '+parse_author(auth[1])+', '+parse_author(auth[2])+' et~al.'
+                        authlist = authlist + ', ' + parse_author(auth[1]) + ', ' + parse_author(auth[2]) + ' et~al.'
                     else:
-                        authlist = authlist+', '+parse_author(auth[1])+', \& '+parse_author(auth[2])
+                        authlist = authlist + ', ' + parse_author(auth[1]) + ', \\& ' + parse_author(auth[2])
                 elif nauth > 3:
-                    authlist = authlist+', '+parse_author(auth[1])+', '+parse_author(auth[2])+' et~al.'
-                else:
-                    pass
+                    authlist = authlist + ', ' + parse_author(auth[1]) + ', ' + parse_author(auth[2]) + ' et~al.'
 
                 title1, title2, title3 = parse_title(data['title'].strip())
 
                 thispub = '{}, to be submitted to {}'.format(data['year'], data['journal'])
 
-                out.write('{}. & {} {} \\\ \n'.format(ipub, authlist, thispub))
-
-                if title2 is None and title3 is None:
-                    out.write('   & {} \smallskip\\\ \n'.format(title1))
-                elif title2 is not None and title3 is None:
-                    out.write('   & {} \\\ \n'.format(title1))
-                    out.write('   & {} \smallskip\\\ \n'.format(title2))
-                elif title2 is not None and title3 is not None:
-                    out.write('   & {} \\\ \n'.format(title1))
-                    out.write('   & {} \\\ \n'.format(title2))
-                    out.write('   & {} \smallskip\\\ \n'.format(title3))
-                else:
-                    pass
+                out.write('{}. & {} {} \\\\\n'.format(ipub, authlist, thispub))
+                write_title_lines(out, title1, title2, title3)
 
                 icount += 1
+
         else:
             for idata in indx:
                 data = db.entries[idata]
-                journal = None # initialize
+                journal = None  # initialize
 
                 ipub = nindx - icount
                 ncite = citations[data['ID']]
@@ -235,13 +244,9 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
                 me = mepos[idata]
                 authlist = parse_author(auth[0])
 
-                #if data['ID'] == '2022AJ....164..207A':
-                #    pdb.set_trace()
-
-                #if nauth > 1:
                 if me > 2:
-                    authlist = parse_author(auth[0])+', '+parse_author(auth[1])
-                    digit = str(me+1)[-1]
+                    authlist = parse_author(auth[0]) + ', ' + parse_author(auth[1])
+                    digit = str(me + 1)[-1]
                     if digit == '1':
                         suffix = 'st'
                     elif digit == '2':
@@ -250,80 +255,59 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
                         suffix = 'rd'
                     else:
                         suffix = 'th'
-                    authlist = authlist+', (\\textbf{J. Moustakas}, $'+str(me+1)+'^{\mathrm{'+suffix+'}}$ coauthor) et al.'
+                    authlist = authlist + ', (\\textbf{J. Moustakas}, $' + str(me + 1) + '^{\\mathrm{' + suffix + '}}$ coauthor) et al.'
                 else:
                     if nauth == 2:
-                        authlist = authlist+' \& '+parse_author(auth[1])
+                        authlist = authlist + ' \\& ' + parse_author(auth[1])
                     elif nauth == 3:
-                        authlist = authlist+', '+parse_author(auth[1])+', \& '+parse_author(auth[2])
+                        authlist = authlist + ', ' + parse_author(auth[1]) + ', \\& ' + parse_author(auth[2])
                     elif nauth > 3:
-                        authlist = authlist+', '+parse_author(auth[1])+', '+parse_author(auth[2])+' et al.'
-                    else:
-                        pass
+                        authlist = authlist + ', ' + parse_author(auth[1]) + ', ' + parse_author(auth[2]) + ' et al.'
 
                 # parse the title
                 title1, title2, title3 = parse_title(data['title'].strip())
-                #if data['ID'] == '2012ApJ...747L...9Z':
-                #    pdb.set_trace()
-    
-                ## parse the publication
-                #if 'volume' in data.keys():
-                #    pubinfo = ', '+data['volume']+', '+data['pages']
-                #elif 'eprint' in data.keys():
-                #    pubinfo = ', in press (arXiv:{})'.format(data['eprint'])
-                #else:
-                #    pubinfo = ''
-                #    #pubinfo = 'in press'
 
                 if 'journal' in data.keys():
                     journal = get_journal(data['journal']['name'])
                     if 'volume' in data.keys():
-                        pubinfo = ', '+data['volume']+', '+data['pages']
+                        pubinfo = ', ' + data['volume'] + ', ' + data['pages']
                     elif 'eprint' in data.keys():
                         if pubtype[idata] == 'unref':
                             pubinfo = ' (arXiv:{})'.format(data['eprint'])
                         else:
                             pubinfo = ', in press (arXiv:{})'.format(data['eprint'])
                     else:
-                        print('This should not happen!')
-                        pdb.set_trace()
+                        raise ValueError('Unexpected entry with journal but no volume or eprint: {}'.format(data['ID']))
                 else:
                     if 'series' in data.keys():
-                        if data['series'] == 'Astronomical Society of the Pacific Conference Series':
-                            journal = 'ASPC'
-                        elif data['series'] == 'Astrophysics and Space Science Proceedings':
-                            journal = 'ASSP'
-                        elif data['series'] == 'American Institute of Physics Conference Series':
-                            journal = 'AIPC'
-                        elif data['series'] == 'IAU Symposium':
-                            journal = 'IAU'
+                        series_map = {
+                            'Astronomical Society of the Pacific Conference Series': 'ASPC',
+                            'Astrophysics and Space Science Proceedings': 'ASSP',
+                            'American Institute of Physics Conference Series': 'AIPC',
+                            'IAU Symposium': 'IAU',
+                        }
+                        if data['series'] in series_map:
+                            journal = series_map[data['series']]
                         else:
-                            print('Unrecognized journal in publication {}!'.format(data['ID']))
-                            pdb.set_trace()
+                            raise ValueError('Unrecognized series in publication {}!'.format(data['ID']))
                         if 'volume' in data.keys():
-                            pubinfo = ', '+data['volume']+', '+data['pages']
+                            pubinfo = ', ' + data['volume'] + ', ' + data['pages']
                         else:
-                            print('This should not happen!')
-                            pdb.set_trace()
+                            raise ValueError('Missing volume in publication {}!'.format(data['ID']))
                     elif 'booktitle' in data.keys():
                         if 'IAU' in data['ID']:
                             journal = 'IAU General Assembly'
                         elif 'astro2010' in data['booktitle']:
                             journal = 'arXiv:{}'.format(data['eprint'])
                         else:
-                            print('Unrecognized journal in publication {}!'.format(data['ID']))
-                            pdb.set_trace()
-                        if 'eprint' in data.keys():
-                            pubinfo = ' (arXiv:{})'.format(data['eprint'])
-                        else:
-                            pubinfo = ''
-                            #print('This should not happen!')
-                            #pdb.set_trace()
+                            raise ValueError('Unrecognized booktitle in publication {}!'.format(data['ID']))
+                        pubinfo = ' (arXiv:{})'.format(data['eprint']) if 'eprint' in data.keys() else ''
                     elif 'howpublished' in data.keys():
                         journal = 'Astroparticle Physics'
+                        pubinfo = ''
                     else:
-                        print('Unrecognized journal in publication {}!'.format(data['ID']))
-                        pdb.set_trace()
+                        raise ValueError('Unrecognized journal in publication {}!'.format(data['ID']))
+
                 if pubtype[idata] == 'unref':
                     if journal is not None and journal == 'The NOIRLab Mirror':
                         thispub = '{} {}{}'.format(data['year'], journal, pubinfo)
@@ -335,36 +319,20 @@ def write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=False
                     else:
                         thispub = '{}, {}{}'.format(data['year'], journal, pubinfo)
 
-                #if data['ID'] == '2020arXiv200205828B':
-                #    pdb.set_trace()
-
-                # put it all together
-                out.write('{}. & {} {} \\\ \n'.format(ipub, authlist, thispub))
-                #out.write('{}. & {} \\\ \n'.format(ipub, authlist))
-                #out.write('    & {} \\\ \n'.format(thispub))
-
-                if title2 is None and title3 is None:
-                    out.write('   & {} \smallskip\\\ \n'.format(title1))
-                elif title2 is not None and title3 is None:
-                    out.write('   & {} \\\ \n'.format(title1))
-                    out.write('   & {} \smallskip\\\ \n'.format(title2))
-                elif title2 is not None and title3 is not None:
-                    out.write('   & {} \\\ \n'.format(title1))
-                    out.write('   & {} \\\ \n'.format(title2))
-                    out.write('   & {} \smallskip\\\ \n'.format(title3))
-                else:
-                    pass
+                out.write('{}. & {} {} \\\\\n'.format(ipub, authlist, thispub))
+                write_title_lines(out, title1, title2, title3)
 
                 icount += 1
 
-        out.write('\end{longtable}\n')
+        out.write('\\end{longtable}\n')
         print('{}: publications={}, citations={}'.format(heading, icount, ntotcite))
 
-date = '2026jan12' # '2025jun02' # '2024nov10' # '2023sep30' # '2023jan19'
+date = '2026jun02'
+# '2026jan12' # '2025jun02' # '2024nov10' # '2023sep30' # '2023jan19'
 
-pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date) # output
-bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date) # from ADS
-citefile = '/Users/ioannis/research/papers/cv/{}-citations.txt'.format(date)   # from ADS
+pubfile = '/Users/ioannis/research/papers/cv/{}-publications.tex'.format(date)  # output
+bibfile = '/Users/ioannis/research/papers/cv/{}-publications.bib'.format(date)  # from ADS
+citefile = '/Users/ioannis/research/papers/cv/{}-citations.txt'.format(date)    # from ADS
 
 # read the citation count file
 citations = {}
@@ -372,15 +340,8 @@ pub, ncite = np.loadtxt(citefile, dtype=str, unpack=True)
 for _pub, _ncite in zip(pub, ncite):
     citations[_pub] = int(_ncite)
 
-# this fails on month names
-#with open(bibfile) as bib:
-#    db = bibtexparser.load(bib)
-
 # https://github.com/sciunto-org/python-bibtexparser/issues/263#issuecomment-729174175
 P = BibTexParser(common_strings=True)
-#P.ignore_nonstandard_types = False
-#P.homogenise_fields = False
-#P.customization = homogenize_latex_encoding
 P.customization = customizations
 
 with open(bibfile, 'r') as bib:
@@ -388,63 +349,55 @@ with open(bibfile, 'r') as bib:
 npub = len(db.entries)
 
 # do an initial pass through all my publications to clean things up, etc.
-mepos = np.zeros(npub, int)-1   # my authorship position (-1 if none)
-pubtype = [] # publication "type"
+mepos = np.zeros(npub, int) - 1  # my authorship position (-1 if none)
+pubtype = []  # publication "type"
 
 for idata in np.arange(npub):
     data = db.entries[idata]
     pubid = data['ID']
 
     # not my papers
-    if (pubid == '2019Mate...12.2498S' or # not me
-        pubid == '2020ApJ...892...72C' or # erratum
-        pubid == '2008ApJ...685..678E' or # erratum
-        pubid == '2002astro.ph..4041C' or # a joke paper
-        pubid == '2006PhDT........23M' or # my PhD thesis
+    if (pubid == '2019Mate...12.2498S' or  # not me
+        pubid == '2020ApJ...892...72C' or  # erratum
+        pubid == '2008ApJ...685..678E' or  # erratum
+        pubid == '2002astro.ph..4041C' or  # a joke paper
+        pubid == '2006PhDT........23M' or  # my PhD thesis
         'sptz.prop' in pubid or 'jwst.prop' in pubid or
-        'hst..prop' in pubid or 'yCat' in pubid): # Vizier catalog
-            pubtype.append('skip')
+        'hst..prop' in pubid or 'yCat' in pubid):  # Vizier catalog
+        pubtype.append('skip')
     else:
         # find my authorship position
         auth = data['author']
-        nauth = len(auth)
         me = np.where(['{Moustakas}, J' in _auth for _auth in auth])[0]
 
         if len(me) == 0:
-            if 'The DESI Experiment Part II:' in data['title']:
-                me = 185
-            elif 'The DESI Experiment Part I:' in data['title']:
-                me = 185
-            elif 'Overview of the Instrumentation for the Dark Energy Spectroscopic Instrument' in data['title']:
-                me = 167
-            elif 'The Early Data Release of the Dark Energy Spectroscopic Instrument' in data['title']:
-                me = 173
-            elif 'Validation of the Scientific Program for the Dark Energy Spectroscopic Instrument' in data['title']:
-                me = 173
-            elif 'DESI 2024 VI: Cosmological Constraints from the Measurements of Baryon Acoustic Oscillations' in data['title']:
-                me = 119
-            elif 'NANCY: Next-generation All-sky Near-infrared Community surveY' in data['title']:
-                me = 131
+            # large DESI consortium papers where author list is truncated
+            title_to_pos = {
+                'The DESI Experiment Part II:': 185,
+                'The DESI Experiment Part I:': 185,
+                'Overview of the Instrumentation for the Dark Energy Spectroscopic Instrument': 167,
+                'The Early Data Release of the Dark Energy Spectroscopic Instrument': 173,
+                'Validation of the Scientific Program for the Dark Energy Spectroscopic Instrument': 173,
+                'DESI 2024 VI: Cosmological Constraints from the Measurements of Baryon Acoustic Oscillations': 119,
+                'NANCY: Next-generation All-sky Near-infrared Community surveY': 131,
+            }
+            matched_pos = next((pos for title_frag, pos in title_to_pos.items()
+                                if title_frag in data['title']), None)
+            if matched_pos is not None:
+                me = np.array([matched_pos])
             else:
                 print('Missing Moustakas from author list for {}!'.format(data['title']))
-                me = -1
+                me = np.array([-1])
 
         mepos[idata] = me[0]
 
-        #if len(me) == 0:
-        #    pdb.set_trace()
-        #try:
-        #    print(me, me[0])
-        #except:
-        #    pdb.set_trace()
-
         if ('AAS' in pubid or
-            'egcc.conf' in pubid or # a talk(?)
-            'eimw.conf' in pubid or # a talk(?)
-            'xru..conf' in pubid or # a talk(?)
-            'fsgc.conf' in pubid or # a talk(?)
+            'egcc.conf' in pubid or  # a talk(?)
+            'eimw.conf' in pubid or  # a talk(?)
+            'xru..conf' in pubid or  # a talk(?)
+            'fsgc.conf' in pubid or  # a talk(?)
             'APS..APR' in pubid):
-            pubtype.append('posters') # contributed posters or talks
+            pubtype.append('posters')  # contributed posters or talks
         elif ('CBET' in pubid or
               'Msngr' in pubid or
               'ASPC' in pubid or
@@ -453,27 +406,28 @@ for idata in np.arange(npub):
               'TNSAN' in pubid or
               'AIPC' in pubid or
               'ASSP' in pubid):
-            pubtype.append('conf') # conference proceeding or telegrams
-        elif (pubid == '2009astro2010P..61W' or
-              pubid == '2024Mirro...6...11M' or
-              pubid == '1999SAOIR...6G...1M' or
-              pubid == '2016arXiv161100036D' or
-              pubid == '2011arXiv1112.3300M' or
-              pubid == '2012arXiv1211.0285P' or
-              pubid == '2020arXiv200205828B' or
-              pubid == '2018arXiv181204897L' or
-              pubid == '2019arXiv190308177L' or
-              pubid == '2022arXiv220904322S' or
-              pubid == '2023arXiv230611784H' or
-              pubid == '2016arXiv161100037D' or
-              pubid == '2013IAUS..295..286B'):
-            pubtype.append('unref') # white papers and unrefereed publications
+            pubtype.append('conf')  # conference proceeding or telegrams
+        elif pubid in {
+              '2009astro2010P..61W',
+              '2024Mirro...6...11M',
+              '1999SAOIR...6G...1M',
+              '2016arXiv161100036D',
+              '2011arXiv1112.3300M',
+              '2012arXiv1211.0285P',
+              '2020arXiv200205828B',
+              '2018arXiv181204897L',
+              '2019arXiv190308177L',
+              '2022arXiv220904322S',
+              '2023arXiv230611784H',
+              '2016arXiv161100037D',
+              '2013IAUS..295..286B'}:
+            pubtype.append('unref')  # white papers and unrefereed publications
         elif 'ascl' in pubid or 'zenodo' in pubid:
             pubtype.append('code')
-        elif me < 3:
-            pubtype.append('mytop') # first, second, or third author
+        elif me[0] < 3:
+            pubtype.append('mytop')  # first, second, or third author
         else:
-            pubtype.append('other') # additional publications
+            pubtype.append('other')  # additional publications
 
 pubtype = np.hstack(pubtype)
 
@@ -492,21 +446,15 @@ mydb = [
     {'author': ['{Moustakas}, John', '{Scholte}, Dirk'],
      'title': '{A New Oxygen Abundance Floor: Discovery of Two Ultra Metal-Poor Galaxies in the Dark Energy Spectroscopic Instrument Survey}',
      'year': 2026, 'journal': 'The Astrophysical Journal', 'etal': True},
-    {'author': ['{Moustakas}, John', '{Buhler}, Jeremy', '{Juneau}, St\'{e}phanie', '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
-     'title': '{FastSpecFit: Spectrophotometric Modeling of 1.4 Million Extragalactic Targets from the DESI Early Data Release}',
+    {'author': ['{Moustakas}, John', '{Buhler}, Jeremy', "{Juneau}, St\\'{e}phanie", '{Pucha}, Ragadeepika', '{Weaver}, Benjamin', '{Lang}, Dustin'],
+     'title': '{FastSpecFit: Spectrophotometric Modeling of 47 Million Extragalactic Targets from the Dark Energy Spectroscopic Instrument Second Data Release}',
      'year': 2026, 'journal': 'The Astronomical Journal', 'etal': True},
     {'author': ['{Moustakas}, John', '{Lang}, Dustin'],
      'title': '{Siena Galaxy Atlas 2025}',
      'year': 2026, 'journal': 'The Astrophysical Journal', 'etal': True},
-    #{'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
-    # 'title': '{Stellar Mass Density Profiles of Red, Low-Redshift Central Galaxies}',
-    # 'year': 2026, 'journal': 'The Astrophysical Journal'},
-    #{'author': ['{Moustakas}, John', '{Lang}, Dustin', '{Wechsler}, Risa.', '{Rozo}, Eduardo'],
-    # 'title': '{Stellar Mass Function of Red, Low-Redshift Central Galaxies}',
-    # 'year': 2026, 'journal': 'The Astrophysical Journal'},
 ]
 
-indx = np.arange(len((mydb)))
+indx = np.arange(len(mydb))
 with open(pubfile, 'a') as out:
     out.write('\\vspace*{-5mm}\n')
 write_pubsection(mydb, citations, pubtype, indx, mepos, heading, verbose=verbose,
@@ -520,19 +468,15 @@ with open(pubfile, 'a') as out:
 write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=verbose)
 
 # conference proceedings and telegrams
-heading = 'Conference Proceedings \& Astronomical Telegrams'
+heading = 'Conference Proceedings \\& Astronomical Telegrams'
 indx = np.where(pubtype == 'conf')[0]
 with open(pubfile, 'a') as out:
     out.write('\\vspace*{-5mm}\n')
 write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=verbose)
 
 # white papers and unrefereed papers
-heading = 'Contributed White Papers \& Unrefereed Papers'
+heading = 'Contributed White Papers \\& Unrefereed Papers'
 indx = np.where(pubtype == 'unref')[0]
 with open(pubfile, 'a') as out:
     out.write('\\vspace*{-5mm}\n')
 write_pubsection(db, citations, pubtype, indx, mepos, heading, verbose=verbose)
-
-
-#    out.write('\\hspace{-5mm}\\textsc{}\n')
-##\hspace{-5mm}{\sc Contributed White Papers \& Unrefereed Publications}
