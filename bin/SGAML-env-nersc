@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Setup the SGA project
+
+echo "Loading SGAML project"
+
+module load pytorch/2.11.0
+export PYTHONPATH=/global/common/software/desi/users/ioannis/SGAML/lib/python3.12/site-packages
+export PATH=/global/common/software/desi/users/ioannis/SGAML/bin:$PATH
+
+export SGA_DIR=/global/cfs/cdirs/desi/users/ioannis/SGA
+#export SGA_CODE_DIR=/global/homes/i/ioannis/code/git/SGA
+# export SPS_HOME=$SCRATCH/fsps
+#export LEGACYHALOS_CODE_DIR=/global/homes/i/ioannis/code/git/legacyhalos
+export GALEX_DIR=/global/cfs/cdirs/cosmo/data/galex/images
+
+#export PATH=$SGA_CODE_DIR/bin:$PATH
+#export PYTHONPATH=$SGA_CODE_DIR/py:$PYTHONPATH
+
+echo '$SGA_DIR='$SGA_DIR
+#echo '$SGA_CODE_DIR='$SGA_CODE_DIR
