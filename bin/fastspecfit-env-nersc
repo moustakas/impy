@@ -8,8 +8,7 @@ source /dvs_ro/common/software/desi/desi_environment.sh main
 #module swap desispec/0.59.2
 
 #module load fastspecfit/main
-#module load fastspecfit/2.5.2
-#for package in fastspecfit redrock; do
+#module load fastspecfit/3.4.1
 #for package in fastspecfit redrock rrevaluator; do
 for package in fastspecfit; do
     echo Loading local check-out of $package

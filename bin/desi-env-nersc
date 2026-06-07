@@ -23,11 +23,12 @@ source /dvs_ro/common/software/desi/desi_environment.sh main
 #export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:${PYTHONPATH}
 
 #for package in desitarget desisim; do
-for package in desigal fastspecfit; do
-  echo Loading local check-out of $package
-  #module unload $package
-  export PATH=/global/common/software/desi/users/ioannis/$package/bin:${PATH}
-  export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:${PYTHONPATH}
+#for package in desigal fastspecfit; do
+for package in fastspecfit; do
+    echo Loading local check-out of $package
+    #pip install --no-deps -e /global/common/software/desi/users/ioannis/$package
+    export PATH=/global/common/software/desi/users/ioannis/$package/bin:$PATH
+    export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:$PYTHONPATH
 done
 
 # echo 'Loading local check-out of speclite'
