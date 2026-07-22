@@ -15,7 +15,7 @@
 #   module load desiconda
 
 echo 'Loading DESI software.'
-source /dvs_ro/common/software/desi/desi_environment.sh main
+source /global/common/software/desi/desi_environment.sh main
 #module load fastspecfit/main
 
 #package=desi-photometry
@@ -30,6 +30,10 @@ for package in fastspecfit; do
     export PATH=/global/common/software/desi/users/ioannis/$package/bin:$PATH
     export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:$PYTHONPATH
 done
+
+echo 'Loading desihiz'
+export PATH=/global/homes/i/ioannis/code/desihiz/bin:$PATH
+export PYTHONPATH=/global/homes/i/ioannis/code/desihiz/py:$PYTHONPATH
 
 # echo 'Loading local check-out of speclite'
 # export PYTHONPATH=/global/homes/i/ioannis/code/desihub/speclite:$PYTHONPATH
