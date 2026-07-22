@@ -62,5 +62,3 @@ globus endpoint search --filter-scope my-endpoints
 #####
   siena-DTN endpoint: 5f6ed85a-ffc8-11e9-be93-02fcc9cdd752
   nyx endpoint: 019dd80e-fdcd-11e9-9947-0a8c187e8c12
-
-

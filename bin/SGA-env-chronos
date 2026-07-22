@@ -20,6 +20,7 @@ for package in desiutil desimodel; do
 done
 
 export SGA_DIR=$IM_PROJECTS_DIR/SGA/2025
+export SGA_PUBLIC_DIR=$IM_PROJECTS_DIR/SGA/2025/public
 export SGA_DATA_DIR=$IM_PROJECTS_DIR/SGA/2025/data
 export SGA_HTML_DIR=$IM_PROJECTS_DIR/SGA/2025/html
 
