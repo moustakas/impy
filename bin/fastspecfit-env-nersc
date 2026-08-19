@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'Loading FastSpecFit.'
+echo 'Loading FastSpecFit'
 source /dvs_ro/common/software/desi/desi_environment.sh main
 #source /dvs_ro/common/software/desi/desi_environment.sh 26.3
 #source /global/cfs/cdirs/desi/software/desi_environment.sh main
@@ -36,8 +36,8 @@ done
 export DESI_SPECTRO_REDUX='/dvs_ro/cfs/cdirs/desi/spectro/redux'
 export DUST_DIR='/dvs_ro/cfs/cdirs/desi/external/dust/v0_1'
 export FPHOTO_DIR='/dvs_ro/cfs/cdirs/desi/external/legacysurvey/dr9'
-export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/users/ioannis/fastspecfit/templates'
-#export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/public/external/templates/fastspecfit'
+#export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/users/ioannis/fastspecfit/templates'
+export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/public/external/templates/fastspecfit'
 
 echo 'DESI_SPECTRO_REDUX='$DESI_SPECTRO_REDUX
 echo 'DUST_DIR='$DUST_DIR
