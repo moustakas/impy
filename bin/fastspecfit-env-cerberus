@@ -21,9 +21,8 @@ export DESI_SPECTRO_REDUX=$DESI_ROOT/spectro/redux
 
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/fastspecfit/templates
-export FPHOTO_DIR=${IM_WORK_DIR}/legacysurvey/dr9
+export FPHOTO_DIR=${DESI_ROOT}/external/legacysurvey/dr9
 export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
 
 export PATH=/Users/ioannis/code/desihub/fastspecfit/bin:${PATH}
 export PYTHONPATH=/Users/ioannis/code/desihub/fastspecfit/py:${PYTHONPATH}
-

@@ -1,0 +1,11 @@
+echo 'Loading FSPS software stack'
+
+micromamba activate fsps
+
+export IM_CODE_DIR=${HOME}/code
+export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
+
+export PATH=/Users/ioannis/code/desihub/fastspecfit/bin:${PATH}
+export PYTHONPATH=/Users/ioannis/code/desihub/fastspecfit/py:${PYTHONPATH}
+
+echo "SPS_HOME="$SPS_HOME
