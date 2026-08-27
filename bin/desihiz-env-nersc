@@ -1,13 +1,16 @@
 #!/bin/bash
 
-echo "Loading desimetals environment"
+echo "Loading desihiz environment"
 source /dvs_ro/common/software/desi/desi_environment.sh main
 
-for package in fastspecfit desimetals; do
+for package in fastspecfit; do
     echo Loading local check-out of $package
     export PATH=/global/common/software/desi/users/ioannis/$package/bin:$PATH
     export PYTHONPATH=/global/common/software/desi/users/ioannis/$package/py:$PYTHONPATH
 done
+
+export PATH=/global/u2/i/ioannis/code/desihiz/bin:$PATH
+export PYTHONPATH=/global/u2/i/ioannis/code/desihiz/py:$PYTHONPATH
 
 export DESI_SPECTRO_REDUX='/dvs_ro/cfs/cdirs/desi/spectro/redux'
 export DUST_DIR='/dvs_ro/cfs/cdirs/desi/external/dust/v0_1'
@@ -17,11 +20,11 @@ export FTEMPLATES_DIR='/dvs_ro/cfs/cdirs/desi/public/external/templates/fastspec
 
 #export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
 export RR_TEMPLATE_DIR=/global/common/software/desi/users/ioannis/redrock-templates
-export DESIMETALS_DIR=${DESI_ROOT}/users/ioannis/desimetals
+export DESIHIZ_DIR=${DESI_ROOT}/users/ioannis/desihiz
 
 echo 'DESI_SPECTRO_REDUX='$DESI_SPECTRO_REDUX
 echo 'DUST_DIR='$DUST_DIR
 echo 'FPHOTO_DIR='$FPHOTO_DIR
 echo 'FTEMPLATES_DIR='$FTEMPLATES_DIR
 echo 'RR_TEMPLATE_DIR='$RR_TEMPLATE_DIR
-echo 'DESIMETALS_DIR='$DESIMETALS_DIR
+echo 'DESIHIZ_DIR='$DESIHIZ_DIR
