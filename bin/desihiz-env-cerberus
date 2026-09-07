@@ -1,0 +1,31 @@
+#!/bin/bash
+# Set up the desihiz environment
+#
+# micromamba create -n desihiz python
+# micromamba activate desihiz
+# python -m pip install fastspecfit
+#
+
+
+echo "Loading desihiz environment"
+micromamba activate desihiz
+
+export IM_WORK_DIR=${HOME}/work
+export IM_CODE_DIR=${HOME}/code
+
+export DESI_ROOT=${IM_WORK_DIR}/desi
+export DESI_SPECTRO_REDUX=${DESI_ROOT}/spectro/redux
+
+export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
+export FTEMPLATES_DIR=${DESI_ROOT}/fastspecfit/templates
+export FPHOTO_DIR=${DESI_ROOT}/external/legacysurvey/dr9
+export SPS_HOME=${IM_CODE_DIR}/python-fsps/src/fsps/libfsps
+export RR_TEMPLATE_DIR=${IM_CODE_DIR}/desihub/redrock-templates
+
+export DESIHIZ_DIR=${DESI_ROOT}/users/ioannis/desihiz
+
+export PATH=${IM_CODE_DIR}/desihub/fastspecfit/bin:${PATH}
+export PYTHONPATH=${IM_CODE_DIR}/desihub/fastspecfit/py:${PYTHONPATH}
+
+export PATH=${IM_CODE_DIR}/desihiz/bin:${PATH}
+export PYTHONPATH=${IM_CODE_DIR}/desihiz/py:${PYTHONPATH}

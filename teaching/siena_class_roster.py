@@ -9,8 +9,8 @@ import os
 # Open the file.
 r = open(sys.argv[1])
 
-if not os.path.isdir('Siena_Class_Roster_files'):
-    os.rename('Siena Class Roster_files', 'Siena_Class_Roster_files')
+if not os.path.isdir('Class_list_files'):
+    os.rename('Siena Class Roster_files', 'Class_list_files')
 
 # Try to parse the webpage by looking for the tables.
 soup = BeautifulSoup(r, "html.parser")
@@ -28,7 +28,7 @@ print(r"\setlength{\headsep}{0pt}")
 
 
 h2s = soup.find_all('h2')
-caption = 'Default'
+caption = r'Default'
 for h in h2s:
     if h.string.find('Class Roster For')>=0:
         caption = h.string
