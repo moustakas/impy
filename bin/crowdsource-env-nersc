@@ -1,0 +1,17 @@
+# Setup the crowdsource project
+
+echo "Loading crowdsource project"
+
+module load conda
+mamba activate /global/common/software/desi/users/ioannis/crowdsource
+
+export CROWDSOURCE_DIR=/global/homes/i/ioannis/code/crowdsource
+export CROWDSOURCE_ETC=/global/common/software/desi/users/ioannis/desimetals/etc/crowdsource
+export UNWISE_OVERLAPS=/global/cfs/cdirs/cosmo/work/wise/unwise_psf/py/unwise_psf/data/tile_overlaps-atlas.fits
+
+export UNWISE_PSF_DIR=/global/homes/i/ioannis/code/unwise_psf
+export PYTHONPATH=$CROWDSOURCE_DIR:$UNWISE_PSF_DIR/py
+
+echo '$CROWDSOURCE_DIR='$CROWDSOURCE_DIR
+echo '$CROWDSOURCE_ETC='$CROWDSOURCE_ETC
+echo '$UNWISE_PSF_DIR='$UNWISE_PSF_DIR
