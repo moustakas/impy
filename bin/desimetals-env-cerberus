@@ -10,6 +10,9 @@ export IM_CODE_DIR=${HOME}/code
 
 export DESI_ROOT=${IM_WORK_DIR}/desi
 export DESI_SPECTRO_REDUX=${DESI_ROOT}/spectro/redux
+export DESIMODEL=${HOME}/micromamba/envs/desimetals/lib/python3.14/site-packages/desimodel
+
+export CLOUDY_DIR=${IM_CODE_DIR}/cloudy
 
 export DUST_DIR=${IM_WORK_DIR}/sfd_dustmaps/
 export FTEMPLATES_DIR=${DESI_ROOT}/fastspecfit/templates
